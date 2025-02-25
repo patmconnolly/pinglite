@@ -56,4 +56,4 @@ Documentation should be created as the product is developed. Ideally hosted in t
 
 In time, the domain name purchased for this product will be used.
 
-[PingLite.xyz](https://pinglite.xyz)
+[PingLite.xyz](http://pinglite.xyz)
