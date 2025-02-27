@@ -4,6 +4,8 @@ branch="$1"
 basefilename="pinglite"
 compiledat=$(date -u +%Y-%m-%d)
 compiletim=$(date -u +%H:%M:%S)
+current_date=$(date -u +%Y.%m.%d)
+current_datetime=$(date -u +%Y.%m.%d-%H.%M.%S)
 
 getCompileDate() {
     compiledat=$1
@@ -29,13 +31,11 @@ ensureFilePermissions() {
 }
 
 if [ $branch == "development" ]; then
-    filename=$basefilename-dev-$compiledat
+    filename=$basefilename-dev-$current_datetime
 elif [ $branch == "nightly" ]; then
-    current_datetime=$(date -u +%Y.%m.%d)
-    filename=$basefilename-nightly-$current_datetime
+    filename=$basefilename-nightly-$current_date
 elif [ $branch == "stable" ]; then
-    current_datetime=$(date -u +%Y.%m.%d)
-    filename=$basefilename-stable-$current_datetime
+    filename=$basefilename-stable-$current_date
 else
     echo "Invalid Make Command!"
     echo "---------------------"
