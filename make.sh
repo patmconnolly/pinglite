@@ -18,8 +18,15 @@ getCompileDate() {
 }
 
 ensureFilePermissions() {
+    # Main executable
     chmod 755 ./usr/bin/pinglite
-    chomod 755 ./usr/lib/*.sh
+
+    #Helper executables, called out one by one for security purposes.
+    chmod 755 ./usr/lib/alert_api.sh
+    chmod 755 ./usr/lib/alert_handler.sh
+    chmod 755 ./usr/lib/target_ping.sh
+    chmod 755 ./usr/lib/target_resolve.sh
+    
     return 0
 }
 
