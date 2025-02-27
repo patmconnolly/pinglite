@@ -10,7 +10,7 @@ getCompileDate() {
     compiletim=$2
     branch=$3
 
-    VERSION="Compiled on $compiledat at $compiletim from branch: $branch."
+    VERSION="Compiled on $compiledat at $compiletim UTC from branch: $branch."
     echo $VERSION > ./var/lib/pinglite/VERSION
     return 0
 }
