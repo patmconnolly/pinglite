@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 branch="$1"
-basefilename="pinglite-"
+basefilename="pinglite"
 compiledat=$(date -u +%Y-%m-%d)
 compiletim=$(date -u +%H:%M:%S)
 
