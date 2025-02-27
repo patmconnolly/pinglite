@@ -10,11 +10,9 @@ getCompileDate() {
     compiletim=$2
     branch=$3
 
-    L1="Compiled on $compiledat\n"
-    L2="at $compiletim\n"
-    L3="from branch: $branch.\n"
-
-    return "$L1$L2$L3"
+    VERSION="Compiled on $compiledat at $compiletim from branch: $branch."
+    echo $VERSION > ./var/lib/pinglite/VERSION
+    return 0
 }
 
 ensureFilePermissions() {
@@ -49,7 +47,7 @@ else
 fi
 
 #Place compile date/time information in VERSION file.
-echo "$(getCompileDate $compiledat $compiletim $branch)" > ./var/lib/pinglite/VERSION
+getCompileDate $compiledat $compiletim $branch
 
 #Place license information in package location.
 cp ./LICENSE ./var/lib/pinglite/LICENSE
