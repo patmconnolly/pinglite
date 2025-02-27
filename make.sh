@@ -26,7 +26,7 @@ ensureFilePermissions() {
     chmod 755 ./usr/lib/alert_handler.sh
     chmod 755 ./usr/lib/target_ping.sh
     chmod 755 ./usr/lib/target_resolve.sh
-    
+
     return 0
 }
 
@@ -49,7 +49,7 @@ else
 fi
 
 #Place compile date/time information in VERSION file.
-echo $(getCompileDate $compiledat $compiletim $branch) > ./var/lib/pinglite/VERSION
+echo "$(getCompileDate $compiledat $compiletim $branch)" > ./var/lib/pinglite/VERSION
 
 #Place license information in package location.
 cp ./LICENSE ./var/lib/pinglite/LICENSE
