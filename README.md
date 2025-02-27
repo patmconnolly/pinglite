@@ -13,7 +13,7 @@ The name PingLite was chosen, as monitoring can be as simple and lightweight as 
 
 GitHub has the capability to download the whole repo, if you wish to just have the product as a package you may visit the hosted download page for PingLite.
 
-[PingLite Downloads](https://downloads.pinglite.xyz/pinglite/)
+[PingLite Downloads](https://download.pinglite.xyz/pinglite/)
 
 ### Installation
 
