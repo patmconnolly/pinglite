@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 ## This checks if the host resolves to an IP.
 ## returns 1 if no

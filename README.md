@@ -71,6 +71,7 @@ The wheel does not need to be recreated on a loop for constant processes, the ti
 
 1. ~~Define configuration files for what to monitor.~~ _Complete_
 2. Basic infrastructure for releases and testing. _In Progress_
+25. Fix win line endings (dos2unix or similar)
 3. Create function call for testing.
 4. Add functionality for pinging.
 5. Add functionality for retcode.
