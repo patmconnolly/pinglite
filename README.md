@@ -71,14 +71,18 @@ The wheel does not need to be recreated on a loop for constant processes, the ti
 
 1. ~~Define configuration files for what to monitor.~~ _Complete_
 2. Basic infrastructure for releases and testing. _In Progress_
-3. Non-default paths and custom installs.
-4. Create function call for testing.
-5. Add functionality for pinging.
-6. Add functionality for retcode.
-7. Add functionality for SSL Certs
-8. Define data file for info needed to alert on next run if applicable.
-9. Create API handler.
-10. Create other handlers as needed.
+3. Create function call for testing.
+4. Add functionality for pinging.
+5. Add functionality for retcode.
+6. Add functionality for SSL Certs
+7. Define data file for info needed to alert on next run if applicable.
+8. Create API handler.
+9. Create other handlers as needed.
+
+## Outside expertice needed:
+
+1. Review file and folder structure, adjust as needed.
+2. Review code as written, adjust as needed.
 
 *Other to-do's to be added as needed*
 
