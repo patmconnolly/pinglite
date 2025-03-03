@@ -4,7 +4,7 @@
 
 namespace configuration
 {
-	configuration::configuration() {
+	configuration() {
 		// Empty for the moment.
 	}
 }

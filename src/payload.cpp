@@ -8,7 +8,7 @@
 
 namespace payload
 {
-	payload::payload() {
+	payload() {
 		// Empty for the moment.
 	}
 }
