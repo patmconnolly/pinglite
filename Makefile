@@ -13,7 +13,7 @@ $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
 
 $(OBJ_DIR)/%.o: %.cpp
-	mkdir -p $(OBJ_DIR)
+	mkdir -p $(OBJ_DIR)/$(SRC_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@ -I$(INC_DIR)
 
 clean:
