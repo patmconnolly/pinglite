@@ -7,6 +7,10 @@
 #ifndef PAYLOAD_H
 #define PAYLOAD_H
 
-// Content to be added.
+class payload {
+public:
+	//Constructor
+	payload();
+};
 
 #endif // PAYLOAD_H

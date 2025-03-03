@@ -3,6 +3,10 @@
 #ifndef CONFIGURATION_H
 #define CONFIGURATION_H
 
-// Content to be added.
+class configuration {
+public:
+	//Constructor
+	configuration();
+};
 
 #endif // CONFIGURATION_H

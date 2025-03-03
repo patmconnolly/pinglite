@@ -2,9 +2,4 @@
 
 #include "configuration.hpp"
 
-namespace configuration
-{
-	configuration() {
-		// Empty for the moment.
-	}
-}
+configuration::configuration() {}

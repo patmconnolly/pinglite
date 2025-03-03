@@ -6,9 +6,4 @@
 
 #include "payload.hpp"
 
-namespace payload
-{
-	payload() {
-		// Empty for the moment.
-	}
-}
+payload::payload() {}
