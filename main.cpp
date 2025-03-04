@@ -13,7 +13,7 @@ int main(int argc, char* argv[]) {
 		//Checks if no arguments were passed, other than the program name.
 		//Fails the program if so.
 		std::cout << "Invalid flags passed! You need to pass at least one argument." << std::endl;
-		function.help_message();
+		function::help_message();
 		return 1;
 	}
 
@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
 		std::string arg = argv[i];
 		if (arg == "-h" || arg == "--help") {
 			//Display help message from functions.
-			function.help_message();
+			function::help_message();
 			
 			return 0;
 		}
@@ -50,7 +50,7 @@ int main(int argc, char* argv[]) {
 		else {
 			//Indicates invalid flags passed. Display help message from functions.
 			std::cout << "Invalid flags passed! Please check your command and try again." << std::endl;
-			function.help_message();
+			function::help_message();
 			return 1;
 		}
 
