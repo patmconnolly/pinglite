@@ -3,9 +3,9 @@
 #include <iostream>
 #include <string>
 
-#include "function.hpp"
-#include "payload.hpp"
-#include "configuration.hpp"
+#include "include/function.hpp"
+#include "include/payload.hpp"
+#include "include/configuration.hpp"
 
 int main(int argc, char* argv[]) {
 	//Collect and parse input.
@@ -22,6 +22,7 @@ int main(int argc, char* argv[]) {
 		if (arg == "-h" || arg == "--help") {
 			//Display help message from functions.
 			function.help_message();
+			
 			return 0;
 		}
 		else if (arg == "-t" || arg == "--test") {
