@@ -4,5 +4,6 @@
 #define FUNCTION_H
 
 // Add function declarations here.
+void help_message();
 
 #endif // FUNCTION_H
