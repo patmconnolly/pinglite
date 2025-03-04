@@ -17,25 +17,39 @@ GitHub has the capability to download the whole repo, if you wish to just have t
 
 ### Installation
 
-To install system wide, simply unzip the downloaded packages to the root directory as SU:
+To install system wide, simply unzip the downloaded packages to a directory and move the executable file `pinglite` to a place on the path:
 
 ```
-sudo tar -xvf ./pinglite-<BRANCH>-<VERSION>.tar -C /
+sudo tar -xvf ./pinglite-<BRANCH>-<VERSION>.tar
 ```
 
-This will create the appropriate directories:
-- usr
-  - bin
-    - pinglite _executable_
-  - lib
-    - pinglite _folder_
-- var
-  - lib
-    - pinglite _folder_
+### Versions
 
-The executable `pinglite` is the only thing entering in the shared folder, the usr/lib and var/lib folders will have a pinglite folder to store those items separate from other things on the node.
+In the download directory there are three folders:
 
-Non-default paths and custom installs are on the roadmaps.
+- development
+  - Development is where active development is happening.
+  - The versioning is: `pinglite-dev-<YYYY>.<MM>.<DD>-<HH>.<mm>.tar`
+  - Only the most recent 20 builds will be kept, it is cleaned nightly.
+- nightly
+  - This is where the builds that compile and are submitted by EOD will be placed.
+  - New features will be available before an actual release occurs.
+  - TODO - Compiles automatically every night.
+  - The versioning is: `pinglite-nightly-<YYYY>.<MM>.<DD>.tar`
+- stable
+  - Stable and complete releases will be here, delayed release to ensure nothing wrong is happening.
+  - Compiled on a manual timeframe and no automatic timer builds take place.
+  - The versioning is: `pinglite-stable-<YYYY>.<MM>.<DD>.tar`
+
+### Compiling
+
+PingLite is compiled using Jenkins pipelines that trigger a docker container build. This is to ensure that the build of PingLite is as portable as possible.
+
+From the root of the project, execute the following for a manual compile:
+
+```
+docker run --rm -v .:/usr/src/myapp -w /usr/src/myapp gcc:4.9 make
+```
 
 ### Goals
 
@@ -70,15 +84,32 @@ The wheel does not need to be recreated on a loop for constant processes, the ti
 ## To-Do List:
 
 1. ~~Define configuration files for what to monitor.~~ _Complete_
-2. Basic infrastructure for releases and testing. _In Progress_
-25. Fix win line endings (dos2unix or similar)
-3. Create function call for testing.
-4. Add functionality for pinging.
-5. Add functionality for retcode.
-6. Add functionality for SSL Certs
-7. Define data file for info needed to alert on next run if applicable.
-8. Create API handler.
-9. Create other handlers as needed.
+2. ~~Basic infrastructure for releases and testing.~~ _Complete_
+3. ~~Create help screen.~~ _Complete_
+4. Create functionality for manual test.
+  - Hit URL
+  - Parse return for following:
+    - If resolved.
+    - Returncode
+    - SSL Valid
+    - SSL Expiry
+  - Display results.
+5. Create functionality for config files.
+  - Read files in order.
+  - Validate files.
+  - Store config in object.
+6. Create functionality for recording results.
+  - Read prior results, if applicable.
+  - Parse results into object.
+  - Compare results to new results.
+  - Record new results.
+7. Create functionality for alerting.
+  - Create primary handler.
+  - Create secondary handlers for other alert methods.
+    - API Call with variables to be used in config file for custom API.
+    - Email handler.
+    - Other as needed.
+  - Based on results and config, call alert handler as needed.
 
 ## Outside expertice needed:
 
