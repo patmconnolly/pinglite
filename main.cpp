@@ -9,6 +9,12 @@
 
 int main(int argc, char* argv[]) {
 	//Collect and parse input.
+	if (argc == 1) {
+		//Checks if no arguments were passed, other than the program name.
+		//Fails the program if so.
+		std::cout << "Invalid flags passed! You need to pass at least one argument." << std::endl;
+	}
+
 	for (int i = 1; i < argc; ++i) {
 		std::string arg = argv[i];
 		if (arg == "-h" || arg == "--help") {
@@ -38,8 +44,8 @@ int main(int argc, char* argv[]) {
 			std::cout << "You passed the manual flag." << std::endl;
 		}
 		else {
-			//Indicates no flags or invalid flags passed. Display help message from functions.
-			std::cout << "Invalid flags passed! Please check your command and try again.";
+			//Indicates invalid flags passed. Display help message from functions.
+			std::cout << "Invalid flags passed! Please check your command and try again." << std::endl;
 		}
 
 	}
