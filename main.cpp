@@ -39,7 +39,7 @@ int main(int argc, char* argv[]) {
 		}
 		else {
 			//Indicates no flags or invalid flags passed. Display help message from functions.
-			std::cout << "Invalid flags passed! Please check your command and try again."
+			std::cout << "Invalid flags passed! Please check your command and try again.";
 		}
 
 	}
