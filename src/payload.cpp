@@ -7,3 +7,4 @@
 #include "payload.hpp"
 
 payload::payload() {}
+payload::~payload() {}

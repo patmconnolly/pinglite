@@ -11,6 +11,9 @@ class payload {
 public:
 	//Constructor
 	payload();
+
+	//Destructor
+	~payload();
 };
 
 #endif // PAYLOAD_H

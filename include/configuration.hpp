@@ -7,6 +7,9 @@ class configuration {
 public:
 	//Constructor
 	configuration();
+
+	//Destructor
+	~configuration();
 };
 
 #endif // CONFIGURATION_H

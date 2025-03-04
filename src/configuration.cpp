@@ -3,3 +3,4 @@
 #include "configuration.hpp"
 
 configuration::configuration() {}
+configuration::~configuration() {}
