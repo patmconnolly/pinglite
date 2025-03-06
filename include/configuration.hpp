@@ -11,6 +11,9 @@ public:
 	//Add more config files
 	int update();
 
+	//Ensure final configuration is valid
+	int validate();
+
 	//Destructor
 	~configuration();
 };
