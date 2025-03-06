@@ -33,4 +33,25 @@ namespace function {
 		std::cout << "" << std::endl;
 		return;
 	}
+
+	int addConfig(configuration* conf, const int argc, const char* argv[], int* i) {
+		int result = 0;
+		if (*i < argc) {
+			do {
+				*i++;
+				std::cout << "Beginning parse of configuration file: " << argv[*i] << "." << std::endl;
+				result = *conf.update();
+			} while (*i < argc and result == 0);
+		}
+		else {
+			std::cout << "At least 1 config file must be passed in!" << std::endl;
+			return 1;
+		}
+		if (result == 1) {
+			std::cout << "Your config is broken in file: " << argv[*i] << ". See output above!" << std::endl;
+			return 1;
+		}
+		std::cout << "Parsing of configuration files complete. Beginning configuration validation." << std::endl;
+		return *conf.validate();
+	}
 }
