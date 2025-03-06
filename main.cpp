@@ -30,7 +30,7 @@ int main(int argc, char* argv[]) {
 	bool manual = false;
 	std::string manualURL = "";
 
-	int i = 1;
+	int i = 0;
 
 	std::string arg = "";
 	
@@ -50,10 +50,10 @@ int main(int argc, char* argv[]) {
 			do {
 				i++;
 				result = conf.update(); //Add the new data to the config object.
-			} while (i < argc and result);
+			} while (i < argc and result == 0);
 			std::cout << "You passed the test flag." << std::endl;
-			if (not result) {
-				std::cout << "Your config is broken! See output above!" << std::endl;
+			if (result == 1) {
+				std::cout << "Your config is broken in file: " << argv[i] << ". See output above!" << std::endl;
 				return 1;
 			}
 			break;
@@ -66,10 +66,10 @@ int main(int argc, char* argv[]) {
 			do {
 				i++;
 				result = conf.update(); //Add the new data to the config object.
-			} while (i < argc and result);
+			} while (i < argc and result == 0);
 			std::cout << "You passed the configuration flag." << std::endl;
-			if (not result) {
-				std::cout << "Your config is broken! See output above!" << std::endl;
+			if (result == 1) {
+				std::cout << "Your config is broken in file: " << argv[i] << ". See output above!" << std::endl;
 				std::cout << "Use the test flag to test your config ahead of time." << std::endl;
 				return 1;
 			}
