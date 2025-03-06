@@ -7,6 +7,8 @@
 #include "include/payload.hpp"
 #include "include/configuration.hpp"
 
+using namespace std;
+
 int main(int argc, char* argv[]) {
 	//Collect and parse input.
 	if (argc == 1) {
@@ -30,11 +32,11 @@ int main(int argc, char* argv[]) {
 
 	int i = 1;
 
-	std::cout << "argc=" << argc << std::endl;
+	std::string arg = "";
 	
 	while (i < argc) {
 		i++;
-		std::string arg = argv[i];
+		arg = argv[i];
 		if (arg == "-h" || arg == "--help") {
 			//Display help message from functions.
 			function::help_message();
@@ -79,7 +81,7 @@ int main(int argc, char* argv[]) {
 			//If flag unused, do not save results, just show on the screen.
 			record = true;
 			i++;
-			recordfile = arg;
+			recordfile = argv[i];
 			std::cout << "You passed the record flag." << std::endl;
 			continue;
 		}
