@@ -29,6 +29,9 @@ int main(int argc, char* argv[]) {
 	std::string manualURL = "";
 
 	int i = 1;
+
+	std::cout << "argc=" << argc << std::endl;
+	
 	while (i < argc) {
 		i++;
 		std::string arg = argv[i];
