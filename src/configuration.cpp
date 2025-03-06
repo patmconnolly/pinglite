@@ -3,4 +3,7 @@
 #include "configuration.hpp"
 
 configuration::configuration() {}
+int configuration::update() {
+	return 0;
+}
 configuration::~configuration() {}

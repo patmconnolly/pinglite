@@ -8,6 +8,9 @@ public:
 	//Constructor
 	configuration();
 
+	//Add more config files
+	int update();
+
 	//Destructor
 	~configuration();
 };
