@@ -46,14 +46,14 @@ int main(int argc, char* argv[]) {
 			//Stop checking for flags and just assume everything is a file.
 			test = true;
 			std::cout << "Testing configuration files." << std::endl;
-			return function::addConfig(conf, argc, argv, i);
+			return function::addConfig(&conf, argc, argv, i);
 		}
 		else if (arg == "-c" || arg == "--configuration") {
 			//Everything after this is configuration from global priority to specific priority with later files taking precidence.
 			//This flag must be used last if used.
 			//Stop checking for flags and just assume everything is a file.
 			config = true;
-			function::addConfig(conf, argc, argv, i);
+			function::addConfig(&conf, argc, argv, i);
 			break;
 		}
 		else if (arg == "-r" || arg == "--record") {
