@@ -3,6 +3,8 @@
 #ifndef FUNCITON_H
 #define FUNCTION_H
 
+#include "configuration.hpp"
+
 // Add function declarations here.
 namespace function {
 	void help_message();
