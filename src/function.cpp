@@ -38,9 +38,9 @@ namespace function {
 		int result = 0;
 		if (*i < argc) {
 			do {
-				*i++;
+				(*i)++;
 				std::cout << "Beginning parse of configuration file: " << argv[*i] << "." << std::endl;
-				result = *conf.update();
+				result = *conf->update();
 			} while (*i < argc and result == 0);
 		}
 		else {
@@ -52,6 +52,6 @@ namespace function {
 			return 1;
 		}
 		std::cout << "Parsing of configuration files complete. Beginning configuration validation." << std::endl;
-		return *conf.validate();
+		return *conf->validate();
 	}
 }
