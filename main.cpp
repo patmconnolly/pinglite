@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
 
 	bool test = false;
 	bool config = false;
-	configuration conf = configuration::configuration();
+	configuration conf;
 	int result = 0;
 
 	bool record = false;
