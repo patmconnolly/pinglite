@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
 	bool manual = false;
 	std::string manualURL = "";
 
-	int* i = 0;
+	int* i = new int(0);
 
 	std::string arg = "";
 
@@ -45,6 +45,7 @@ int main(int argc, char* argv[]) {
 			//Display help message from functions.
 			function::help_message();
 			delete conf;
+			delete i;
 			return 0;
 		}
 		else if (arg == "-t" || arg == "--test") {
@@ -54,10 +55,12 @@ int main(int argc, char* argv[]) {
 			std::cout << "Testing configuration files." << std::endl;
 			if (function::addConfig(conf, argc, argv, i) == 0) {
 				delete conf;
+				delete i;
 				return 0;
 			}
 			else {
 				delete conf;
+				delete i;
 				return 1;
 			}
 		}
@@ -82,6 +85,7 @@ int main(int argc, char* argv[]) {
 			else {
 				std::cout << "File must be passed in with record flag." << std::endl;
 				delete conf;
+				delete i;
 				return 1;
 			}
 			continue;
@@ -98,6 +102,7 @@ int main(int argc, char* argv[]) {
 			else {
 				std::cout << "URL must be passed in with manual flag." << std::endl;
 				delete conf;
+				delete i;
 				return 1;
 			}
 			break;
@@ -107,10 +112,12 @@ int main(int argc, char* argv[]) {
 			std::cout << "Invalid flags passed! Please check your command and try again." << std::endl;
 			function::help_message();
 			delete conf;
+			delete i;
 			return 1;
 		}
 
 	}
+	delete i;
 
 
 
