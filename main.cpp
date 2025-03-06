@@ -16,10 +16,10 @@ int main(int argc, char* argv[]) {
 		function::help_message();
 		return 1;
 	}
-
+	
 	bool test = false;
 	bool config = false;
-	configuration* conf();
+	configuration* conf = new configuration();
 	int result = 0;
 
 	bool record = false;
@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
 		if (arg == "-h" || arg == "--help") {
 			//Display help message from functions.
 			function::help_message();
-			
+			delete conf;
 			return 0;
 		}
 		else if (arg == "-t" || arg == "--test") {
@@ -46,14 +46,21 @@ int main(int argc, char* argv[]) {
 			//Stop checking for flags and just assume everything is a file.
 			test = true;
 			std::cout << "Testing configuration files." << std::endl;
-			return function::addConfig(&conf, argc, argv, i);
+			if (function::addConfig(conf, argc, argv, i) == 0) {
+				delete conf;
+				return 0;
+			}
+			else {
+				delete conf;
+				return 1;
+			}
 		}
 		else if (arg == "-c" || arg == "--configuration") {
 			//Everything after this is configuration from global priority to specific priority with later files taking precidence.
 			//This flag must be used last if used.
 			//Stop checking for flags and just assume everything is a file.
 			config = true;
-			function::addConfig(&conf, argc, argv, i);
+			function::addConfig(conf, argc, argv, i);
 			break;
 		}
 		else if (arg == "-r" || arg == "--record") {
@@ -68,6 +75,7 @@ int main(int argc, char* argv[]) {
 			}
 			else {
 				std::cout << "File must be passed in with record flag." << std::endl;
+				delete conf;
 				return 1;
 			}
 			continue;
@@ -83,6 +91,7 @@ int main(int argc, char* argv[]) {
 			}
 			else {
 				std::cout << "URL must be passed in with manual flag." << std::endl;
+				delete conf;
 				return 1;
 			}
 			break;
@@ -91,6 +100,7 @@ int main(int argc, char* argv[]) {
 			//Indicates invalid flags passed. Display help message from functions.
 			std::cout << "Invalid flags passed! Please check your command and try again." << std::endl;
 			function::help_message();
+			delete conf;
 			return 1;
 		}
 
@@ -108,6 +118,6 @@ int main(int argc, char* argv[]) {
 
 	//Send alert, if needed.
 
-
+	delete conf;
 	return 0;
 }
