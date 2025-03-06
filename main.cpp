@@ -33,7 +33,7 @@ int main(int argc, char* argv[]) {
 	std::string arg = "";
 	
 	while (*i < argc) {
-		*i++;
+		(*i)++;
 		arg = argv[*i];
 		if (arg == "-h" || arg == "--help") {
 			//Display help message from functions.
@@ -62,7 +62,7 @@ int main(int argc, char* argv[]) {
 			//If flag unused, do not save results, just show on the screen.
 			record = true;
 			if (*i < argc) {
-				*i++;
+				(*i)++;
 				recordfile = argv[*i];
 				std::cout << "Recordfile stored as: " << recordfile << "." << std::endl;
 			}
@@ -77,7 +77,7 @@ int main(int argc, char* argv[]) {
 			//Will not report other than stdout, will not save results.
 			manual = true;
 			if (*i < argc) {
-				*i++;
+				(*i)++;
 				manualURL = argv[*i];
 				std::cout << "Target URL: " << recordfile << "." << std::endl;
 			}
