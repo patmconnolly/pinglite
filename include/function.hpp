@@ -6,7 +6,7 @@
 // Add function declarations here.
 namespace function {
 	void help_message();
-	void addConfig(configuration* conf, const int argc, const char* argv[], int* i);
+	int addConfig(configuration* conf, const int argc, const char* argv[], int* i);
 }
 
 #endif // FUNCTION_H
