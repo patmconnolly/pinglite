@@ -34,7 +34,7 @@ namespace function {
 		return;
 	}
 
-	int addConfig(configuration* conf, const int argc, const char* argv[], int* i) {
+	int addConfig(configuration* conf, int argc, char* argv[], int* i) {
 		int result = 0;
 		if (*i < argc) {
 			do {
