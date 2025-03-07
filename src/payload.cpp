@@ -33,15 +33,11 @@ int payload::webcall(std::string URL) {
         curl_easy_setopt(handle, CURLOPT_SSL_VERIFYPEER, 1L); //Enable SSL verification
         curl_easy_setopt(handle, CURLOPT_SSL_VERIFYHOST, 2L); //Verify Hostname
 
-        char errorbuf[CURL_ERROR_SIZE];
-        errorbuf[0] = 0;
-        curl_easy_setopt(handle, CURLOPT_ERRORBUFFER, errorbuf);
-
 
         //--------Actual Call
         res = curl_easy_perform(handle);
         std::cout << res << std::endl;
-        std::cout << errorbuf << std::endl;
+        std::cout << curl_easy_strerror(res) << std::endl;
         //--------End Actual Call
 
 
