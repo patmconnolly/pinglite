@@ -89,6 +89,8 @@ int main(int argc, char* argv[]) {
 			manual = true;
 			if (*i < argc) {
 				(*i)++;
+				std::cout << "*i: " << (*i) << std::endl; //Tracer
+				std::cout << "argc: " << (argc) << std::endl; //Tracer
 				manualURL = argv[*i];
 				std::cout << "Target URL: " << manualURL << "." << std::endl;
 			}
