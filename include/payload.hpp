@@ -7,13 +7,23 @@
 #ifndef PAYLOAD_H
 #define PAYLOAD_H
 
+#include <string>
+
 class payload {
 public:
 	//Constructor
-	payload();
+	payload(std::string TargetURL);
 
 	//Destructor
 	~payload();
+
+private:
+	static int webcall(std::string URL);
 };
+std::string URL;
+bool RESOLVED;
+int RETCODE;
+bool SSLVALID;
+int SSLEXPIRY;
 
 #endif // PAYLOAD_H
