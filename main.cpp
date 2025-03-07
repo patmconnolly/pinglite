@@ -125,7 +125,7 @@ int main(int argc, char* argv[]) {
 	payload* targetPayload = nullptr;
 
 	if (manual) {
-		*targetPayload = new payload(manualURL);
+		targetPayload = new payload(manualURL);
 	}
 
 	//Collect configuration and store in configuration object.
