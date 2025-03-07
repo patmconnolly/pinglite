@@ -4,7 +4,6 @@
 
 #include "function.hpp"
 #include "configuration.hpp"
-#include "payload.hpp"
 
 // Add function defenitions here.
 namespace function {
