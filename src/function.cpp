@@ -41,7 +41,7 @@ namespace function {
 				(*i)++;
 				std::cout << "Beginning parse of configuration file: " << argv[*i] << "." << std::endl;
 				result = conf->update();
-			} while (*i < argc and result == 0);
+			} while (*i < argc - 1 and result == 0);
 		}
 		else {
 			std::cout << "At least 1 config file must be passed in!" << std::endl;
