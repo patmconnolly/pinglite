@@ -26,7 +26,7 @@ static int payload::webcall(std::string URL) {
     CURL* curl = curl_easy_init();
     if (!curl) {
         std::cerr << "Error initializing curl" << std::endl;
-        return;
+        return 1;
     }
 
     std::string response;
