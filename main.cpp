@@ -31,16 +31,9 @@ int main(int argc, char* argv[]) {
 
 	std::string arg = "";
 
-	std::cout << "i: " << i << std::endl; //tracer
-	std::cout << "*i: " << *i << std::endl; //tracer
-	std::cout << "argc: " << argc << std::endl; //tracer
-
 	while (*i < argc) {
 		(*i)++;
-		std::cout << "i: " << i << std::endl; //tracer
-		std::cout << "*i: " << *i << std::endl; //tracer
 		arg = argv[*i];
-		std::cout << "arg: " << arg << std::endl; //tracer
 		if (arg == "-h" || arg == "--help") {
 			//Display help message from functions.
 			function::help_message();
