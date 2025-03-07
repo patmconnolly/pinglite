@@ -87,10 +87,8 @@ int main(int argc, char* argv[]) {
 			//Indicates a manual run, no config file. Must have URL passed in with this flag.
 			//Will not report other than stdout, will not save results.
 			manual = true;
-			if (*i < argc) {
+			if (*i < argc - 1) {
 				(*i)++;
-				std::cout << "*i: " << (*i) << std::endl; //Tracer
-				std::cout << "argc: " << (argc) << std::endl; //Tracer
 				manualURL = argv[*i];
 				std::cout << "Target URL: " << manualURL << "." << std::endl;
 			}
