@@ -21,11 +21,11 @@ private:
 	int webcall(std::string URL);
 	// Add definition of writecallback.
 	size_t writeCallback(void* contents, size_t size, size_t nmemb, std::string* output);
+	std::string URL;
+	bool RESOLVED;
+	int RETCODE;
+	bool SSLVALID;
+	int SSLEXPIRY;
 };
-std::string URL;
-bool RESOLVED;
-int RETCODE;
-bool SSLVALID;
-int SSLEXPIRY;
 
 #endif // PAYLOAD_H
