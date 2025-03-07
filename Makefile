@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-O2 -Wall -std=c++11
+CFLAGS=-O2 -Wall
 SRC_DIR=src
 INC_DIR=include
 OBJ_DIR=obj
