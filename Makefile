@@ -6,6 +6,7 @@ OBJ_DIR=obj
 TARGET=pinglite
 SRCS=$(wildcard $(SRC_DIR)/*.cpp) main.cpp
 OBJS=$(SRCS:%.cpp=$(OBJ_DIR)/%.o)
+LIBS=-lcurl -lssl -lcrypto
 
 all: $(TARGET)
 
