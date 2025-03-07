@@ -28,7 +28,7 @@ int main(int argc, char* argv[]) {
 	bool manual = false;
 	std::string manualURL = "";
 
-	payload targetPayload;
+	payload targetPayload = nullptr;
 
 	int* i = new int(0);
 
