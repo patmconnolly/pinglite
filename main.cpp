@@ -90,7 +90,7 @@ int main(int argc, char* argv[]) {
 			if (*i < argc) {
 				(*i)++;
 				manualURL = argv[*i];
-				std::cout << "Target URL: " << recordfile << "." << std::endl;
+				std::cout << "Target URL: " << manualURL << "." << std::endl;
 			}
 			else {
 				std::cout << "URL must be passed in with manual flag." << std::endl;
