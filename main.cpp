@@ -70,7 +70,7 @@ int main(int argc, char* argv[]) {
 			//If passed but file does not exist, this is the first run, create the file.
 			//If flag unused, do not save results, just show on the screen.
 			record = true;
-			if (*i < argc) {
+			if (*i < argc - 1) {
 				(*i)++;
 				recordfile = argv[*i];
 				std::cout << "Recordfile stored as: " << recordfile << "." << std::endl;
