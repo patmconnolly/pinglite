@@ -6,11 +6,12 @@ OBJ_DIR=obj
 TARGET=pinglite
 SRCS=$(wildcard $(SRC_DIR)/*.cpp) main.cpp
 OBJS=$(SRCS:%.cpp=$(OBJ_DIR)/%.o)
+LIBS=-lcurl
 
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS) $(LIBS)
 
 $(OBJ_DIR)/%.o: %.cpp
 	mkdir -p $(OBJ_DIR)/$(SRC_DIR)

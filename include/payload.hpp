@@ -22,7 +22,6 @@ private:
 
 	//Private variables.
 	std::string URL;
-	bool RESOLVED;
 	int RETCODE;
 	bool SSLVALID;
 	int SSLEXPIRY;
