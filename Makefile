@@ -8,7 +8,7 @@ SRCS=$(wildcard $(SRC_DIR)/*.cpp) main.cpp
 OBJS=$(SRCS:%.cpp=$(OBJ_DIR)/%.o)
 LIBS=-lcurl -lssl -lcrypto
 
-all: $(TARGET)
+all: $(TARGET) $(LIBS)
 
 $(TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
