@@ -19,7 +19,7 @@ int payload::webcall() {
     auto handle = curl_easy_init();
 
     long retcode;
-    long certvalid;
+    long certinvalid;
 
     if (!handle) {
         std::cout << "Error initializing curl!" << std::endl;
@@ -45,9 +45,8 @@ int payload::webcall() {
         std::cout << "HTTP Return Code is: " << RETCODE << "." << std::endl;
 
         //Collect Cert Correct
-        res = curl_easy_getinfo(handle, CURLINFO_SSL_VERIFYRESULT, &certvalid);
-        std::cout << "certvalid: " << certvalid << std::endl;
-        if (!certvalid) {
+        res = curl_easy_getinfo(handle, CURLINFO_SSL_VERIFYRESULT, &certinvalid);
+        if (certinvalid) {
             this->SSLVALID = false;
             std::cout << "SSL Cert is Invalid!" << std::endl;
         }
