@@ -11,11 +11,11 @@ LIBS=-lcurl -lssl -lcrypto
 all: $(TARGET)
 
 $(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS) $(LIBS)
 
 $(OBJ_DIR)/%.o: %.cpp
 	mkdir -p $(OBJ_DIR)/$(SRC_DIR)
-	$(CC) $(CFLAGS) -c $< -o $@ -I$(INC_DIR) $(LIBS)
+	$(CC) $(CFLAGS) -c $< -o $@ -I$(INC_DIR)
 
 clean:
 	rm -rf $(OBJ_DIR) $(TARGET)
