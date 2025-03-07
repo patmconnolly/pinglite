@@ -28,8 +28,6 @@ int main(int argc, char* argv[]) {
 	bool manual = false;
 	std::string manualURL = "";
 
-	payload targetPayload = nullptr;
-
 	int* i = new int(0);
 
 	std::string arg = "";
@@ -124,8 +122,10 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 
+	payload* targetPayload = nullptr;
+
 	if (manual) {
-		targetPayload = new payload(manualURL);
+		*targetPayload = new payload(manualURL);
 	}
 
 	//Collect configuration and store in configuration object.
