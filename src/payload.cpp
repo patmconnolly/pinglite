@@ -36,6 +36,7 @@ int payload::webcall(std::string URL) {
 
         //--------Actual Call
         res = curl_easy_perform(handle);
+        std::cout << res << std::endl;
         //--------End Actual Call
 
 
