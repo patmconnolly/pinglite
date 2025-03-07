@@ -18,7 +18,7 @@ public:
 	~payload();
 
 private:
-	static int webcall(std::string URL);
+	int webcall(std::string URL);
 };
 std::string URL;
 bool RESOLVED;
