@@ -82,7 +82,9 @@ int payload::webcall(std::string URL) {
                     else {
                         auto expirationTime = std::chrono::system_clock::from_time_t(std::mktime(&tm));
                         auto now = std::chrono::system_clock::now();
-                        auto duration = std::chrono::duration_cast<std::chrono::days>(expirationTime - now);
+                        auto duration = std::chrono::duration_cast<std::chrono::days>(
+                            std::chrono::duration_cast<std::chrono::seconds>(expirationTime - now) // Corrected line
+                        );
                         SSLEXPIRY = static_cast<int>(duration.count());
                         std::cout << "SSL certificate expires in " << SSLEXPIRY << " days." << std::endl;
                     }
