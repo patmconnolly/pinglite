@@ -20,6 +20,15 @@ int payload::webcall() {
 
     long retcode;
     long certinvalid;
+    std::string scheme = this->URL.substr(0, this->URL.find("://"));
+    bool insecure;
+
+    if (scheme == "https") {
+        insecure = false;
+    }
+    else {
+        insecure = true;
+    }
 
     if (!handle) {
         std::cout << "Error initializing curl!" << std::endl;
@@ -50,9 +59,13 @@ int payload::webcall() {
             this->SSLVALID = false;
             std::cout << "SSL Cert is Invalid!" << std::endl;
         }
-        else {
+        else if (not insecure) {
             this->SSLVALID = true;
             std::cout << "SSL Cert is Valid!" << std::endl;
+        }
+        else {
+            this->SSLVALID = false;
+            std::cout << "Insecure Protocol!" << std::endl;
         }
 
         //Collect Cert Expiry
