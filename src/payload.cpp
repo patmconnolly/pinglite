@@ -36,8 +36,6 @@ int payload::webcall() {
 
         //--------Actual Call
         res = curl_easy_perform(handle);
-        std::cout << res << std::endl;
-        std::cout << curl_easy_strerror(res) << std::endl;
         //--------End Actual Call
 
 
@@ -48,7 +46,7 @@ int payload::webcall() {
 
         //Collect Cert Correct
         res = curl_easy_getinfo(handle, CURLINFO_SSL_VERIFYRESULT, &certvalid);
-        if (!res) {
+        if (!certvalid) {
             this->SSLVALID = false;
             std::cout << "SSL Cert is Invalid!" << std::endl;
         }
