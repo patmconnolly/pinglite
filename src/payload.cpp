@@ -10,12 +10,12 @@
 #include <curl/curl.h>
 
 payload::payload(std::string TargetURL) {
-    URL = TargetURL;
-    webcall(URL);
+    this->URL = TargetURL;
+    webcall();
 }
 payload::~payload() {}
 
-int payload::webcall(std::string URL) {
+int payload::webcall() {
     auto handle = curl_easy_init();
 
     long retcode;
@@ -27,8 +27,9 @@ int payload::webcall(std::string URL) {
     else {
         //Declaring variable for response.
         CURLcode res;
-
-        curl_easy_setopt(handle, CURLOPT_URL, URL);
+        
+        std::cout << this->URL << std::endl;
+        curl_easy_setopt(handle, CURLOPT_URL, this->URL);
         curl_easy_setopt(handle, CURLOPT_FOLLOWLOCATION, 1L); //Follow redirects
         curl_easy_setopt(handle, CURLOPT_SSL_VERIFYPEER, 1L); //Enable SSL verification
         curl_easy_setopt(handle, CURLOPT_SSL_VERIFYHOST, 2L); //Verify Hostname
