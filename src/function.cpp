@@ -36,7 +36,7 @@ namespace function {
 
 	int addConfig(configuration* conf, int argc, char* argv[], int* i) {
 		int result = 0;
-		if (*i < argc) {
+		if (*i < argc - 1) {
 			do {
 				(*i)++;
 				std::cout << "Beginning parse of configuration file: " << argv[*i] << "." << std::endl;
