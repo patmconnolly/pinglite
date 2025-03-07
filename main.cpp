@@ -13,6 +13,7 @@ int main(int argc, char* argv[]) {
 		//Checks if no arguments were passed, other than the program name.
 		//Fails the program if so.
 		std::cout << "Invalid flags passed! You need to pass at least one argument." << std::endl;
+		std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl << std::endl;
 		function::help_message();
 		return 1;
 	}
@@ -103,6 +104,7 @@ int main(int argc, char* argv[]) {
 		else {
 			//Indicates invalid flags passed. Display help message from functions.
 			std::cout << "Invalid flags passed! Please check your command and try again." << std::endl;
+			std::cout << "++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++" << std::endl << std::endl;
 			function::help_message();
 			delete conf;
 			delete i;
@@ -114,6 +116,7 @@ int main(int argc, char* argv[]) {
 
 	if (record and not config) {
 		std::cout << "Record flag requires Config flag used as well!" << std::endl;
+		std::cout << "++++++++++++++++++++++++++++++++++++++++++++++" << std::endl << std::endl;
 		function::help_message();
 		delete conf;
 		return 1;
