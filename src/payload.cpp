@@ -21,7 +21,7 @@ int payload::webcall(std::string URL) {
     long retcode;
     long certvalid;
 
-    if (!curl) {
+    if (!handle) {
         std::cout << "Error initializing curl!" << std::endl;
     }
     else {
@@ -41,7 +41,7 @@ int payload::webcall(std::string URL) {
 
         //Collect retcode.
         curl_easy_getinfo(handle, CURLINFO_RESPONSE_CODE, &retcode);
-        this->RETCODE = response_code;
+        this->RETCODE = retcode;
         std::cout << "HTTP Return Code is: " << RETCODE << "." << std::endl;
 
         //Collect Cert Correct
