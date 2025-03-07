@@ -28,8 +28,7 @@ int payload::webcall() {
         //Declaring variable for response.
         CURLcode res;
         
-        std::cout << this->URL << std::endl;
-        curl_easy_setopt(handle, CURLOPT_URL, this->URL);
+        curl_easy_setopt(handle, CURLOPT_URL, this->URL.c_str());
         curl_easy_setopt(handle, CURLOPT_FOLLOWLOCATION, 1L); //Follow redirects
         curl_easy_setopt(handle, CURLOPT_SSL_VERIFYPEER, 1L); //Enable SSL verification
         curl_easy_setopt(handle, CURLOPT_SSL_VERIFYHOST, 2L); //Verify Hostname
