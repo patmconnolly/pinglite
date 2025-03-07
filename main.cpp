@@ -31,7 +31,7 @@ int main(int argc, char* argv[]) {
 
 	std::string arg = "";
 
-	while (*i < argc) {
+	while (*i < argc - 1) {
 		(*i)++;
 		arg = argv[*i];
 		if (arg == "-h" || arg == "--help") {
