@@ -37,10 +37,12 @@ int payload::webcall() {
         //Declaring variable for response.
         CURLcode res;
         
-        curl_easy_setopt(handle, CURLOPT_URL, this->URL.c_str());
+        curl_easy_setopt(handle, CURLOPT_URL, this->URL.c_str()); //Set URL
         curl_easy_setopt(handle, CURLOPT_FOLLOWLOCATION, 1L); //Follow redirects
         curl_easy_setopt(handle, CURLOPT_SSL_VERIFYPEER, 0L); //Enable SSL verification
         curl_easy_setopt(handle, CURLOPT_SSL_VERIFYHOST, 0L); //Verify Hostname
+        curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, discard_data); //We actually don't care about the HTML.
+        curl_easy_setopt(handle, CURLOPT_WRITEDATA, NULL); //So we discard it with these two lines.
 
 
         //--------Actual Call
