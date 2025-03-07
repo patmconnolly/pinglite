@@ -112,6 +112,13 @@ int main(int argc, char* argv[]) {
 	}
 	delete i;
 
+	if (record and not config) {
+		std::cout << "Record flag requires Config flag used as well!" << std::endl;
+		function::help_message();
+		delete conf;
+		return 1;
+	}
+
 
 
 	//Collect configuration and store in configuration object.
