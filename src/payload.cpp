@@ -40,12 +40,13 @@ int payload::webcall() {
 
 
         //Collect retcode.
-        curl_easy_getinfo(handle, CURLINFO_RESPONSE_CODE, &retcode);
+        res = curl_easy_getinfo(handle, CURLINFO_RESPONSE_CODE, &retcode);
         this->RETCODE = retcode;
         std::cout << "HTTP Return Code is: " << RETCODE << "." << std::endl;
 
         //Collect Cert Correct
         res = curl_easy_getinfo(handle, CURLINFO_SSL_VERIFYRESULT, &certvalid);
+        std::cout << "certvalid: " << certvalid << std::endl;
         if (!certvalid) {
             this->SSLVALID = false;
             std::cout << "SSL Cert is Invalid!" << std::endl;
