@@ -77,3 +77,8 @@ int payload::webcall() {
     curl_easy_cleanup(handle);
 	return 0;
 }
+
+// Dummy write function to discard data
+size_t payload::discard_data(void* buffer, size_t size, size_t nmemb, void* userp) {
+    return size * nmemb; // Indicate that all data was written (discarded)
+}
