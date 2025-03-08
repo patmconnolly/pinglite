@@ -21,7 +21,7 @@ private:
 	int webcall();
 
 	// Dummy write function to discard data
-	size_t discard_data(void* buffer, size_t size, size_t nmemb, void* userp);
+	static size_t discard_data(void* buffer, size_t size, size_t nmemb, void* userp);
 
 	//Private variables.
 	std::string URL;
