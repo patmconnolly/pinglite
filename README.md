@@ -86,14 +86,14 @@ The wheel does not need to be recreated on a loop for constant processes, the ti
 1. ~~Define configuration files for what to monitor.~~ _Complete_
 2. ~~Basic infrastructure for releases and testing.~~ _Complete_
 3. ~~Create help screen.~~ _Complete_
-4. Create functionality for manual test.
-  - Hit URL
-  - Parse return for following:
-    - If resolved.
-    - Returncode
-    - SSL Valid
+4. Create functionality for manual test. _In Progress_
+  - ~~Hit URL~~
+  - ~~Parse return for following:~~
+    - ~~If resolved.~~ _Part of the regular process._
+    - ~~Returncode~~
+    - ~~SSL Valid~~
     - SSL Expiry
-  - Display results.
+  - ~~Display results.~~
 5. Create functionality for config files.
   - Read files in order.
   - Validate files.
