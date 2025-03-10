@@ -113,7 +113,7 @@ size_t payload::discard_data(void* buffer, size_t size, size_t nmemb, void* user
 }
 
 //Strip expiry date from verbose data.
-std::string getDate(const std::string& inputString) {
+std::string payload::getDate(const std::string& inputString) {
     std::string ExpireDateText = "expire date: ";
     size_t startPos = inputString.find(ExpireDateText);
     size_t endPos = inputString.find('\n', startPos);
