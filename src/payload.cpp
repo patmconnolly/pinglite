@@ -54,7 +54,7 @@ int payload::webcall() {
         ErrorText = curl_easy_strerror(res); //Tracer turned error message.
         //--------End Actual Call
 
-        if (ErrorText.contains("No error")) {
+        if (ErrorText.find("No error") != std::string::npos) {
             //Collect retcode.
             res = curl_easy_getinfo(handle, CURLINFO_RESPONSE_CODE, &retcode);
             this->RETCODE = retcode;
