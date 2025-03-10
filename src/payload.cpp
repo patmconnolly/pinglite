@@ -51,10 +51,10 @@ int payload::webcall() {
 
         //--------Actual Call
         res = curl_easy_perform(handle);
-        ErrorText curl_easy_strerror(res); //Tracer turned error message.
+        ErrorText = curl_easy_strerror(res); //Tracer turned error message.
         //--------End Actual Call
 
-        if (ErrorTest.contains("No error")) {
+        if (ErrorText.contains("No error")) {
             //Collect retcode.
             res = curl_easy_getinfo(handle, CURLINFO_RESPONSE_CODE, &retcode);
             this->RETCODE = retcode;
