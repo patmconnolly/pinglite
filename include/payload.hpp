@@ -17,6 +17,8 @@ public:
 	//Destructor
 	~payload();
 
+	int isvalid();
+
 private:
 	int webcall();
 
@@ -28,6 +30,7 @@ private:
 	int RETCODE;
 	bool SSLVALID;
 	int SSLEXPIRY;
+	int VALID;
 };
 
 #endif // PAYLOAD_H

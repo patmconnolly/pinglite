@@ -43,11 +43,11 @@ namespace function {
 			} while (*i < argc - 1 and result == 0);
 		}
 		else {
-			std::cout << "At least 1 config file must be passed in!" << std::endl;
+			std::cerr << "At least 1 config file must be passed in!" << std::endl;
 			return 1;
 		}
 		if (result == 1) {
-			std::cout << "Your config is broken in file: " << argv[*i] << ". See output above!" << std::endl;
+			std::cerr << "Your config is broken in file: " << argv[*i] << ". See output above!" << std::endl;
 			return 1;
 		}
 		std::cout << "Parsing of configuration files complete. Beginning configuration validation." << std::endl;
