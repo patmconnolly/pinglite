@@ -24,7 +24,7 @@ private:
 	int webcall();
 
 	// Collect the verbose curl output as string instead of file.
-	int debug_function(CURL* handle, curl_infotype type, char* data, size_t size, void* userp);
+	static int debug_function(CURL* handle, curl_infotype type, char* data, size_t size, void* userp);
 
 	//Private variables.
 	std::string URL;
