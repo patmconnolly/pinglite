@@ -47,9 +47,8 @@ int payload::webcall() {
         curl_easy_setopt(handle, CURLOPT_SSL_VERIFYPEER, 0L); //Enable SSL verification
         curl_easy_setopt(handle, CURLOPT_SSL_VERIFYHOST, 0L); //Verify Hostname
         curl_easy_setopt(handle, CURLOPT_VERBOSE, 1L); //Enable verbose to collect SSL expiry date exactly.
-        curl_easy_setopt(handle, CURLOPT_STDERR, nullptr); //
-        curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, payload::write_string); //
-        curl_easy_setopt(handle, CURLOPT_WRITEDATA, &stderr_buffer); //
+        curl_easy_setopt(handle, CURLOPT_DEBUGFUNCTION, payload::debug_function); //
+        curl_easy_setopt(handle, CURLOPT_DEBUGDATA, &stderr_buffer); //
 
 
         //--------Actual Call
@@ -99,10 +98,12 @@ int payload::webcall() {
 }
 
 // Collect the verbose curl output as string instead of file.
-size_t payload::write_string(void* ptr, size_t size, size_t nmemb, std::string* data) {
-    size_t real_size = size * nmemb;
-    data->append((char*)ptr, real_size);
-    return real_size;
+size_t payload::debug_function(CURL* handle, curl_infotype type, char* data, size_t size, void* userp) {
+    std::string* buffer = static_cast<std::string*>(userp);
+    if (type == CURLINFO_TEXT) {
+        buffer->append(data, size);
+    }
+    return 0;
 }
 
 bool payload::isvalid() {

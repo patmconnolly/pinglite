@@ -23,7 +23,7 @@ private:
 	int webcall();
 
 	// Collect the verbose curl output as string instead of file.
-	static size_t write_string(void* ptr, size_t size, size_t nmemb, std::string* data);
+	static size_t debug_function(CURL* handle, curl_infotype type, char* data, size_t size, void* userp);
 
 	//Private variables.
 	std::string URL;
