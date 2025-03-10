@@ -17,7 +17,7 @@ public:
 	//Destructor
 	~payload();
 
-	int isvalid();
+	bool isvalid();
 
 private:
 	int webcall();

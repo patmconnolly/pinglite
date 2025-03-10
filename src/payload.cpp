@@ -95,6 +95,11 @@ size_t payload::discard_data(void* buffer, size_t size, size_t nmemb, void* user
     return size * nmemb; // Indicate that all data was written (discarded)
 }
 
-int payload::isvalid() {
-    return this->VALID;
+bool payload::isvalid() {
+    if (this->VALID > 0) {
+        return false;
+    }
+    else {
+        return true;
+    }
 }
