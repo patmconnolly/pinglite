@@ -47,6 +47,7 @@ int payload::webcall() {
 
         //--------Actual Call
         res = curl_easy_perform(handle);
+        std::cout << curl_easy_strerror(res) << std::endl; //Tracer
         //--------End Actual Call
 
 
