@@ -89,7 +89,7 @@ int payload::webcall() {
         //Collect Cert Expiry
         if (not insecure and failcode == 0) {
             //Do the thing.
-            std::cout << payload::getDate(stderr_buffer) << std::endl;
+            std::cout << "-->" << payload::getDate(stderr_buffer) << "<--" << std::endl;
         }
 
 
@@ -117,7 +117,7 @@ std::string payload::getDate(const std::string& inputString) {
     std::string ExpireDateText = "expire date: ";
     size_t startPos = inputString.find(ExpireDateText);
     size_t endPos = inputString.find('\n', startPos);
-    return inputString.substr(startPos, endPos - startPos);
+    return inputString.substr(startPos + ExpireDateText.length(), endPos - startPos);
 }
 
 bool payload::isvalid() {
