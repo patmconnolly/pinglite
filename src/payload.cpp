@@ -98,7 +98,7 @@ int payload::webcall() {
 }
 
 // Collect the verbose curl output as string instead of file.
-size_t payload::debug_function(CURL* handle, curl_infotype type, char* data, size_t size, void* userp) {
+int payload::debug_function(CURL* handle, curl_infotype type, char* data, size_t size, void* userp) {
     std::string* buffer = static_cast<std::string*>(userp);
     if (type == CURLINFO_TEXT) {
         buffer->append(data, size);

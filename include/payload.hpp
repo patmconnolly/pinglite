@@ -8,6 +8,7 @@
 #define PAYLOAD_H
 
 #include <string>
+#include <curl/curl.h>
 
 class payload {
 public:
@@ -23,7 +24,7 @@ private:
 	int webcall();
 
 	// Collect the verbose curl output as string instead of file.
-	static size_t debug_function(CURL* handle, curl_infotype type, char* data, size_t size, void* userp);
+	int debug_function(CURL* handle, curl_infotype type, char* data, size_t size, void* userp);
 
 	//Private variables.
 	std::string URL;
