@@ -47,9 +47,9 @@ int payload::webcall() {
         curl_easy_setopt(handle, CURLOPT_SSL_VERIFYPEER, 0L); //Enable SSL verification
         curl_easy_setopt(handle, CURLOPT_SSL_VERIFYHOST, 0L); //Verify Hostname
         curl_easy_setopt(handle, CURLOPT_VERBOSE, 1L); //Enable verbose to collect SSL expiry date exactly.
-        curl_easy_setopt(handle, CURLOPT_STDERR, NULL); //
+        curl_easy_setopt(handle, CURLOPT_STDERR, &stderr_buffer); //
         curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, payload::write_string); //
-        curl_easy_setopt(handle, CURLOPT_WRITEDATA, &stderr_buffer); //
+        curl_easy_setopt(handle, CURLOPT_WRITEDATA, NULL); //
 
 
         //--------Actual Call
