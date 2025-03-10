@@ -25,6 +25,7 @@ int payload::webcall() {
     std::string scheme = this->URL.substr(0, this->URL.find("://"));
     bool insecure;
     std::string ErrorText = "";
+    std::string stderr_buffer; //String to store stderr data for later parsing.
 
     if (scheme == "https") {
         insecure = false;
@@ -45,8 +46,10 @@ int payload::webcall() {
         curl_easy_setopt(handle, CURLOPT_FOLLOWLOCATION, 1L); //Follow redirects
         curl_easy_setopt(handle, CURLOPT_SSL_VERIFYPEER, 0L); //Enable SSL verification
         curl_easy_setopt(handle, CURLOPT_SSL_VERIFYHOST, 0L); //Verify Hostname
-        curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, payload::discard_data); //We actually don't care about the HTML.
-        curl_easy_setopt(handle, CURLOPT_WRITEDATA, NULL); //So we discard it with these two lines.
+        curl_easy_setopt(handle, CURLOPT_VERBOSE, 1L); //Enable verbose to collect SSL expiry date exactly.
+        curl_easy_setopt(handle, CURLOPT_STDERR, NULL); //
+        curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, payload::write_string); //
+        curl_easy_setopt(handle, CURLOPT_WRITEDATA, &stderr_buffer); //
 
 
         //--------Actual Call
@@ -83,6 +86,11 @@ int payload::webcall() {
         }
 
         //Collect Cert Expiry
+        if (not insecure and failcode == 0) {
+            //Do the thing.
+            std::cout << "BUFFER DUMP:" << std::endl;
+            std::cout << stderr_buffer << std::endl;
+        }
 
 
     }
@@ -90,9 +98,11 @@ int payload::webcall() {
 	return failcode;
 }
 
-// Dummy write function to discard data
-size_t payload::discard_data(void* buffer, size_t size, size_t nmemb, void* userp) {
-    return size * nmemb; // Indicate that all data was written (discarded)
+// Collect the verbose curl output as string instead of file.
+size_t payload::write_string(void* ptr, size_t size, size_t nmemb, std::string* data) {
+    size_t real_size = size * nmemb;
+    data->append((char*)ptr, real_size);
+    return real_size;
 }
 
 bool payload::isvalid() {

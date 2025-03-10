@@ -22,8 +22,8 @@ public:
 private:
 	int webcall();
 
-	// Dummy write function to discard data
-	static size_t discard_data(void* buffer, size_t size, size_t nmemb, void* userp);
+	// Collect the verbose curl output as string instead of file.
+	size_t write_string(void* ptr, size_t size, size_t nmemb, std::string* data);
 
 	//Private variables.
 	std::string URL;
