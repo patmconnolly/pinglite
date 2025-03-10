@@ -49,6 +49,8 @@ int payload::webcall() {
         curl_easy_setopt(handle, CURLOPT_VERBOSE, 1L); //Enable verbose to collect SSL expiry date exactly.
         curl_easy_setopt(handle, CURLOPT_DEBUGFUNCTION, payload::debug_function); //
         curl_easy_setopt(handle, CURLOPT_DEBUGDATA, &stderr_buffer); //
+        curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, payload::discard_data);
+        curl_easy_setopt(handle, CURLOPT_WRITEDATA, nullptr);
 
 
         //--------Actual Call
@@ -104,6 +106,11 @@ int payload::debug_function(CURL* handle, curl_infotype type, char* data, size_t
         buffer->append(data, size);
     }
     return 0;
+}
+
+//Discard HTML data as that is not needed.
+size_t payload::discard_data(void* buffer, size_t size, size_t nmemb, void* userp) {
+    return size * nmemb;
 }
 
 bool payload::isvalid() {
