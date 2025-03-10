@@ -89,8 +89,7 @@ int payload::webcall() {
         //Collect Cert Expiry
         if (not insecure and failcode == 0) {
             //Do the thing.
-            std::cout << "BUFFER DUMP:" << std::endl;
-            std::cout << stderr_buffer << std::endl;
+            std::cout << payload::getDate(stderr_buffer) << std::endl;
         }
 
 
@@ -111,6 +110,14 @@ int payload::debug_function(CURL* handle, curl_infotype type, char* data, size_t
 //Discard HTML data as that is not needed.
 size_t payload::discard_data(void* buffer, size_t size, size_t nmemb, void* userp) {
     return size * nmemb;
+}
+
+//Strip expiry date from verbose data.
+std::string getDate(const std::string& inputString) {
+    std::string ExpireDateText = "expire date: ";
+    size_t startPos = inputString.find(ExpireDateText);
+    size_t endPos = inputString.find('\n', startPos);
+    return inputString.substr(startPos, endPos - startPos);
 }
 
 bool payload::isvalid() {

@@ -28,6 +28,9 @@ private:
 	//Discard HTML data as that is not needed.
 	static size_t discard_data(void* buffer, size_t size, size_t nmemb, void* userp);
 
+	//Strip expiry date from verbose data.
+	static std::string getDate(const std::string& inputString);
+
 	//Private variables.
 	std::string URL;
 	int RETCODE;
