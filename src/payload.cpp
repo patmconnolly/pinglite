@@ -123,16 +123,16 @@ int payload::calculateDaysDifferenceInt(const std::string& dateTimeString) {
         std::cerr << "Error converting tm to time_t" << std::endl;
         return -1;
     }
-    auto parsedTimePoint = system_clock::from_time_t(timeT);
+    auto parsedTimePoint = std::chrono::system_clock::from_time_t(timeT);
 
     // Get current time
-    auto now = system_clock::now();
+    auto now = std::chrono::system_clock::now();
 
     // Calculate duration
     auto duration = parsedTimePoint - now;
 
     // Convert duration to days and return as int
-    auto daysDifference = duration_cast<duration<int, std::ratio_multiply<std::ratio, std::chrono::hours::period>>>(duration); //or duration_cast<days>(duration) if you have c++20.
+    auto daysDifference = std::chrono::duration_cast<duration<int, std::ratio_multiply<std::ratio, std::chrono::hours::period>>>(duration); //or duration_cast<days>(duration) if you have c++20.
     return daysDifference.count();
 }
 
