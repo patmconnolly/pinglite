@@ -97,7 +97,7 @@ int payload::webcall() {
                 failcode++;
             }
             else {
-                std::cout << "SSL Cert Expires in " << " days." << std::endl;
+                std::cout << "SSL Cert Expires in " << this->SSLEXPIRY << " days." << std::endl;
             }
         }
     }
@@ -136,7 +136,6 @@ int payload::calculateDaysDifferenceInt(const std::string& dateTimeString) {
     // Convert duration to days and return as int
     auto hoursDifference = std::chrono::duration_cast<std::chrono::hours>(duration);
     int daysDifference = static_cast<int>(hoursDifference.count() / hoursInDay);
-    std::cout << "daysDiff: " << daysDifference << std::endl;
     return daysDifference;
 }
 
