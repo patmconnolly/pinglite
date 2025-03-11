@@ -12,15 +12,12 @@ minute=$(date -u +%M)
 IncludedFilenames="$basefilename LICENSE"
 
 if [[ "$branch" == "dev" ]]; then
-	outputfile="$basefilename-$branch-$year.$month.$day-$hour.$minute.tar"
-	releasedir="$UPLOAD_LOCATION/pinglite/development/"
+	outputfile="$UPLOAD_LOCATION/pinglite/development/$basefilename-$branch-$year.$month.$day-$hour.$minute.tar"
 elif [[ "$branch" == "nightly" ]]; then
-	outputfile="$basefilename-$branch-$year.$month.$day.tar"
-	releasedir="$UPLOAD_LOCATION/pinglite/nightly/"
+	outputfile="$UPLOAD_LOCATION/pinglite/nightly/$basefilename-$branch-$year.$month.$day.tar"
 elif [[ "$branch" == "stable" ]]; then
-	outputfile="$basefilename-$branch-$year.$month.$day.tar"
-	releasedir="$UPLOAD_LOCATION/pinglite/stable/"
+	outputfile="$UPLOAD_LOCATION/pinglite/stable/$basefilename-$branch-$year.$month.$day.tar"
+fi
 
 
-
-tar -cvf "$releasedir$outputfile" $IncludedFilenames
+tar -cvf $outputfile $IncludedFilenames
