@@ -110,20 +110,15 @@ int payload::webcall() {
 int payload::calculateDaysDifferenceInt(const std::string& dateTimeString) {
 
     const int hoursInDay = 24;
-    const std::string slimDateTimeString = payload::removeDoubleSpaces(dateTimeString);
+    std::string slimDateTimeString = payload::padSingleDigitDay(payload::removeDoubleSpaces(dateTimeString));
 
     // Parse the input string
     std::tm tm = {};
     std::istringstream ss(slimDateTimeString);
 
 
-    ss >> std::get_time(&tm, "%b %e %H:%M:%S %Y");
+    ss >> std::get_time(&tm, "%b %d %H:%M:%S %Y");
 
-    if (ss.fail()) {
-        ss.clear(); //Clear the failstate.
-        ss.str(slimDateTimeString); //Reset the stringstream.
-        ss >> std::get_time(&tm, "%b %d %H:%M:%S %Y");
-    }
     if (ss.fail()) {
         std::cerr << "Error parsing date/time string." << std::endl;
         return -1; // Return -1 days on error
@@ -155,6 +150,19 @@ std::string payload::removeDoubleSpaces(std::string str) {
         str.replace(pos, 2, " ");
     }
     return str;
+}
+
+std::string payload::padSingleDigitDay(std::string input) {
+    std::stringstream ss(input);
+    std::string month, day, time, year;
+
+    ss >> month >> day >> time >> year;
+
+    if (day.length() == 1) {
+        day = "0" + day;
+    }
+
+    return month + " " + day + " " + time + " " + year;
 }
 
 // Collect the verbose curl output as string instead of file.
