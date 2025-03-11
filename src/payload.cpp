@@ -135,7 +135,9 @@ int payload::calculateDaysDifferenceInt(const std::string& dateTimeString) {
 
     // Convert duration to days and return as int
     auto hoursDifference = std::chrono::duration_cast<std::chrono::hours>(duration);
-    return static_cast<int>(hoursDifference.count() / hoursInDay);
+    int daysDifference = static_cast<int>(hoursDifference.count() / hoursInDay);
+    std::cout << "daysDiff: " << daysDifference << std::endl;
+    return daysDifference;
 }
 
 // Collect the verbose curl output as string instead of file.
