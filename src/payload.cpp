@@ -132,7 +132,7 @@ int payload::calculateDaysDifferenceInt(const std::string& dateTimeString) {
     auto duration = parsedTimePoint - now;
 
     // Convert duration to days and return as int
-    auto daysDifference = std::chrono::duration_cast<duration<int, std::ratio_multiply<std::ratio, std::chrono::hours::period>>>(duration); //or duration_cast<days>(duration) if you have c++20.
+    auto daysDifference = std::chrono::duration_cast<std::chrono::duration<int, std::ratio_multiply<std::ratio, std::chrono::hours::period>>>(duration); //or duration_cast<days>(duration) if you have c++20.
     return daysDifference.count();
 }
 
