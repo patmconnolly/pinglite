@@ -12,11 +12,11 @@ minute=$(date -u +%M)
 IncludedFilenames="$basefilename LICENSE"
 
 if [[ "$branch" == "dev" ]]; then
-	outputfile="$UPLOAD_LOCATION/pinglite/development/$basefilename-$branch-$year.$month.$day-$hour.$minute.tar"
+	outputfile="$basefilename-$branch-$year.$month.$day-$hour.$minute.tar"
 elif [[ "$branch" == "nightly" ]]; then
-	outputfile="$UPLOAD_LOCATION/pinglite/nightly/$basefilename-$branch-$year.$month.$day.tar"
+	outputfile="$basefilename-$branch-$year.$month.$day.tar"
 elif [[ "$branch" == "stable" ]]; then
-	outputfile="$UPLOAD_LOCATION/pinglite/stable/$basefilename-$branch-$year.$month.$day.tar"
+	outputfile="$basefilename-$branch-$year.$month.$day.tar"
 fi
 
 
