@@ -35,7 +35,7 @@ private:
 
 	static std::string removeDoubleSpaces(std::string str);
 
-	std::string padSingleDigitDay(std::string input);
+	static std::string padSingleDigitDay(std::string input);
 
 	//Private variables.
 	std::string URL;
