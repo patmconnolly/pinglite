@@ -143,9 +143,11 @@ int payload::calculateDaysDifferenceInt(const std::string& dateTimeString) {
 
 std::string payload::removeDoubleSpaces(std::string str) {
     size_t pos = 0;
+    std::cout << str << std::endl;
     while ((pos = str.find("  ", pos)) != std::string::npos) {
         str.replace(pos, 2, " ");
     }
+    std::cout << str << std::endl;
     return str;
 }
 
