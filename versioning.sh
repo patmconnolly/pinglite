@@ -21,6 +21,13 @@ L7="COMPILE_TIME="+$COMPILE_TIME+"\n"
 L8="COMPILE_BRANCH="+$COMPILE_BRANCH+"\n"
 L9="#endif //VERSION_H\n"
 
-for i in {1..9}; do
-	echo "${L$i}" >> include/version.hpp
-done
+
+echo $L1 > include/version.hpp
+echo $L2 > include/version.hpp
+echo $L3 > include/version.hpp
+echo $L4 > include/version.hpp
+echo $L5 > include/version.hpp
+echo $L6 > include/version.hpp
+echo $L7 > include/version.hpp
+echo $L8 > include/version.hpp
+echo $L9 > include/version.hpp
