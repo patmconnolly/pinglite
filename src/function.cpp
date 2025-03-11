@@ -13,6 +13,7 @@ namespace function {
 		std::cout << "Flags" << std::endl;
 		std::cout << "-------------------------------------------------------------------------------------------------------------------------------" << std::endl;
 		std::cout << " -h, --help             Displays this help screen and exits." << std::endl;
+		std::cout << " -v, --version          Displays the version number and exits." << std::endl;
 		std::cout << " -m, --manual           Indicates a manual run with a URL. No results will be recorded, no alerts to be sent." << std::endl;
 		std::cout << " -t, --test             Tests the configuration files and exits." << std::endl;
 		std::cout << " -r, --results          Specifies the file to record the results, if the file does not exist it will be created." << std::endl;
@@ -21,6 +22,7 @@ namespace function {
 		std::cout << "Example Usage" << std::endl;
 		std::cout << "-------------------------------------------------------------------------------------------------------------------------------" << std::endl;
 		std::cout << "pinglite --help" << std::endl;
+		std::cout << "pinglite --version" << std::endl;
 		std::cout << "pinglite --manual https://download.pinglite.xyz" << std::endl;
 		std::cout << "pinglite --test globalconfig.conf localconfig.conf siteconfig.conf" << std::endl;
 		std::cout << "pinglite --record results.txt --configuration globalconfig.conf localconfig.conf siteconfig.conf" << std::endl;
