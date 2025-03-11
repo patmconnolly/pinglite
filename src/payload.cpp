@@ -110,17 +110,18 @@ int payload::webcall() {
 int payload::calculateDaysDifferenceInt(const std::string& dateTimeString) {
 
     const int hoursInDay = 24;
+    const std::string slimDateTimeString = payload::removeDoubleSpaces(dateTimeString);
 
     // Parse the input string
     std::tm tm = {};
-    std::istringstream ss(dateTimeString);
+    std::istringstream ss(slimDateTimeString);
 
 
-    ss >> std::get_time(&tm, "%b  %e %H:%M:%S %Y");
+    ss >> std::get_time(&tm, "%b %e %H:%M:%S %Y");
 
     if (ss.fail()) {
         ss.clear(); //Clear the failstate.
-        ss.str(dateTimeString); //Reset the stringstream.
+        ss.str(slimDateTimeString); //Reset the stringstream.
         ss >> std::get_time(&tm, "%b %d %H:%M:%S %Y");
     }
     if (ss.fail()) {
@@ -146,6 +147,14 @@ int payload::calculateDaysDifferenceInt(const std::string& dateTimeString) {
     auto hoursDifference = std::chrono::duration_cast<std::chrono::hours>(duration);
     int daysDifference = static_cast<int>(hoursDifference.count() / hoursInDay);
     return daysDifference;
+}
+
+std::string payload::removeDoubleSpaces(std::string str) {
+    size_t pos = 0;
+    while ((pos = str.find("  ", pos)) != std::string::npos) {
+        str.replace(pos, 2, " ");
+    }
+    return str;
 }
 
 // Collect the verbose curl output as string instead of file.
