@@ -107,7 +107,7 @@ int payload::webcall() {
 	return failcode;
 }
 
-int payload::calculateDaysDifferenceInt(const std::string& dateTimeString) {
+int payload::calculateDaysDifferenceInt(std::string& dateTimeString) {
 
     const int hoursInDay = 24;
 
