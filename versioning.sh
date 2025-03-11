@@ -18,8 +18,9 @@ cat <<EOF > include/version.hpp
 // Contains version info passed in immediately before compile time.
 #ifndef VERSION_H
 #define VERSION_H
-COMPILE_DATE=$year-$month-$day
-COMPILE_TIME=$hour:$minute
-COMPILE_BRANCH=$branch
+#include <string>
+std::string COMPILE_DATE=$year-$month-$day
+std::string COMPILE_TIME=$hour:$minute
+std::string COMPILE_BRANCH=$branch
 #endif //VERSION_H
 EOF
