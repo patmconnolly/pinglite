@@ -107,6 +107,8 @@ int payload::webcall() {
 
 int payload::calculateDaysDifferenceInt(const std::string& dateTimeString) {
 
+    const int hoursInDay = 24;
+
     // Parse the input string
     std::tm tm = {};
     std::istringstream ss(dateTimeString);
@@ -132,8 +134,8 @@ int payload::calculateDaysDifferenceInt(const std::string& dateTimeString) {
     auto duration = parsedTimePoint - now;
 
     // Convert duration to days and return as int
-    auto daysDifference = std::chrono::duration_cast<std::chrono::days>(duration);
-    return daysDifference.count();
+    auto hoursDifference = std::chrono::duration_cast<std::chrono::hours>(duration);
+    return static_cast<int>(hoursDifference.count() / hoursInDay);
 }
 
 // Collect the verbose curl output as string instead of file.
