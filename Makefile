@@ -18,6 +18,6 @@ $(OBJ_DIR)/%.o: %.cpp
 	$(CC) $(CFLAGS) -c $< -o $@ -I$(INC_DIR)
 
 clean:
-	rm -rf $(OBJ_DIR) $(TARGET) include/version.hpp
+	rm -rf $(OBJ_DIR) $(TARGET)
 
 .PHONY: all clean
