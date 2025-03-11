@@ -113,7 +113,7 @@ int payload::calculateDaysDifferenceInt(const std::string& dateTimeString) {
 
     // Parse the input string
     std::tm tm = {};
-    std::istringstream ss(dateTimeString);
+    std::istringstream ss(payload::removeDoubleSpaces(dateTimeString));
     ss >> std::get_time(&tm, "%b %d %H:%M:%S %Y");
 
     if (ss.fail()) {
@@ -139,6 +139,13 @@ int payload::calculateDaysDifferenceInt(const std::string& dateTimeString) {
     auto hoursDifference = std::chrono::duration_cast<std::chrono::hours>(duration);
     int daysDifference = static_cast<int>(hoursDifference.count() / hoursInDay);
     return daysDifference;
+}
+
+void payload::removeDoubleSpaces(std::string& str) {
+    size_t pos = 0;
+    while ((pos = str.find("  ", pos)) != std::string::npos) {
+        str.replace(pos, 2, " ");
+    }
 }
 
 // Collect the verbose curl output as string instead of file.

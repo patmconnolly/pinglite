@@ -33,6 +33,8 @@ private:
 
 	static int calculateDaysDifferenceInt(const std::string& dateTimeString);
 
+	void removeDoubleSpaces(std::string& str);
+
 	//Private variables.
 	std::string URL;
 	int RETCODE;
