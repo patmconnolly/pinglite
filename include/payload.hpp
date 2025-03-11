@@ -31,9 +31,9 @@ private:
 	//Strip expiry date from verbose data.
 	static std::string getDate(const std::string& inputString);
 
-	static int calculateDaysDifferenceInt(std::string& dateTimeString);
+	static int calculateDaysDifferenceInt(const std::string& dateTimeString);
 
-	void removeDoubleSpaces(std::string& str);
+	static void removeDoubleSpaces(std::string& str);
 
 	//Private variables.
 	std::string URL;
