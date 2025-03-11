@@ -116,7 +116,7 @@ int payload::calculateDaysDifferenceInt(const std::string& dateTimeString) {
     std::istringstream ss(dateTimeString);
 
 
-    ss >> std::get_time(&tm, "%b %e %d %H:%M:%S %Y");
+    ss >> std::get_time(&tm, "%b %e %H:%M:%S %Y");
 
     if (ss.fail()) {
         ss.clear(); //Clear the failstate.
