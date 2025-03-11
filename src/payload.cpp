@@ -8,6 +8,9 @@
 #include <iostream>
 #include <string>
 #include <curl/curl.h>
+#include <chrono>
+#include <sstream>
+#include <iomanip>
 
 payload::payload(std::string TargetURL) {
     this->URL = TargetURL;
@@ -89,13 +92,48 @@ int payload::webcall() {
         //Collect Cert Expiry
         if (not insecure and failcode == 0) {
             //Do the thing.
-            std::cout << "-->" << payload::getDate(stderr_buffer) << "<--" << std::endl;
+            this->SSLEXPIRY = payload::calculateDaysDifferenceInt(payload::getDate(stderr_buffer));
+            if (this->SSLEXPIRY < 0) {
+                failcode++;
+            }
+            else {
+                std::cout << "SSL Cert Expires in " << " days." << std::endl;
+            }
         }
-
-
     }
     curl_easy_cleanup(handle);
 	return failcode;
+}
+
+int payload::calculateDaysDifferenceInt(const std::string& dateTimeString) {
+
+    // Parse the input string
+    std::tm tm = {};
+    std::istringstream ss(dateTimeString);
+    ss >> std::get_time(&tm, "%b %d %H:%M:%S %Y");
+
+    if (ss.fail()) {
+        std::cerr << "Error parsing date/time string." << std::endl;
+        return -1; // Return -1 days on error
+    }
+
+    // Convert tm to time_point
+    std::time_t timeT = std::mktime(&tm);
+    if (timeT == -1) {
+        std::cerr << "Error converting tm to time_t" << std::endl;
+        return -1;
+    }
+    auto parsedTimePoint = system_clock::from_time_t(timeT);
+
+    // Get current time
+    auto now = system_clock::now();
+
+    // Calculate duration
+    auto duration = parsedTimePoint - now;
+
+    // Convert duration to days and return as int
+    auto daysDifference = duration_cast<duration<int, std::ratio_multiply<std::ratio, std::chrono::hours::period>>>(duration); //or duration_cast<days>(duration) if you have c++20.
+    return daysDifference.count();
 }
 
 // Collect the verbose curl output as string instead of file.

@@ -31,6 +31,8 @@ private:
 	//Strip expiry date from verbose data.
 	static std::string getDate(const std::string& inputString);
 
+	static int calculateDaysDifferenceInt(const std::string& dateTimeString);
+
 	//Private variables.
 	std::string URL;
 	int RETCODE;
