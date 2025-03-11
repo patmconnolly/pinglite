@@ -114,8 +114,13 @@ int payload::calculateDaysDifferenceInt(const std::string& dateTimeString) {
     // Parse the input string
     std::tm tm = {};
     std::istringstream ss(dateTimeString);
+
+
     ss >> std::get_time(&tm, "%b %e %d %H:%M:%S %Y");
 
+    if (ss.fail()) {
+        ss >> std::get_time(&tm, "%b %d %H:%M:%S %Y");
+    }
     if (ss.fail()) {
         std::cerr << "Error parsing date/time string." << std::endl;
         return -1; // Return -1 days on error
