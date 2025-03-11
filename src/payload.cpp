@@ -94,8 +94,8 @@ int payload::webcall() {
             //Do the thing.
             std::string DateTimeString = payload::getDate(stderr_buffer);
             this->SSLEXPIRY = payload::calculateDaysDifferenceInt(DateTimeString);
+            std::cout << "SSL Cert Expires on :" << DateTimeString << std::endl;
             if (this->SSLEXPIRY < 0) {
-                std::cerr << "DateTime String: " << DateTimeString << std::endl;
                 failcode++;
             }
             else {
