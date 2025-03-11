@@ -8,9 +8,19 @@ day=$(date -u +%d)
 hour=$(date -u +%H)
 minute=$(date -u +%M)
 
-echo "Compiled and packaged on $year-$month-$day at $hour:$minute UTC from the $branch branch." > VERSION
-
 #Add each filename to be included in final package, separated by a space.
-IncludedFilenames="$basefilename LICENSE VERSION"
+IncludedFilenames="$basefilename LICENSE"
 
-tar -cvf $basefilename-$branch-$year.$month.$day-$hour.$minute.tar $IncludedFilenames
+if [[ "$branch" == "dev" ]]; then
+	outputfile="$basefilename-$branch-$year.$month.$day-$hour.$minute.tar"
+	releasedir="$UPLOAD_LOCATION/pinglite/development/"
+elif [[ "$branch" == "nightly" ]]; then
+	outputfile="$basefilename-$branch-$year.$month.$day.tar"
+	releasedir="$UPLOAD_LOCATION/pinglite/nightly/"
+elif [[ "$branch" == "stable" ]]; then
+	outputfile="$basefilename-$branch-$year.$month.$day.tar"
+	releasedir="$UPLOAD_LOCATION/pinglite/stable/"
+
+
+
+tar -cvf "$releasedir$outputfile" $IncludedFilenames

@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 
+#include "include/version.hpp"
 #include "include/function.hpp"
 #include "include/payload.hpp"
 #include "include/configuration.hpp"
@@ -41,6 +42,13 @@ int main(int argc, char* argv[]) {
 		if (arg == "-h" || arg == "--help") {
 			//Display help message from functions.
 			function::help_message();
+			HARDSTOP = true;
+			EXITCODE = 0;
+		}
+		else if (arg == "-t" || arg == "--test") {
+			//Display versioning information.
+			std::cout << "Compiled and packaged on " << COMPILE_DATE << " at " << COMPILE_TIME << " UTC from the " << COMPILE_BRANCH << " branch." << std::endl;
+			std::cout << "Pinglite v" << COMPILE_DATE << "-" << COMPILE_BRANCH << std::endl;
 			HARDSTOP = true;
 			EXITCODE = 0;
 		}

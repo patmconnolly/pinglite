@@ -48,7 +48,7 @@ PingLite is compiled using Jenkins pipelines that trigger a docker container bui
 From the root of the project, execute the following for a manual compile:
 
 ```
-docker run --rm -v .:/usr/src/myapp -w /usr/src/myapp gcc:4.9 make
+docker run --rm -v .:/usr/src/myapp -w /usr/src/myapp gcc:12 make
 ```
 
 ### Goals
@@ -86,13 +86,13 @@ The wheel does not need to be recreated on a loop for constant processes, the ti
 1. ~~Define configuration files for what to monitor.~~ _Complete_
 2. ~~Basic infrastructure for releases and testing.~~ _Complete_
 3. ~~Create help screen.~~ _Complete_
-4. Create functionality for manual test. _In Progress_
+4. ~~Create functionality for manual test.~~ _Complete_
   - ~~Hit URL~~
   - ~~Parse return for following:~~
     - ~~If resolved.~~ _Part of the regular process._
     - ~~Returncode~~
     - ~~SSL Valid~~
-    - SSL Expiry
+    - ~~SSL Expiry~~
   - ~~Display results.~~
 5. Create functionality for config files.
   - Read files in order.
