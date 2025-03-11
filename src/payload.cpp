@@ -92,8 +92,10 @@ int payload::webcall() {
         //Collect Cert Expiry
         if (not insecure and failcode == 0) {
             //Do the thing.
-            this->SSLEXPIRY = payload::calculateDaysDifferenceInt(payload::getDate(stderr_buffer));
+            std::string DateTimeString = payload::getDate(stderr_buffer);
+            this->SSLEXPIRY = payload::calculateDaysDifferenceInt(DateTimeString);
             if (this->SSLEXPIRY < 0) {
+                std::cerr << "DateTime String: " << DateTimeString << std::endl;
                 failcode++;
             }
             else {
