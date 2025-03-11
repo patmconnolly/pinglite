@@ -141,11 +141,12 @@ int payload::calculateDaysDifferenceInt(const std::string& dateTimeString) {
     return daysDifference;
 }
 
-void payload::removeDoubleSpaces(std::string& str) {
+std::string payload::removeDoubleSpaces(std::string str) {
     size_t pos = 0;
     while ((pos = str.find("  ", pos)) != std::string::npos) {
         str.replace(pos, 2, " ");
     }
+    return str;
 }
 
 // Collect the verbose curl output as string instead of file.
