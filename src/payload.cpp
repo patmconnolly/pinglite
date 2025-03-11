@@ -36,7 +36,7 @@ int payload::webcall() {
 
     if (!handle) {
         std::cerr << "Error initializing curl!" << std::endl;
-        failcode = 1;
+        failcode++;
     }
     else {
         //Declaring variable for response.
@@ -69,7 +69,7 @@ int payload::webcall() {
             if (certinvalid) {
                 this->SSLVALID = false;
                 std::cerr << "SSL Cert is Invalid!" << std::endl;
-                failcode = 1;
+                failcode++;
             }
             else if (not insecure) {
                 this->SSLVALID = true;
@@ -83,7 +83,7 @@ int payload::webcall() {
         else {
             std::cerr << "There was a problem with the call!" << std::endl;
             std::cerr << ErrorText << std::endl;
-            failcode = 1;
+            failcode++;
         }
 
         //Collect Cert Expiry
