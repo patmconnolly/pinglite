@@ -19,8 +19,8 @@ cat <<EOF > include/version.hpp
 #ifndef VERSION_H
 #define VERSION_H
 #include <string>
-std::string COMPILE_DATE=$year-$month-$day
-std::string COMPILE_TIME=$hour:$minute
-std::string COMPILE_BRANCH=$branch
+std::string COMPILE_DATE="$year-$month-$day";
+std::string COMPILE_TIME="$hour:$minute";
+std::string COMPILE_BRANCH="$branch";
 #endif //VERSION_H
 EOF
