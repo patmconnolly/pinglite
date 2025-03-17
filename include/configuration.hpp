@@ -11,7 +11,7 @@ public:
 	configuration();
 
 	//Add more config files
-	int update();
+	int update(std::string confFile);
 
 	//Ensure final configuration is valid
 	int validate();
