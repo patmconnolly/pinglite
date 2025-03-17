@@ -5,10 +5,10 @@
 #include "configuration.hpp"
 
 configuration::configuration() {
-	this-> HOST = "httpx://EMPTY";
-	int RETURNCODE = -1;
-	int SSLVALID = -1;
-	int SSLEXPIRYREMINDER = -1;
+	this->HOST = "httpx://EMPTY";
+	this->RETURNCODE = -1;
+	this->SSLVALID = -1;
+	this->SSLEXPIRYREMINDER = -1;
 }
 
 int configuration::update(std::string confFile) {
