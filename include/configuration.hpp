@@ -16,6 +16,12 @@ public:
 	//Ensure final configuration is valid
 	int validate();
 
+	//Return variable data.
+	std::string getHOST();
+	int getRETURNCODE();
+	int getSSLVALID();
+	int getSSLEXPIRYREMINDER();
+
 	//Destructor
 	~configuration();
 

@@ -72,7 +72,7 @@ int payload::webcall() {
             if (certinvalid) {
                 this->SSLVALID = false;
                 std::cerr << "SSL Cert is Invalid!" << std::endl;
-                failcode++;
+                //failcode++; //Removing as this cannot cause the program to fail.
             }
             else if (not insecure) {
                 this->SSLVALID = true;
@@ -96,7 +96,8 @@ int payload::webcall() {
             this->SSLEXPIRY = payload::calculateDaysDifferenceInt(DateTimeString);
             std::cout << "SSL Cert Expires on: " << DateTimeString << std::endl;
             if (this->SSLEXPIRY < 0) {
-                failcode++;
+                //failcode++;
+                std::cerr << "SSL Cert is Expired!" << std::endl;
             }
             else {
                 std::cout << "SSL Cert Expires in " << this->SSLEXPIRY << " days." << std::endl;
@@ -195,3 +196,6 @@ bool payload::isvalid() {
         return true;
     }
 }
+
+int payload::getRETCODE() { return this->RETCODE; }
+int payload::getSSLEXPIRY() { return this->SSLEXPIRY; }

@@ -145,7 +145,15 @@ int main(int argc, char* argv[]) {
 			}
 		}
 
+		if (config) {
+			std::cout << "Executing Webcall..." << std::endl;
+			targetPayload = new payload(conf->getHOST());
+			//Create alert handler
+			//Assign alert functions as needed.
 
+
+
+		}
 
 		//Collect history, if it exists, and store in a historical object.
 

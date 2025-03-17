@@ -89,4 +89,10 @@ int configuration::validate() {
 	}
 }
 
+//Return variable data.
+std::string configuration::getHOST() { return this->HOST; }
+int configuration::getRETURNCODE() { return this->RETURNCODE; }
+int configuration::getSSLVALID() { return this->SSLVALID; }
+int configuration::getSSLEXPIRYREMINDER() { return this->SSLEXPIRYREMINDER; }
+
 configuration::~configuration() {}

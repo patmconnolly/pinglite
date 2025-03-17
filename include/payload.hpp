@@ -19,6 +19,9 @@ public:
 	~payload();
 
 	bool isvalid();
+	int getRETCODE();
+	int getSSLEXPIRY();
+
 
 private:
 	int webcall();
