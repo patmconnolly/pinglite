@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 #include <stdexcept>
-#include "inih/INIReader.h"
+#include "INIReader.h"
 #include "configuration.hpp"
 
 configuration::configuration() {
