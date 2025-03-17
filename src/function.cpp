@@ -41,7 +41,7 @@ namespace function {
 			do {
 				(*i)++;
 				std::cout << "Beginning parse of configuration file: " << argv[*i] << "." << std::endl;
-				result = conf->update();
+				result = conf->update(argv[*i]);
 			} while (*i < argc - 1 and result == 0);
 		}
 		else {
