@@ -48,7 +48,7 @@ int main(int argc, char* argv[]) {
 		else if (arg == "-v" || arg == "--version") {
 			//Display versioning information.
 			std::cout << "Compiled and packaged on " << COMPILE_DATE << " at " << COMPILE_TIME << " UTC from the " << COMPILE_BRANCH << " branch." << std::endl;
-			std::cout << "Pinglite v" << COMPILE_BRANCH << "-" << COMPILE_DATE << std::endl;
+			std::cout << "Pinglite version: " << COMPILE_BRANCH << "-" << COMPILE_DATE << std::endl;
 			HARDSTOP = true;
 			EXITCODE = 0;
 		}
