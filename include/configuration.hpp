@@ -3,6 +3,8 @@
 #ifndef CONFIGURATION_H
 #define CONFIGURATION_H
 
+#include <string>
+
 class configuration {
 public:
 	//Constructor
@@ -16,6 +18,13 @@ public:
 
 	//Destructor
 	~configuration();
+
+private:
+	//Private variables
+	std::string HOST;
+	int RETURNCODE;
+	int SSLVALID;
+	int SSLEXPIRYREMINDER;
 };
 
 #endif // CONFIGURATION_H
