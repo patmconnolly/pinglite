@@ -58,10 +58,12 @@ int main(int argc, char* argv[]) {
 			test = true;
 			std::cout << "Testing configuration files." << std::endl;
 			if (function::addConfig(conf, argc, argv, i) == 0) {
+				std::cout << "Validation succeeded." << std::endl;
 				HARDSTOP = true;
 				EXITCODE = 0;
 			}
 			else {
+				std::cerr << "VALIDATION FAILED! SEE OUTPUT ABOVE." << std::endl;
 				HARDSTOP = true;
 				EXITCODE = 1;
 			}
@@ -134,6 +136,7 @@ int main(int argc, char* argv[]) {
 	if (not HARDSTOP) {
 		payload* targetPayload = nullptr;
 
+		//Executes the manual test.
 		if (manual) {
 			targetPayload = new payload(manualURL);
 			if (not targetPayload->isvalid()) {
@@ -142,7 +145,7 @@ int main(int argc, char* argv[]) {
 			}
 		}
 
-		//Collect configuration and store in configuration object.
+
 
 		//Collect history, if it exists, and store in a historical object.
 
