@@ -1,7 +1,6 @@
 // Object to store configuration pulled from file.
 #include <iostream>
 #include <string>
-#include <stdexcept>
 #include "../third-party/inih/cpp/INIReader.h"
 #include "configuration.hpp"
 
@@ -20,41 +19,50 @@ int configuration::update(std::string confFile) {
 		return 1;
 	}
 
+	std::string tempHOST;
+	int tempRETCODE;
+	int tempSSLVALID;
+	int tempSSLEXPIRYREMINDER;
+
 	//Attempt to grab known variables, continue if cannot collect
 
 	//---HOST
-	try {
-		this->HOST = reader.Get("CHECK", "HOST");
+	tempHOST = reader.Get("CHECK", "HOST", "");
+	if (tempHOST != "") {
+		this->HOST = tempHOST;
 		std::cout << "Collected HOST Variable." << std::endl;
 	}
-	catch (const std::runtime_error& e) {
+	else {
 		std::cerr << "No HOST Variable Defined." << std::endl;
 	}
 
 	//---RETURNCODE
-	try {
-		this->RETURNCODE = reader.Get("REPORTING", "RETURNCODE");
+	tempRETCODE = reader.GetInteger("REPORTING", "RETURNCODE", -1);
+	if (tempRETCODE != -1) {
+		this->RETURNCODE = tempRETCODE;
 		std::cout << "Collected RETURNCODE Variable." << std::endl;
 	}
-	catch (const std::runtime_error& e) {
+	else {
 		std::cerr << "No RETURNCODE Variable Defined." << std::endl;
 	}
 
 	//---SSLVALID
-	try {
-		this->SSLVALID = reader.Get("REPORTING", "SSLVALID");
+	tempSSLVALID = reader.GetInteger("REPORTING", "SSLVALID", -1);
+	if (tempSSLVALID != -1) {
+		this->SSLVALID = tempSSLVALID;
 		std::cout << "Collected SSLVALID Variable." << std::endl;
 	}
-	catch (const std::runtime_error& e) {
+	else {
 		std::cerr << "No SSLVALID Variable Defined." << std::endl;
 	}
 
 	//---SSLEXPIRYREMINDER
-	try {
-		this->SSLEXPIRYREMINDER = reader.Get("REPORTING", "SSLEXPIRYREMINDER");
+	tempSSLEXPIRYREMINDER = reader.GetInteger("REPORTING", "SSLEXPIRYREMINDER", -1);
+	if (tempSSLEXPIRYREMINDER != -1) {
+		this->SSLEXPIRYREMINDER = tempSSLEXPIRYREMINDER;
 		std::cout << "Collected SSLEXPIRYREMINDER Variable." << std::endl;
 	}
-	catch (const std::runtime_error& e) {
+	else {
 		std::cerr << "No SSLEXPIRYREMINDER Variable Defined." << std::endl;
 	}
 
