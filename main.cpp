@@ -22,7 +22,6 @@ int main(int argc, char* argv[]) {
 	bool HARDSTOP = false; //If a hard stop is triggered, stop doing everything and go straight to end of program.
 	int EXITCODE = 0;      //The exit code to be returned. Allows for nonzero to be assigned.
 	
-	bool test = false;
 	bool config = false;
 	configuration* conf = new configuration();
 
@@ -55,7 +54,6 @@ int main(int argc, char* argv[]) {
 		else if (arg == "-t" || arg == "--test") {
 			//Test the config file(s) to ensure they will work. Exit after test with pass/fail.
 			//Stop checking for flags and just assume everything is a file.
-			test = true;
 			std::cout << "Testing configuration files." << std::endl;
 			if (function::addConfig(conf, argc, argv, i) == 0) {
 				std::cout << "Validation succeeded." << std::endl;
@@ -139,7 +137,7 @@ int main(int argc, char* argv[]) {
 		//Executes the manual test.
 		if (manual) {
 			targetPayload = new payload(manualURL);
-			if (not targetPayload->isvalid()) {
+			if (not targetPayload->validWebcall()) {
 				HARDSTOP = true;
 				EXITCODE = 1;
 			}
