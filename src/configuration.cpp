@@ -103,6 +103,6 @@ std::string configuration::getHOST() { return this->HOST; }
 int configuration::getRETURNCODE() { return this->RETURNCODE; }
 int configuration::getSSLVALID() { return this->SSLVALID; }
 int configuration::getSSLEXPIRYREMINDER() { return this->SSLEXPIRYREMINDER; }
-std::string configuration::getREPORTINGMETHOD() { returrn this->REPORTING_METHOD; }
+std::string configuration::getREPORTINGMETHOD() { return this->REPORTING_METHOD; }
 
 configuration::~configuration() {}
