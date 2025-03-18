@@ -7,6 +7,7 @@
 #include "include/function.hpp"
 #include "include/payload.hpp"
 #include "include/configuration.hpp"
+#include "include/reporting.hpp"
 
 int main(int argc, char* argv[]) {
 	//Collect and parse input.
@@ -146,21 +147,21 @@ int main(int argc, char* argv[]) {
 		if (config) {
 			std::cout << "Executing Webcall..." << std::endl;
 			targetPayload = new payload(conf->getHOST());
-			//Create alert handler
-			//Assign alert functions as needed.
+			reporting* report = new reporting(conf, targetPayload);
+			if (conf->getREPORTINGMETHOD() == "RETCODE") { EXITCODE = report->getRetcode(); }
+			else if (conf->getREPORTINGMETHOD() != "NONE") {
 
+				//Collect history, if it exists, and store in a historical object.
 
+				//Send call, store response in payload object.
 
+				//Compare payload to history, prepare alert if needed.
+
+				//Send alert, if needed.
+				report->trigger();
+			}
+			delete report;
 		}
-
-		//Collect history, if it exists, and store in a historical object.
-
-		//Send call, store response in payload object.
-
-		//Compare payload to history, prepare alert if needed.
-
-		//Send alert, if needed.
-
 		delete targetPayload;
 	}
 	delete conf;
