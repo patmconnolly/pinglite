@@ -1,6 +1,7 @@
 // Object to handle reporting.
 
 #include <string>
+#include <iostream>
 #include "configuration.hpp"
 #include "payload.hpp"
 
