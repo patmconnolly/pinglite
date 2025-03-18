@@ -22,8 +22,8 @@ public:
 
 private:
 	//Private variables of objects.
-	configuration conf;
-	payload results;
+	const configuration* conf;
+	const payload* results;
 
 	bool RETCODE_Compare(); // Compare return code to expected retcode, Return false if different.
 	bool SSLVALID(); //Return false if SSL is invalid or nonexistant (http).
