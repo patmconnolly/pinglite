@@ -55,7 +55,7 @@ bool reporting::SSLVALID() {
 
 //Return false if SSL is expiring within the configured range.
 bool reporting::SSLEXPIRYWARNING() {
-	if (this->results->getSSLEXPIRY <= this->conf->getSSLEXPIRYREMINDER) {
+	if (this->results->getSSLEXPIRY() <= this->conf->getSSLEXPIRYREMINDER()) {
 		return false;
 	}
 	else {
