@@ -18,12 +18,12 @@ public:
 	//Destructor
 	~payload();
 
-	const int getRETCODE();
-	const int getSSLEXPIRY();
+	int getRETCODE();
+	int getSSLEXPIRY();
 
-	const bool validWebcall();
-	const bool getSSLVALID();
-	const bool isINSECURE();
+	bool validWebcall();
+	bool getSSLVALID();
+	bool isINSECURE();
 
 
 private:

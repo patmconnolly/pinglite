@@ -99,10 +99,10 @@ int configuration::validate() {
 }
 
 //Return variable data.
-const std::string configuration::getHOST() { return this->HOST; }
-const int configuration::getRETURNCODE() { return this->RETURNCODE; }
-const int configuration::getSSLVALID() { return this->SSLVALID; }
-const int configuration::getSSLEXPIRYREMINDER() { return this->SSLEXPIRYREMINDER; }
-const std::string configuration::getREPORTINGMETHOD() { return this->REPORTINGMETHOD; }
+std::string configuration::getHOST() { return this->HOST; }
+int configuration::getRETURNCODE() { return this->RETURNCODE; }
+int configuration::getSSLVALID() { return this->SSLVALID; }
+int configuration::getSSLEXPIRYREMINDER() { return this->SSLEXPIRYREMINDER; }
+std::string configuration::getREPORTINGMETHOD() { return this->REPORTINGMETHOD; }
 
 configuration::~configuration() {}

@@ -17,11 +17,11 @@ public:
 	int validate();
 
 	//Return variable data.
-	const std::string getHOST();
-	const int getRETURNCODE();
-	const int getSSLVALID();
-	const int getSSLEXPIRYREMINDER();
-	const std::string getREPORTINGMETHOD();
+	std::string getHOST();
+	int getRETURNCODE();
+	int getSSLVALID();
+	int getSSLEXPIRYREMINDER();
+	std::string getREPORTINGMETHOD();
 
 	//Destructor
 	~configuration();

@@ -10,24 +10,24 @@
 class reporting {
 public:
 	//Constructor
-	reporting(const configuration* conf, const payload* results);
+	reporting(configuration* conf, payload* results);
 
 	//Destructor
 	~reporting();
 
 	//Returns 0 if no need for alerts. 1 if need to alert.
-	const int getRetcode();
+	int getRetcode();
 
 	void trigger(); //Triggers the alerts to be configured later.
 
 private:
 	//Private variables of objects.
-	const configuration* conf;
-	const payload* results;
+	configuration* conf;
+	payload* results;
 
-	const bool RETCODE_Compare(); // Compare return code to expected retcode, Return false if different.
-	const bool SSLVALID(); //Return false if SSL is invalid or nonexistant (http).
-	const bool SSLEXPIRYWARNING(); //Return false if SSL is expiring within the configured range.
+	bool RETCODE_Compare(); // Compare return code to expected retcode, Return false if different.
+	bool SSLVALID(); //Return false if SSL is invalid or nonexistant (http).
+	bool SSLEXPIRYWARNING(); //Return false if SSL is expiring within the configured range.
 };
 
 #endif // REPORTING_H
