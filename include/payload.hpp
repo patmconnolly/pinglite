@@ -18,7 +18,6 @@ public:
 	//Destructor
 	~payload();
 
-	bool isvalid();
 	int getRETCODE();
 	int getSSLEXPIRY();
 
