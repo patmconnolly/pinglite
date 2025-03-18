@@ -21,6 +21,5 @@ $(OBJ_DIR)/%.o: %.cpp
 
 clean:
 	rm -rf $(OBJ_DIR) $(TARGET)
-	$(MAKE) -C third-party/inih/ clean
 
 .PHONY: all clean
