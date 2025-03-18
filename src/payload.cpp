@@ -18,6 +18,14 @@ payload::payload(std::string TargetURL) {
 }
 payload::~payload() {}
 
+//Get functions for data.
+int payload::getRETCODE() { return this->RETCODE; }
+int payload::getSSLEXPIRY() { return this->SSLEXPIRY; }
+bool payload::getSSLVALID() { return this->SSLVALID; }
+bool payload::validWebcall() { return this->VALIDWEBCALL; }
+bool payload::isINSECURE() { return this->INSECURE; }
+
+//Private functions for backend work.
 bool payload::webcall() {
     auto handle = curl_easy_init();
 
@@ -191,8 +199,3 @@ std::string payload::getDate(const std::string& inputString) {
     return inputString.substr(startPos, endPos - startPos);
 }
 
-int payload::getRETCODE() { return this->RETCODE; }
-int payload::getSSLEXPIRY() { return this->SSLEXPIRY; }
-bool payload::getSSLVALID() { return this->SSLVALID; }
-bool payload::validWebcall() { return this->VALIDWEBCALL; }
-bool payload::isINSECURE() { return this->INSECURE; }

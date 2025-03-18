@@ -21,6 +21,7 @@ public:
 	int getRETURNCODE();
 	int getSSLVALID();
 	int getSSLEXPIRYREMINDER();
+	std::string getREPORTINGMETHOD();
 
 	//Destructor
 	~configuration();
@@ -31,6 +32,7 @@ private:
 	int RETURNCODE;
 	int SSLVALID;
 	int SSLEXPIRYREMINDER;
+	std::string REPORTINGMETHOD = "NONE";
 };
 
 #endif // CONFIGURATION_H

@@ -23,6 +23,7 @@ int configuration::update(std::string confFile) {
 	int tempRETCODE;
 	int tempSSLVALID;
 	int tempSSLEXPIRYREMINDER;
+	std::string tempREPORTINGMETHOD;
 
 	//Attempt to grab known variables, continue if cannot collect
 
@@ -37,7 +38,7 @@ int configuration::update(std::string confFile) {
 	}
 
 	//---RETURNCODE
-	tempRETCODE = reader.GetInteger("REPORTING", "RETURNCODE", -1);
+	tempRETCODE = reader.GetInteger("VALIDATION", "RETURNCODE", -1);
 	if (tempRETCODE != -1) {
 		this->RETURNCODE = tempRETCODE;
 		std::cout << "Collected RETURNCODE Variable." << std::endl;
@@ -47,7 +48,7 @@ int configuration::update(std::string confFile) {
 	}
 
 	//---SSLVALID
-	tempSSLVALID = reader.GetInteger("REPORTING", "SSLVALID", -1);
+	tempSSLVALID = reader.GetInteger("VALIDATION", "SSLVALID", -1);
 	if (tempSSLVALID != -1) {
 		this->SSLVALID = tempSSLVALID;
 		std::cout << "Collected SSLVALID Variable." << std::endl;
@@ -57,7 +58,7 @@ int configuration::update(std::string confFile) {
 	}
 
 	//---SSLEXPIRYREMINDER
-	tempSSLEXPIRYREMINDER = reader.GetInteger("REPORTING", "SSLEXPIRYREMINDER", -1);
+	tempSSLEXPIRYREMINDER = reader.GetInteger("VALIDATION", "SSLEXPIRYREMINDER", -1);
 	if (tempSSLEXPIRYREMINDER != -1) {
 		this->SSLEXPIRYREMINDER = tempSSLEXPIRYREMINDER;
 		std::cout << "Collected SSLEXPIRYREMINDER Variable." << std::endl;
@@ -66,20 +67,28 @@ int configuration::update(std::string confFile) {
 		std::cerr << "No SSLEXPIRYREMINDER Variable Defined." << std::endl;
 	}
 
+	//---REPORTING METHOD
+	tempREPORTINGMETHOD = reader.Get("REPORTING", "METHOD", "");
+	if (tempREPORTINGMETHOD != "") {
+		this->REPORTINGMETHOD = tempREPORTINGMETHOD;
+		std::cout << "Collected REPORTINGMETHOD Variable." << std::endl;
+	}
+	else {
+		std::cerr << "No REPORTINGMETHOD Variable Defined." << std::endl;
+	}
+
 	return 0;
 }
 
 int configuration::validate() {
 	bool VALID = true;
-	//this->HOST = "httpx://EMPTY";
-	//int RETURNCODE = -1;
-	//int SSLVALID = -1;
-	//int SSLEXPIRYREMINDER = -1;
 
 	if (this->HOST == "httpx://EMPTY") { VALID = false; std::cerr << "HOST IS INVALID!" << std::endl; }
 	if (this->RETURNCODE == -1) { VALID = false; std::cerr << "RETURNCODE IS INVALID!" << std::endl; }
 	if (this->SSLVALID == -1) { VALID = false;  std::cerr << "SSLVALID IS INVALID!" << std::endl; }
 	if (this->SSLEXPIRYREMINDER == -1) { VALID = false;  std::cerr << "SSLEXPIRYREMINDER IS INVALID!" << std::endl; }
+
+	if (this->REPORTINGMETHOD != "NONE" and this->REPORTINGMETHOD != "RETCODE") { VALID = false; std::cerr << "REPORTINGMETHOD IS INVALID!" << std::endl; }
 
 	if (not VALID) {
 		return 1;
@@ -94,5 +103,6 @@ std::string configuration::getHOST() { return this->HOST; }
 int configuration::getRETURNCODE() { return this->RETURNCODE; }
 int configuration::getSSLVALID() { return this->SSLVALID; }
 int configuration::getSSLEXPIRYREMINDER() { return this->SSLEXPIRYREMINDER; }
+std::string configuration::getREPORTINGMETHOD() { returrn this->REPORTING_METHOD; }
 
 configuration::~configuration() {}
