@@ -2,6 +2,7 @@
 
 #include <string>
 #include <iostream>
+#include "reporting.hpp"
 #include "configuration.hpp"
 #include "payload.hpp"
 
