@@ -10,7 +10,7 @@
 class reporting {
 public:
 	//Constructor
-	reporting(configuration conf, payload results);
+	reporting(const configuration* conf, const payload* results);
 
 	//Destructor
 	~reporting();

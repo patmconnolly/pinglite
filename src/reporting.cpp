@@ -11,7 +11,7 @@
 // payload results;
 
 //Constructor
-reporting::reporting(configuration conf, payload results) {
+reporting::reporting(const configuration* conf, const payload* results) {
 	this->conf = conf;
 	this->results = results;
 }
