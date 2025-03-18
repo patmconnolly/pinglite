@@ -19,11 +19,11 @@ payload::payload(std::string TargetURL) {
 payload::~payload() {}
 
 //Get functions for data.
-int payload::getRETCODE() { return this->RETCODE; }
-int payload::getSSLEXPIRY() { return this->SSLEXPIRY; }
-bool payload::getSSLVALID() { return this->SSLVALID; }
-bool payload::validWebcall() { return this->VALIDWEBCALL; }
-bool payload::isINSECURE() { return this->INSECURE; }
+const int payload::getRETCODE() { return this->RETCODE; }
+const int payload::getSSLEXPIRY() { return this->SSLEXPIRY; }
+const bool payload::getSSLVALID() { return this->SSLVALID; }
+const bool payload::validWebcall() { return this->VALIDWEBCALL; }
+const bool payload::isINSECURE() { return this->INSECURE; }
 
 //Private functions for backend work.
 bool payload::webcall() {
