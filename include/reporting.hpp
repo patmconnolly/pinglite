@@ -16,7 +16,7 @@ public:
 	~reporting();
 
 	//Returns 0 if no need for alerts. 1 if need to alert.
-	int getRetcode();
+	const int getRetcode();
 
 	void trigger(); //Triggers the alerts to be configured later.
 
@@ -25,9 +25,9 @@ private:
 	const configuration* conf;
 	const payload* results;
 
-	bool RETCODE_Compare(); // Compare return code to expected retcode, Return false if different.
-	bool SSLVALID(); //Return false if SSL is invalid or nonexistant (http).
-	bool SSLEXPIRYWARNING(); //Return false if SSL is expiring within the configured range.
+	const bool RETCODE_Compare(); // Compare return code to expected retcode, Return false if different.
+	const bool SSLVALID(); //Return false if SSL is invalid or nonexistant (http).
+	const bool SSLEXPIRYWARNING(); //Return false if SSL is expiring within the configured range.
 };
 
 #endif // REPORTING_H

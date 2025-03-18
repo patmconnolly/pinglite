@@ -20,7 +20,7 @@ reporting::reporting(const configuration* conf, const payload* results) {
 reporting::~reporting() {}
 
 //Returns 0 if no need for alerts. 1 if need to alert.
-int reporting::getRetcode() {
+const int reporting::getRetcode() {
 	if (RETCODE_Compare() and SSLVALID() and SSLEXPIRYWARNING()) {
 		return 0;
 	}
@@ -39,7 +39,7 @@ void reporting::trigger() {
 
 
  // Compare return code to expected retcode, Return false if different.
-bool reporting::RETCODE_Compare() {
+const bool reporting::RETCODE_Compare() {
 	if (this->conf->getRETURNCODE() == this->results->getRETCODE()) {
 		return true;
 	}
@@ -49,12 +49,12 @@ bool reporting::RETCODE_Compare() {
 }
 
 //Return false if SSL is invalid or nonexistant (http).
-bool reporting::SSLVALID() {
+const bool reporting::SSLVALID() {
 	return this->results->getSSLVALID();
 }
 
 //Return false if SSL is expiring within the configured range.
-bool reporting::SSLEXPIRYWARNING() {
+const bool reporting::SSLEXPIRYWARNING() {
 	if (this->payload->getSSLEXPIRY <= this->conf->getSSLEXPIRYREMINDER) {
 		return false;
 	}
