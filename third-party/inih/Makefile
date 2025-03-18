@@ -19,7 +19,7 @@ cpp/INIReader.o: cpp/INIReader.cpp cpp/INIReader.h
 	$(CXX) $(CXXFLAGS) -c cpp/INIReader.cpp
 
 # Clean target
-clean:
-	rm -f *.o cpp/*.o
+#clean:
+#	rm -f *.o cpp/*.o
 
 .PHONY: all clean
