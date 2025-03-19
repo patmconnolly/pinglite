@@ -41,11 +41,11 @@ void reporting::trigger() {
  // Compare return code to expected retcode, Return false if different.
 bool reporting::RETCODE_Compare() {
 	if (this->conf->getRETURNCODE() == this->results->getRETCODE()) {
-		std::cout << "HTTP Return Code is As Expected!" << std::endl;
+		std::cout << "HTTP Return Code Is As Expected." << std::endl;
 		return true;
 	}
 	else {
-		std::cerr << "HTTP Return Code is NOT As Expected!" << std::endl;
+		std::cerr << "HTTP Return Code Is NOT As Expected!" << std::endl;
 		return false;
 	}
 }
