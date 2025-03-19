@@ -20,6 +20,6 @@ cpp/INIReader.o: cpp/INIReader.cpp cpp/INIReader.h
 
 # Clean target
 clean:
-	rm -f *.o cpp/*.o
+	rm -rf *.o
 
 .PHONY: all clean
