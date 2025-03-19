@@ -95,10 +95,10 @@ The wheel does not need to be recreated on a loop for constant processes, the ti
     - ~~SSL Valid~~
     - ~~SSL Expiry~~
   - ~~Display results.~~
-5. Create functionality for config files.
-  - Read files in order.
-  - Validate files.
-  - Store config in object.
+5. ~~Create functionality for config files.~~ _Complete_
+  - ~~Read files in order.~~
+  - ~~Validate files.~~
+  - ~~Store config in object.~~
 6. Create functionality for recording results.
   - Read prior results, if applicable.
   - Parse results into object.
