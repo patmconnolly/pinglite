@@ -34,7 +34,8 @@ In the download directory there are three folders:
 - nightly
   - This is where the builds that compile and are submitted by EOD will be placed.
   - New features will be available before an actual release occurs.
-  - TODO - Compiles automatically every night.
+  - Compiles automatically every night.
+  - Only the most recent 50 builds will be kept, it is cleaned nightly.
   - The versioning is: `pinglite-nightly-<YYYY>.<MM>.<DD>.tar`
 - stable
   - Stable and complete releases will be here, delayed release to ensure nothing wrong is happening.
@@ -94,10 +95,10 @@ The wheel does not need to be recreated on a loop for constant processes, the ti
     - ~~SSL Valid~~
     - ~~SSL Expiry~~
   - ~~Display results.~~
-5. Create functionality for config files.
-  - Read files in order.
-  - Validate files.
-  - Store config in object.
+5. ~~Create functionality for config files.~~ _Complete_
+  - ~~Read files in order.~~
+  - ~~Validate files.~~
+  - ~~Store config in object.~~
 6. Create functionality for recording results.
   - Read prior results, if applicable.
   - Parse results into object.

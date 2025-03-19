@@ -18,10 +18,16 @@ public:
 	//Destructor
 	~payload();
 
-	bool isvalid();
+	int getRETCODE();
+	int getSSLEXPIRY();
+
+	bool validWebcall();
+	bool getSSLVALID();
+	bool isINSECURE();
+
 
 private:
-	int webcall();
+	bool webcall();
 
 	// Collect the verbose curl output as string instead of file.
 	static int debug_function(CURL* handle, curl_infotype type, char* data, size_t size, void* userp);
@@ -42,7 +48,8 @@ private:
 	int RETCODE;
 	bool SSLVALID;
 	int SSLEXPIRY;
-	int VALID;
+	bool VALIDWEBCALL;
+	bool INSECURE;
 };
 
 #endif // PAYLOAD_H

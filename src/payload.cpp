@@ -14,14 +14,22 @@
 
 payload::payload(std::string TargetURL) {
     this->URL = TargetURL;
-    this->VALID = webcall();
+    this->VALIDWEBCALL = webcall();
 }
 payload::~payload() {}
 
-int payload::webcall() {
+//Get functions for data.
+int payload::getRETCODE() { return this->RETCODE; }
+int payload::getSSLEXPIRY() { return this->SSLEXPIRY; }
+bool payload::getSSLVALID() { return this->SSLVALID; }
+bool payload::validWebcall() { return this->VALIDWEBCALL; }
+bool payload::isINSECURE() { return this->INSECURE; }
+
+//Private functions for backend work.
+bool payload::webcall() {
     auto handle = curl_easy_init();
 
-    int failcode = 0;
+    bool SUCCESS = true;
 
     long retcode;
     long certinvalid;
@@ -39,7 +47,7 @@ int payload::webcall() {
 
     if (!handle) {
         std::cerr << "Error initializing curl!" << std::endl;
-        failcode++;
+        SUCCESS = false;
     }
     else {
         //Declaring variable for response.
@@ -67,44 +75,48 @@ int payload::webcall() {
             this->RETCODE = retcode;
             std::cout << "HTTP Return Code is: " << RETCODE << "." << std::endl;
 
-            //Collect Cert Correct
-            res = curl_easy_getinfo(handle, CURLINFO_SSL_VERIFYRESULT, &certinvalid);
-            if (certinvalid) {
+            //Collect Cert Information
+            if (insecure) {
                 this->SSLVALID = false;
-                std::cerr << "SSL Cert is Invalid!" << std::endl;
-                failcode++;
-            }
-            else if (not insecure) {
-                this->SSLVALID = true;
-                std::cout << "SSL Cert is Valid!" << std::endl;
+                this->SSLEXPIRY = 0;
+                this->INSECURE = true;
+                std::cout << "Insecure protocol!" << std::endl;
             }
             else {
-                this->SSLVALID = false;
-                std::cout << "Insecure Protocol!" << std::endl;
+                this->INSECURE = false;
+                res = curl_easy_getinfo(handle, CURLINFO_SSL_VERIFYRESULT, &certinvalid);
+
+                //Validate Certificate If Applicable
+                if (certinvalid) {
+                    this->SSLVALID = false;
+                    std::cerr << "SSL Cert is Invalid!" << std::endl;
+                }
+                else {
+                    this->SSLVALID = true;
+                    std::cout << "SSL Cert is Valid." << std::endl;
+                }
+
+                //Check certificate expiry date.
+                std::string DateTimeString = payload::getDate(stderr_buffer);
+                this->SSLEXPIRY = payload::calculateDaysDifferenceInt(DateTimeString);
+                std::cout << "SSL Cert Expires on: " << DateTimeString << std::endl;
+                if (this->SSLEXPIRY < 0) {
+                    std::cerr << "SSL Cert is Expired!" << std::endl;
+                }
+                else {
+                    std::cout << "SSL Cert Expires in " << this->SSLEXPIRY << " days." << std::endl;
+                }
             }
+
         }
         else {
             std::cerr << "There was a problem with the call!" << std::endl;
             std::cerr << ErrorText << std::endl;
-            failcode++;
-        }
-
-        //Collect Cert Expiry
-        if (not insecure and failcode == 0) {
-            //Do the thing.
-            std::string DateTimeString = payload::getDate(stderr_buffer);
-            this->SSLEXPIRY = payload::calculateDaysDifferenceInt(DateTimeString);
-            std::cout << "SSL Cert Expires on: " << DateTimeString << std::endl;
-            if (this->SSLEXPIRY < 0) {
-                failcode++;
-            }
-            else {
-                std::cout << "SSL Cert Expires in " << this->SSLEXPIRY << " days." << std::endl;
-            }
+            SUCCESS = false;
         }
     }
     curl_easy_cleanup(handle);
-	return failcode;
+	return SUCCESS;
 }
 
 int payload::calculateDaysDifferenceInt(const std::string& dateTimeString) {
@@ -187,11 +199,3 @@ std::string payload::getDate(const std::string& inputString) {
     return inputString.substr(startPos, endPos - startPos);
 }
 
-bool payload::isvalid() {
-    if (this->VALID > 0) {
-        return false;
-    }
-    else {
-        return true;
-    }
-}

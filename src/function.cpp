@@ -41,7 +41,7 @@ namespace function {
 			do {
 				(*i)++;
 				std::cout << "Beginning parse of configuration file: " << argv[*i] << "." << std::endl;
-				result = conf->update();
+				result = conf->update(argv[*i]);
 			} while (*i < argc - 1 and result == 0);
 		}
 		else {
@@ -52,7 +52,7 @@ namespace function {
 			std::cerr << "Your config is broken in file: " << argv[*i] << ". See output above!" << std::endl;
 			return 1;
 		}
-		std::cout << "Parsing of configuration files complete. Beginning configuration validation." << std::endl;
+		std::cout << "Parsing of configuration files complete, validating." << std::endl;
 		return conf->validate();
 	}
 }

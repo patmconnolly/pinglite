@@ -7,6 +7,7 @@
 #include "include/function.hpp"
 #include "include/payload.hpp"
 #include "include/configuration.hpp"
+#include "include/reporting.hpp"
 
 int main(int argc, char* argv[]) {
 	//Collect and parse input.
@@ -22,7 +23,6 @@ int main(int argc, char* argv[]) {
 	bool HARDSTOP = false; //If a hard stop is triggered, stop doing everything and go straight to end of program.
 	int EXITCODE = 0;      //The exit code to be returned. Allows for nonzero to be assigned.
 	
-	bool test = false;
 	bool config = false;
 	configuration* conf = new configuration();
 
@@ -48,20 +48,21 @@ int main(int argc, char* argv[]) {
 		else if (arg == "-v" || arg == "--version") {
 			//Display versioning information.
 			std::cout << "Compiled and packaged on " << COMPILE_DATE << " at " << COMPILE_TIME << " UTC from the " << COMPILE_BRANCH << " branch." << std::endl;
-			std::cout << "Pinglite v" << COMPILE_BRANCH << "-" << COMPILE_DATE << std::endl;
+			std::cout << "Pinglite version: " << COMPILE_BRANCH << "-" << COMPILE_DATE << std::endl;
 			HARDSTOP = true;
 			EXITCODE = 0;
 		}
 		else if (arg == "-t" || arg == "--test") {
 			//Test the config file(s) to ensure they will work. Exit after test with pass/fail.
 			//Stop checking for flags and just assume everything is a file.
-			test = true;
 			std::cout << "Testing configuration files." << std::endl;
 			if (function::addConfig(conf, argc, argv, i) == 0) {
+				std::cout << "Validation succeeded." << std::endl;
 				HARDSTOP = true;
 				EXITCODE = 0;
 			}
 			else {
+				std::cerr << "VALIDATION FAILED! SEE OUTPUT ABOVE." << std::endl;
 				HARDSTOP = true;
 				EXITCODE = 1;
 			}
@@ -134,24 +135,33 @@ int main(int argc, char* argv[]) {
 	if (not HARDSTOP) {
 		payload* targetPayload = nullptr;
 
+		//Executes the manual test.
 		if (manual) {
 			targetPayload = new payload(manualURL);
-			if (not targetPayload->isvalid()) {
+			if (not targetPayload->validWebcall()) {
 				HARDSTOP = true;
 				EXITCODE = 1;
 			}
 		}
 
-		//Collect configuration and store in configuration object.
+		if (config) {
+			std::cout << "Executing Webcall..." << std::endl;
+			targetPayload = new payload(conf->getHOST());
+			reporting* report = new reporting(conf, targetPayload);
+			if (conf->getREPORTINGMETHOD() == "RETCODE") { EXITCODE = report->getRetcode(); }
+			else if (conf->getREPORTINGMETHOD() != "NONE") {
 
-		//Collect history, if it exists, and store in a historical object.
+				//Collect history, if it exists, and store in a historical object.
 
-		//Send call, store response in payload object.
+				//Send call, store response in payload object.
 
-		//Compare payload to history, prepare alert if needed.
+				//Compare payload to history, prepare alert if needed.
 
-		//Send alert, if needed.
-
+				//Send alert, if needed.
+				report->trigger();
+			}
+			delete report;
+		}
 		delete targetPayload;
 	}
 	delete conf;
