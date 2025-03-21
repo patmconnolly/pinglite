@@ -9,6 +9,8 @@ configuration::configuration() {
 	this->RETURNCODE = -1;
 	this->SSLVALID = -1;
 	this->SSLEXPIRYREMINDER = -1;
+	this->SSLEXPIRYSNOOZE = -1;
+	this->ALERTSNOOZE = -1;
 }
 
 int configuration::update(std::string confFile) {
@@ -24,6 +26,8 @@ int configuration::update(std::string confFile) {
 	int tempSSLVALID;
 	int tempSSLEXPIRYREMINDER;
 	std::string tempREPORTINGMETHOD;
+	int tempSSLEXPIRYSNOOZE;
+	int tempALERTSNOOZE;
 
 	//Attempt to grab known variables, continue if cannot collect
 
@@ -77,6 +81,26 @@ int configuration::update(std::string confFile) {
 		std::cerr << "No REPORTINGMETHOD Variable Defined." << std::endl;
 	}
 
+	//---SSL Expiry Snooze
+	tempSSLEXPIRYSNOOZE = reader.GetInteger("REPORTING", "SSLEXPIRYSNOOZE", -1);
+	if (tempSSLEXPIRYSNOOZE != -1) {
+		this->SSLEXPIRYSNOOZE = tempSSLEXPIRYSNOOZE;
+		std::cout << "Collected SSLEXPIRYSNOOZE Variable." << std::endl;
+	}
+	else {
+		std::cerr << "No SSLEXPIRYSNOOZE Variable Defined." << std::endl;
+	}
+
+	//---Alert Snooze
+	tempALERTSNOOZE = reader.GetInteger("REPORTING", "ALERTSNOOZE", -1);
+	if (tempALERTSNOOZE != -1) {
+		this->ALERTSNOOZE = tempALERTSNOOZE;
+		std::cout << "Collected ALERTSNOOZE Variable." << std::endl;
+	}
+	else {
+		std::cerr << "No ALERTSNOOZE Variable Defined." << std::endl;
+	}
+
 	return 0;
 }
 
@@ -104,5 +128,7 @@ int configuration::getRETURNCODE() { return this->RETURNCODE; }
 int configuration::getSSLVALID() { return this->SSLVALID; }
 int configuration::getSSLEXPIRYREMINDER() { return this->SSLEXPIRYREMINDER; }
 std::string configuration::getREPORTINGMETHOD() { return this->REPORTINGMETHOD; }
+int configuration::getSSLEXPIRYSNOOZE() { return this->SSLEXPIRYSNOOZE; }
+int configuration::getALERTSNOOZE() { return this->ALERTSNOOZE; }
 
 configuration::~configuration() {}

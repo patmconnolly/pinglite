@@ -8,6 +8,7 @@
 #include "include/payload.hpp"
 #include "include/configuration.hpp"
 #include "include/reporting.hpp"
+#include "include/record.hpp"
 
 int main(int argc, char* argv[]) {
 	//Collect and parse input.
