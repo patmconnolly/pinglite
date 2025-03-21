@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <string>
-#include "include/record.hpp"
+#include "record.hpp"
 #include "../third-party/inih/cpp/INIReader.h"
 
 //Constructor
