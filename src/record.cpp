@@ -101,6 +101,7 @@ bool record::alertRequired(int SSLEXPIRYSNOOZE, int ALERTSNOOZE)
 	}
 
 	//Checks SSL Certificate Validity
+	bool SKIPSSLWARN = false; //Lets me skip the ssl warn part since if the cert is invalid, it doesn't matter when it expires.
 	if (this->NEWSSLVALID and this->SSLVALIDCHANGE) {
 		isRequired = true;
 		this->ALERTSTRING += "Recovery: SSL Certificate is now valid.\n";
@@ -108,17 +109,18 @@ bool record::alertRequired(int SSLEXPIRYSNOOZE, int ALERTSNOOZE)
 	else if (not this->NEWSSLVALID and this->isAlertSnoozeExpired(ALERTSNOOZE)) {
 		isRequired = true;
 		this->ALERTSTRING += "ERROR: SSL Certificate is Invalid!\n";
+		SKIPSSLWARN = true;
 		this->LASTALERT = this->NOW;
 		if (this->SSLVALIDCHANGE and this->DOWNSINCE == 0) { this->DOWNSINCE = this->NOW; }
 	}
 
 	//Checks SSL Warning Status
-	if (this->NEWSSLWARNING and this->SSLWARNCHANGE) {
+	if (this->NEWSSLWARNING and this->SSLWARNCHANGE and not SKIPSSLWARN) {
 		isRequired = true;
 		this->ALERTSTRING += "Recovery: SSL Certificate has been renewed.\n";
 		this->LASTSSLWARNING = 0; // Setting last alert to 0.
 	}
-	else if (not this->NEWSSLWARNING and this->isWarnSnoozeExpired(SSLEXPIRYSNOOZE)) {
+	else if (not this->NEWSSLWARNING and this->isWarnSnoozeExpired(SSLEXPIRYSNOOZE) and not SKIPSSLWARN) {
 		isRequired = true;
 		this->ALERTSTRING += "WARNING: SSL Certificate will be expiring soon!\n";
 		this->LASTSSLWARNING = this->NOW;
