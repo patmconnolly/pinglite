@@ -163,9 +163,9 @@ int main(int argc, char* argv[]) {
 					if (reportRequired) { 
 						reportText += "Host ----------------: " + conf->getHOST() + "\n";
 						reportText += Data->alertText();
-						reportText += "Return Code ---------: " + std::string(conf->getRETURNCODE()) + "\n";
-						reportText += "Certificate Valid ---: " + std::string(conf->getSSLVALID()) + "\n";
-						reportText += "Certificate Expires in " + std::string(conf->getSSLEXPIRYREMINDER()) + " days.\n";
+						reportText += "Return Code ---------: " + std::to_string(conf->getRETURNCODE()) + "\n";
+						reportText += "Certificate Valid ---: " + std::to_string(conf->getSSLVALID()) + "\n";
+						reportText += "Certificate Expires in " + std::to_string(conf->getSSLEXPIRYREMINDER()) + " days.\n";
 					}
 					Data->write();
 					delete Data;
