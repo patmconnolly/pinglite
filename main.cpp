@@ -164,7 +164,7 @@ int main(int argc, char* argv[]) {
 						reportText += "Host ----------------: " + conf->getHOST() + "\n";
 						reportText += Data->alertText();
 						reportText += "Return Code ---------: " + std::to_string(report->getHTTPCODE()) + "\n";
-						reportText += "Certificate Valid ---: " + std::to_string(report->SSLVALID()) + "\n";
+						reportText += "Certificate Valid ---: " + function::stringifyBoolean(report->SSLVALID()) + "\n";
 						reportText += "Certificate Expires in " + std::to_string(report->getEXPIRY()) + " days.\n";
 					}
 					Data->write();
