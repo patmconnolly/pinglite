@@ -59,7 +59,6 @@ int record::write() {
 	this->SSLWARNING = this->NEWSSLWARNING;
 
 	if (this->CODEEXPECTED) { this->DOWNSINCE = 0; this->LASTALERT = 0; }
-	//if (not this->SSLWARNING) { this->LASTSSLWARNING = 0; }
 
 	//Write all the data to the file.
 	std::ofstream outputFile(this->FILENAME); // Open the file for writing.
@@ -117,6 +116,7 @@ bool record::alertRequired(int SSLEXPIRYSNOOZE, int ALERTSNOOZE)
 	if (this->NEWSSLWARNING and this->SSLWARNCHANGE) {
 		isRequired = true;
 		this->ALERTSTRING += "Recovery: SSL Certificate has been renewed.\n";
+		this->LASTSSLWARNING = 0; // Setting last alert to 0.
 	}
 	else if (not this->NEWSSLWARNING and this->isWarnSnoozeExpired(SSLEXPIRYSNOOZE)) {
 		isRequired = true;
