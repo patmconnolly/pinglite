@@ -25,6 +25,9 @@ public:
 	int getAlertSnooze(); //Return int in minutes of snooze for alerts.
 	int getWarnSnooze();  //Return in in days of warning snooze for alerts.
 
+	int getHTTPCODE(); //Get HTTP Return Code.
+	int getEXPIRY(); //Get time till expire.
+
 private:
 	//Private variables of objects.
 	configuration* conf;

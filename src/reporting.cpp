@@ -74,3 +74,13 @@ int reporting::getWarnSnooze()
 {
 	return this->conf->getSSLEXPIRYSNOOZE();
 }
+
+int reporting::getHTTPCODE()
+{
+	return this->results->getRETCODE();
+}
+
+int reporting::getEXPIRY()
+{
+	return this->results->getRETCODE();
+}
