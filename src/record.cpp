@@ -97,6 +97,8 @@ bool record::alertRequired(int SSLEXPIRYSNOOZE, int ALERTSNOOZE)
 	else if (not this->NEWCODEEXPECTED and this->isAlertSnoozeExpired(ALERTSNOOZE)) {
 		isRequired = true;
 		this->ALERTSTRING += "ERROR: Site Is Returning Incorrect Code!\n";
+		this->LASTALERT = this->NOW;
+		if (this->CODECHANGE and this->DOWNSINCE == 0) { this->DOWNSINCE = this->NOW; }
 	}
 
 	//Checks SSL Certificate Validity
@@ -107,6 +109,8 @@ bool record::alertRequired(int SSLEXPIRYSNOOZE, int ALERTSNOOZE)
 	else if (not this->NEWSSLVALID and this->isAlertSnoozeExpired(ALERTSNOOZE)) {
 		isRequired = true;
 		this->ALERTSTRING += "ERROR: SSL Certificate is Invalid!\n";
+		this->LASTALERT = this->NOW;
+		if (this->SSLVALIDCHANGE and this->DOWNSINCE == 0) { this->DOWNSINCE = this->NOW; }
 	}
 
 	//Checks SSL Warning Status
@@ -117,6 +121,7 @@ bool record::alertRequired(int SSLEXPIRYSNOOZE, int ALERTSNOOZE)
 	else if (not this->NEWSSLWARNING and this->isWarnSnoozeExpired(SSLEXPIRYSNOOZE)) {
 		isRequired = true;
 		this->ALERTSTRING += "WARNING: SSL Certificate will be expiring soon!\n";
+		if (this->SSLVALIDCHANGE) { this->LASTSSLWARNING = this->NOW; }
 	}
 	return isRequired;
 }
