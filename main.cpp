@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
 	bool config = false;
 	configuration* conf = new configuration();
 
-	bool record = false;
+	bool recordflag = false;
 	std::string recordfile = "";
 	
 	bool manual = false;
@@ -85,7 +85,7 @@ int main(int argc, char* argv[]) {
 			//File for where to store the data for multiple runs.
 			//If passed but file does not exist, this is the first run, create the file.
 			//If flag unused, do not save results, just show on the screen.
-			record = true;
+			recordflag = true;
 			if (*i < argc - 1) {
 				(*i)++;
 				recordfile = argv[*i];
@@ -125,7 +125,7 @@ int main(int argc, char* argv[]) {
 	}
 	delete i;
 
-	if (record and not config) {
+	if (recordflag and not config) {
 		std::cerr << "Record flag requires Config flag used as well!" << std::endl;
 		std::cerr << "++++++++++++++++++++++++++++++++++++++++++++++" << std::endl << std::endl;
 		function::help_message();
@@ -156,7 +156,7 @@ int main(int argc, char* argv[]) {
 				std::string reportText = "";
 
 				//Collect history, if it exists, and store in a historical object.
-				if (record) {
+				if (recordflag) {
 					Data = new record(recordfile);
 					Data->update(report->RETCODE_Compare(), report->SSLVALID(), report->SSLEXPIRYWARNING());
 					reportRequired = Data->alertRequired(report->getWarnSnooze(), report->getAlertSnooze());
