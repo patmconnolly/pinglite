@@ -82,5 +82,5 @@ int reporting::getHTTPCODE()
 
 int reporting::getEXPIRY()
 {
-	return this->results->getRETCODE();
+	return this->results->getSSLEXPIRY();
 }
