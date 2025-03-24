@@ -55,4 +55,9 @@ namespace function {
 		std::cout << "Parsing of configuration files complete, validating." << std::endl;
 		return conf->validate();
 	}
+
+	std::string stringifyBoolean(bool value) {
+		if (value) { return "true"; }
+		else { return "false"; }
+	}
 }

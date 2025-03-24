@@ -151,15 +151,28 @@ int main(int argc, char* argv[]) {
 			reporting* report = new reporting(conf, targetPayload);
 			if (conf->getREPORTINGMETHOD() == "RETCODE") { EXITCODE = report->getRetcode(); }
 			else if (conf->getREPORTINGMETHOD() != "NONE") {
+				record Data = nullptr;
+				bool reportRequired;
+				std::string reportText = "";
 
 				//Collect history, if it exists, and store in a historical object.
-
-				//Send call, store response in payload object.
-
-				//Compare payload to history, prepare alert if needed.
-
-				//Send alert, if needed.
-				report->trigger();
+				if (record) {
+					Data = new record(recordfile);
+					Data->update(report->RETCODE_Compare(), report->SSLVALID(), report->SSLEXPIRYWARNING());
+					reportRequired = Data->alertRequired(report->getWarnSnooze(), report->getAlertSnooze());
+					if (reportRequired) { 
+						reportText += "Host ----------------: " + conf->getHOST() + "\n";
+						reportText += Data->alertText();
+						reportText += "Return Code ---------: " + conf->getRETURNCODE() + "\n";
+						reportText += "Certificate Valid ---: " + conf->getSSLVALID() + "\n";
+						reportText += "Certificate Expires in " + conf->getSSLEXPIRYREMINDER() + " days.\n";
+					}
+					Data->write();
+					delete Data;
+					if (reportRequired) {
+						report->trigger(reportText);
+					}
+				}
 			}
 			delete report;
 		}

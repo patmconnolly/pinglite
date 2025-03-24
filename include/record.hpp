@@ -15,7 +15,10 @@ public:
 
 	void update(bool codeexpected, bool sslvalid, bool sslwarning);
 
-	void write();
+	int write();
+
+	bool alertRequired(int SSLEXPIRYSNOOZE, int ALERTSNOOZE); //Returns True if alert is needed, false if alert is not needed.
+	std::string alertText(); //Returns alert text.
 
 	bool getCODECHANGE();
 	bool getSSLVALIDCHANGE();
@@ -30,9 +33,9 @@ private:
 	bool CODEEXPECTED = true;  //Is the previous code as expected.
 	bool SSLVALID = true;      //Is the SSL cert valid.
 	bool SSLWARNING = false;   //Is the SSL cert warning for expiry.
-	int DOWNSINCE = 0;         //Timestamp of first down. ------------ 0 for still up.
-	int LASTALERT = 0;         //Timestamp of last alert. ------------ 0 for still up.
-	int LASTSSLWARNING = 0;    //Timestamp of last SSL expiry alert. - 0 for no alert needed.
+	long long int DOWNSINCE = 0;         //Timestamp of first down. ------------ 0 for still up.
+	long long int LASTALERT = 0;         //Timestamp of last alert. ------------ 0 for still up.
+	long long int LASTSSLWARNING = 0;    //Timestamp of last SSL expiry alert. - 0 for no alert needed.
 
 	bool NEWCODEEXPECTED;      //Current return code.
 	bool NEWSSLVALID;          //Current SSL is valid.
@@ -41,6 +44,18 @@ private:
 	bool CODECHANGE;           //Notes a change in the Return code as expected since last run.
 	bool SSLVALIDCHANGE;       //Notes a change in SSL Validity.
 	bool SSLWARNCHANGE;        //Notes a change in warning status of SSL.
+
+	const std::string HEADER = "RECORD"; // Header variable for the INI record file.
+
+	long long int NOW;         //Time of updated information being added. To be used as the time since down if need be.
+
+	std::string ALERTSTRING = "";  //String to be returned for the alert.
+
+	long long stringToLongLong(const std::string& str);
+
+	bool isAlertSnoozeExpired(int SNOOZE); //Int snooze in minutes.
+	bool isWarnSnoozeExpired(int SNOOZE);  //Int snooze in days.
+	bool isSnoozeExpired(int SNOOZE, long long LAST);      //Int snooze in seconds, long long last is time to compare to of last alert.
 };
 
 #endif // RECORD_H

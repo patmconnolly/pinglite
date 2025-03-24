@@ -30,8 +30,8 @@ int reporting::getRetcode() {
 }
 
 //Triggers the alerts to be configured later.
-void reporting::trigger() {
-	std::cout << "This is a triggered alert, to be implemented later." << std::endl;
+void reporting::trigger(std::string AlertText) {
+	std::cout << AlertText << std::endl;
 }
 
 
@@ -63,4 +63,14 @@ bool reporting::SSLEXPIRYWARNING() {
 	else {
 		return true;
 	}
+}
+
+int reporting::getAlertSnooze()
+{
+	return this->conf->getALERTSNOOZE();
+}
+
+int reporting::getWarnSnooze()
+{
+	return this->conf->getSSLEXPIRYSNOOZE();
 }

@@ -18,16 +18,18 @@ public:
 	//Returns 0 if no need for alerts. 1 if need to alert.
 	int getRetcode();
 
-	void trigger(); //Triggers the alerts to be configured later.
+	void trigger(std::string AlertText); //Triggers the alerts to be configured later.
+	bool RETCODE_Compare(); // Compare return code to expected retcode, Return false if different.
+	bool SSLVALID(); //Return false if SSL is invalid or nonexistant (http).
+	bool SSLEXPIRYWARNING(); //Return false if SSL is expiring within the configured range.
+	int getAlertSnooze(); //Return int in minutes of snooze for alerts.
+	int getWarnSnooze();  //Return in in days of warning snooze for alerts.
 
 private:
 	//Private variables of objects.
 	configuration* conf;
 	payload* results;
 
-	bool RETCODE_Compare(); // Compare return code to expected retcode, Return false if different.
-	bool SSLVALID(); //Return false if SSL is invalid or nonexistant (http).
-	bool SSLEXPIRYWARNING(); //Return false if SSL is expiring within the configured range.
 };
 
 #endif // REPORTING_H
