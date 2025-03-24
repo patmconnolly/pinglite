@@ -112,7 +112,7 @@ int configuration::validate() {
 	if (this->SSLVALID == -1) { VALID = false;  std::cerr << "SSLVALID IS INVALID!" << std::endl; }
 	if (this->SSLEXPIRYREMINDER == -1) { VALID = false;  std::cerr << "SSLEXPIRYREMINDER IS INVALID!" << std::endl; }
 
-	if (this->REPORTINGMETHOD != "NONE" and this->REPORTINGMETHOD != "RETCODE") { VALID = false; std::cerr << "REPORTINGMETHOD IS INVALID!" << std::endl; }
+	if (this->REPORTINGMETHOD != "NONE" and this->REPORTINGMETHOD != "RETCODE" and this->REPORTINGMETHOD != "TEST") { VALID = false; std::cerr << "REPORTINGMETHOD IS INVALID!" << std::endl; }
 
 	if (not VALID) {
 		return 1;
