@@ -124,6 +124,8 @@ bool record::alertRequired(int SSLEXPIRYSNOOZE, int ALERTSNOOZE)
 		std::cout << "Last: " << this->LASTSSLWARNING << std::endl;
 		std::cout << "NOW: " << this->NOW << std::endl;
 		this->LASTSSLWARNING = this->NOW;
+		std::cout << "Last: " << this->LASTSSLWARNING << std::endl;
+		std::cout << "NOW: " << this->NOW << std::endl;
 	}
 	return isRequired;
 }
