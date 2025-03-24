@@ -151,7 +151,7 @@ int main(int argc, char* argv[]) {
 			reporting* report = new reporting(conf, targetPayload);
 			if (conf->getREPORTINGMETHOD() == "RETCODE") { EXITCODE = report->getRetcode(); }
 			else if (conf->getREPORTINGMETHOD() != "NONE") {
-				record Data = nullptr;
+				record* Data = nullptr;
 				bool reportRequired;
 				std::string reportText = "";
 
