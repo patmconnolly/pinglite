@@ -121,6 +121,8 @@ bool record::alertRequired(int SSLEXPIRYSNOOZE, int ALERTSNOOZE)
 	else if (not this->NEWSSLWARNING and this->isWarnSnoozeExpired(SSLEXPIRYSNOOZE)) {
 		isRequired = true;
 		this->ALERTSTRING += "WARNING: SSL Certificate will be expiring soon!\n";
+		std::cout << "Last: " << this->LASTSSLWARNING << std::endl;
+		std::cout << "NOW: " << this->NOW << std::endl;
 		this->LASTSSLWARNING = this->NOW;
 	}
 	return isRequired;
