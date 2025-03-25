@@ -7,6 +7,19 @@
 
 // Add function defenitions here.
 namespace function {
+	void flushbuffer()
+	{
+		function::BUFFERLOGS = false;
+	}
+
+	void log(std::string str)
+	{
+	}
+
+	void errlog(std::string str)
+	{
+	}
+
 	void help_message() {
 		std::cout << "PingLite Usage" << std::endl;
 		std::cout << "===============================================================================================================================" << std::endl;
@@ -14,6 +27,9 @@ namespace function {
 		std::cout << "-------------------------------------------------------------------------------------------------------------------------------" << std::endl;
 		std::cout << " -h, --help             Displays this help screen and exits." << std::endl;
 		std::cout << " -v, --version          Displays the version number and exits." << std::endl;
+		std::cout << " -d, --debug, --verbose Displays logs as they occur to stdout, still logs to log file." << std::endl;
+		std::cout << " -l, --logfile          Manually specify the log file, defaults to pinglite.log in current directory." << std::endl;
+		std::cout << " --silent               Supress all messages, log nothing. Output only what is needed at an absoloute minimum." << std::endl;
 		std::cout << " -m, --manual           Indicates a manual run with a URL. No results will be recorded, no alerts to be sent." << std::endl;
 		std::cout << " -t, --test             Tests the configuration files and exits." << std::endl;
 		std::cout << " -r, --results          Specifies the file to record the results, if the file does not exist it will be created." << std::endl;
@@ -24,8 +40,9 @@ namespace function {
 		std::cout << "pinglite --help" << std::endl;
 		std::cout << "pinglite --version" << std::endl;
 		std::cout << "pinglite --manual https://download.pinglite.xyz" << std::endl;
-		std::cout << "pinglite --test globalconfig.conf localconfig.conf siteconfig.conf" << std::endl;
-		std::cout << "pinglite --record results.txt --configuration globalconfig.conf localconfig.conf siteconfig.conf" << std::endl;
+		std::cout << "pinglite --test globalconfig.ini localconfig.ini siteconfig.ini" << std::endl;
+		std::cout << "pinglite --debug --logfile output.txt --results results.ini --configuration configuration.ini" << std::endl;
+		std::cout << "pinglite --record results.txt --configuration globalconfig.ini localconfig.ini siteconfig.ini" << std::endl;
 		std::cout << "" << std::endl;
 		std::cout << "Notes" << std::endl;
 		std::cout << "-------------------------------------------------------------------------------------------------------------------------------" << std::endl;
@@ -60,4 +77,10 @@ namespace function {
 		if (value) { return "true"; }
 		else { return "false"; }
 	}
+
+	bool DEBUG = false;
+	bool SILENT = false;
+	bool BUFFERLOGS = true;
+	std::string LOGFILE = "pinglite.txt";
+	std::string LOGBUFFER = "";
 }

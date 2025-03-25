@@ -5,6 +5,7 @@
 // SSL Expiry - INT (days left before expires)
 
 #include "payload.hpp"
+#include "function.hpp"
 #include <iostream>
 #include <string>
 #include <curl/curl.h>

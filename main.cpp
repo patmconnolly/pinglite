@@ -12,6 +12,7 @@
 
 int main(int argc, char* argv[]) {
 	//Collect and parse input.
+
 	if (argc == 1) {
 		//Checks if no arguments were passed, other than the program name.
 		//Fails the program if so.
@@ -112,6 +113,27 @@ int main(int argc, char* argv[]) {
 				EXITCODE = 1;
 			}
 			break;
+		}
+		else if (arg == "-d" || arg == "--debug" || arg == "--verbose") {
+			function::DEBUG = true;
+			std::cout << "DEBUG FLAG SET, VERBOSE OUTPUT SENT TO STDOUT." << std::endl;
+		}
+		else if (arg == "--silent") {
+			function::SILENT = true;
+			std::cout << "SILENT FLAG SET, NO MORE OUTPUT WILL OCCUR." << std::endl;
+			// I see the irony in the previous line, but I will replace all couts with a logger function.
+		}
+		else if (arg == "-l" || arg == "--logfile") {
+			if (*i < argc - 1) {
+				(*i)++;
+				function::LOGFILE = argv[*i];
+				std::cout << "Logfile: " << function::LOGFILE << "." << std::endl;
+			}
+			else {
+				std::cerr << "Filename must be passed with logfile flag." << std::endl;
+				HARDSTOP = true;
+				EXITCODE = 1;
+			}
 		}
 		else {
 			//Indicates invalid flags passed. Display help message from functions.

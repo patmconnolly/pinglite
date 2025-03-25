@@ -3,6 +3,7 @@
 #include <string>
 #include "../third-party/inih/cpp/INIReader.h"
 #include "configuration.hpp"
+#include "function.hpp"
 
 configuration::configuration() {
 	this->HOST = "httpx://EMPTY";

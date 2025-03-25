@@ -5,6 +5,7 @@
 #include "reporting.hpp"
 #include "configuration.hpp"
 #include "payload.hpp"
+#include "function.hpp"
 
 //Private variables of objects.
 // configuration conf;
