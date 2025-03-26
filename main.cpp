@@ -69,7 +69,7 @@ int main(int argc, char* argv[]) {
 				EXITCODE = 1;
 			}
 		}
-		else if (arg == "-c" || arg == "--configuration") {
+		else if (arg == "-c" || arg == "--config") {
 			//Everything after this is configuration from global priority to specific priority with later files taking precidence.
 			//This flag must be used last if used.
 			//Stop checking for flags and just assume everything is a file.
@@ -82,7 +82,7 @@ int main(int argc, char* argv[]) {
 				EXITCODE = 1;
 			}
 		}
-		else if (arg == "-r" || arg == "--record") {
+		else if (arg == "-r" || arg == "--results") {
 			//File for where to store the data for multiple runs.
 			//If passed but file does not exist, this is the first run, create the file.
 			//If flag unused, do not save results, just show on the screen.
@@ -114,11 +114,11 @@ int main(int argc, char* argv[]) {
 			}
 			break;
 		}
-		else if (arg == "-d" || arg == "--debug" || arg == "--verbose") {
+		else if (arg == "-d" || arg == "--debug") {
 			function::DEBUG = true;
 			std::cout << "DEBUG FLAG SET, VERBOSE OUTPUT SENT TO STDOUT." << std::endl;
 		}
-		else if (arg == "--silent") {
+		else if (arg == "-s" || arg == "--silent") {
 			function::SILENT = true;
 			std::cout << "SILENT FLAG SET, NO MORE OUTPUT WILL OCCUR." << std::endl;
 			// I see the irony in the previous line, but I will replace all couts with a logger function.

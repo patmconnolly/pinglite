@@ -27,13 +27,13 @@ namespace function {
 		std::cout << "-------------------------------------------------------------------------------------------------------------------------------" << std::endl;
 		std::cout << " -h, --help             Displays this help screen and exits." << std::endl;
 		std::cout << " -v, --version          Displays the version number and exits." << std::endl;
-		std::cout << " -d, --debug, --verbose Displays logs as they occur to stdout, still logs to log file." << std::endl;
+		std::cout << " -d, --debug            Displays logs as they occur to stdout, still logs to log file." << std::endl;
 		std::cout << " -l, --logfile          Manually specify the log file, defaults to pinglite.log in current directory." << std::endl;
-		std::cout << " --silent               Supress all messages, log nothing. Output only what is needed at an absoloute minimum." << std::endl;
+		std::cout << " -s, --silent           Supress all messages, log nothing. Output only what is needed at an absoloute minimum." << std::endl;
 		std::cout << " -m, --manual           Indicates a manual run with a URL. No results will be recorded, no alerts to be sent." << std::endl;
 		std::cout << " -t, --test             Tests the configuration files and exits." << std::endl;
 		std::cout << " -r, --results          Specifies the file to record the results, if the file does not exist it will be created." << std::endl;
-		std::cout << " -c, --configuration    Indicates all subsequent arguments are the configuration files ordered from lowest priority to highest." << std::endl;
+		std::cout << " -c, --config           Indicates all subsequent arguments are the configuration files ordered from lowest priority to highest." << std::endl;
 		std::cout << "" << std::endl;
 		std::cout << "Example Usage" << std::endl;
 		std::cout << "-------------------------------------------------------------------------------------------------------------------------------" << std::endl;
@@ -41,8 +41,8 @@ namespace function {
 		std::cout << "pinglite --version" << std::endl;
 		std::cout << "pinglite --manual https://download.pinglite.xyz" << std::endl;
 		std::cout << "pinglite --test globalconfig.ini localconfig.ini siteconfig.ini" << std::endl;
-		std::cout << "pinglite --debug --logfile output.txt --results results.ini --configuration configuration.ini" << std::endl;
-		std::cout << "pinglite --record results.txt --configuration globalconfig.ini localconfig.ini siteconfig.ini" << std::endl;
+		std::cout << "pinglite --debug --logfile output.txt --results results.ini --config configuration.ini" << std::endl;
+		std::cout << "pinglite --results results.txt --config globalconfig.ini localconfig.ini siteconfig.ini" << std::endl;
 		std::cout << "" << std::endl;
 		std::cout << "Notes" << std::endl;
 		std::cout << "-------------------------------------------------------------------------------------------------------------------------------" << std::endl;
