@@ -1,21 +1,23 @@
 // Object to store configuration pulled from file.
-#include <iostream>
 #include <string>
 #include "../third-party/inih/cpp/INIReader.h"
 #include "configuration.hpp"
+#include "function.hpp"
 
 configuration::configuration() {
 	this->HOST = "httpx://EMPTY";
 	this->RETURNCODE = -1;
 	this->SSLVALID = -1;
 	this->SSLEXPIRYREMINDER = -1;
+	this->SSLEXPIRYSNOOZE = -1;
+	this->ALERTSNOOZE = -1;
 }
 
 int configuration::update(std::string confFile) {
 	INIReader reader(confFile);
 
 	if (reader.ParseError() < 0) {
-		std::cerr << "Cannot load config file: " << confFile << "." << std::endl;
+		function::error("Cannot load config file: ", confFile, ".");
 		return 1;
 	}
 
@@ -24,6 +26,8 @@ int configuration::update(std::string confFile) {
 	int tempSSLVALID;
 	int tempSSLEXPIRYREMINDER;
 	std::string tempREPORTINGMETHOD;
+	int tempSSLEXPIRYSNOOZE;
+	int tempALERTSNOOZE;
 
 	//Attempt to grab known variables, continue if cannot collect
 
@@ -31,50 +35,70 @@ int configuration::update(std::string confFile) {
 	tempHOST = reader.Get("CHECK", "HOST", "");
 	if (tempHOST != "") {
 		this->HOST = tempHOST;
-		std::cout << "Collected HOST Variable." << std::endl;
+		function::info("Collected HOST Variable.");
 	}
 	else {
-		std::cerr << "No HOST Variable Defined." << std::endl;
+		function::warning("No HOST Variable Defined.");
 	}
 
 	//---RETURNCODE
 	tempRETCODE = reader.GetInteger("VALIDATION", "RETURNCODE", -1);
 	if (tempRETCODE != -1) {
 		this->RETURNCODE = tempRETCODE;
-		std::cout << "Collected RETURNCODE Variable." << std::endl;
+		function::info("Collected RETURNCODE Variable.");
 	}
 	else {
-		std::cerr << "No RETURNCODE Variable Defined." << std::endl;
+		function::warning("No RETURNCODE Variable Defined.");
 	}
 
 	//---SSLVALID
 	tempSSLVALID = reader.GetInteger("VALIDATION", "SSLVALID", -1);
 	if (tempSSLVALID != -1) {
 		this->SSLVALID = tempSSLVALID;
-		std::cout << "Collected SSLVALID Variable." << std::endl;
+		function::info("Collected SSLVALID Variable.");
 	}
 	else {
-		std::cerr << "No SSLVALID Variable Defined." << std::endl;
+		function::warning("No SSLVALID Variable Defined.");
 	}
 
 	//---SSLEXPIRYREMINDER
 	tempSSLEXPIRYREMINDER = reader.GetInteger("VALIDATION", "SSLEXPIRYREMINDER", -1);
 	if (tempSSLEXPIRYREMINDER != -1) {
 		this->SSLEXPIRYREMINDER = tempSSLEXPIRYREMINDER;
-		std::cout << "Collected SSLEXPIRYREMINDER Variable." << std::endl;
+		function::info("Collected SSLEXPIRYREMINDER Variable.");
 	}
 	else {
-		std::cerr << "No SSLEXPIRYREMINDER Variable Defined." << std::endl;
+		function::warning("No SSLEXPIRYREMINDER Variable Defined.");
 	}
 
 	//---REPORTING METHOD
 	tempREPORTINGMETHOD = reader.Get("REPORTING", "METHOD", "");
 	if (tempREPORTINGMETHOD != "") {
 		this->REPORTINGMETHOD = tempREPORTINGMETHOD;
-		std::cout << "Collected REPORTINGMETHOD Variable." << std::endl;
+		function::info("Collected REPORTINGMETHOD Variable.");
 	}
 	else {
-		std::cerr << "No REPORTINGMETHOD Variable Defined." << std::endl;
+		function::warning("No REPORTINGMETHOD Variable Defined.");
+	}
+
+	//---SSL Expiry Snooze
+	tempSSLEXPIRYSNOOZE = reader.GetInteger("REPORTING", "SSLEXPIRYSNOOZE", -1);
+	if (tempSSLEXPIRYSNOOZE != -1) {
+		this->SSLEXPIRYSNOOZE = tempSSLEXPIRYSNOOZE;
+		function::info("Collected SSLEXPIRYSNOOZE Variable.");
+	}
+	else {
+		function::warning("No SSLEXPIRYSNOOZE Variable Defined.");
+	}
+
+	//---Alert Snooze
+	tempALERTSNOOZE = reader.GetInteger("REPORTING", "ALERTSNOOZE", -1);
+	if (tempALERTSNOOZE != -1) {
+		this->ALERTSNOOZE = tempALERTSNOOZE;
+		function::info("Collected ALERTSNOOZE Variable.");
+	}
+	else {
+		function::warning("No ALERTSNOOZE Variable Defined.");
 	}
 
 	return 0;
@@ -83,12 +107,12 @@ int configuration::update(std::string confFile) {
 int configuration::validate() {
 	bool VALID = true;
 
-	if (this->HOST == "httpx://EMPTY") { VALID = false; std::cerr << "HOST IS INVALID!" << std::endl; }
-	if (this->RETURNCODE == -1) { VALID = false; std::cerr << "RETURNCODE IS INVALID!" << std::endl; }
-	if (this->SSLVALID == -1) { VALID = false;  std::cerr << "SSLVALID IS INVALID!" << std::endl; }
-	if (this->SSLEXPIRYREMINDER == -1) { VALID = false;  std::cerr << "SSLEXPIRYREMINDER IS INVALID!" << std::endl; }
+	if (this->HOST == "httpx://EMPTY") { VALID = false; function::error("HOST IS INVALID!"); }
+	if (this->RETURNCODE == -1) { VALID = false; function::error("RETURNCODE IS INVALID!"); }
+	if (this->SSLVALID == -1) { VALID = false;  function::error("SSLVALID IS INVALID!"); }
+	if (this->SSLEXPIRYREMINDER == -1) { VALID = false;  function::error("SSLEXPIRYREMINDER IS INVALID!"); }
 
-	if (this->REPORTINGMETHOD != "NONE" and this->REPORTINGMETHOD != "RETCODE") { VALID = false; std::cerr << "REPORTINGMETHOD IS INVALID!" << std::endl; }
+	if (this->REPORTINGMETHOD != "NONE" and this->REPORTINGMETHOD != "RETCODE" and this->REPORTINGMETHOD != "TEST") { VALID = false; function::error("REPORTINGMETHOD IS INVALID!"); }
 
 	if (not VALID) {
 		return 1;
@@ -104,5 +128,7 @@ int configuration::getRETURNCODE() { return this->RETURNCODE; }
 int configuration::getSSLVALID() { return this->SSLVALID; }
 int configuration::getSSLEXPIRYREMINDER() { return this->SSLEXPIRYREMINDER; }
 std::string configuration::getREPORTINGMETHOD() { return this->REPORTINGMETHOD; }
+int configuration::getSSLEXPIRYSNOOZE() { return this->SSLEXPIRYSNOOZE; }
+int configuration::getALERTSNOOZE() { return this->ALERTSNOOZE; }
 
 configuration::~configuration() {}

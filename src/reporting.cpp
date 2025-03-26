@@ -1,10 +1,10 @@
 // Object to handle reporting.
 
 #include <string>
-#include <iostream>
 #include "reporting.hpp"
 #include "configuration.hpp"
 #include "payload.hpp"
+#include "function.hpp"
 
 //Private variables of objects.
 // configuration conf;
@@ -30,8 +30,8 @@ int reporting::getRetcode() {
 }
 
 //Triggers the alerts to be configured later.
-void reporting::trigger() {
-	std::cout << "This is a triggered alert, to be implemented later." << std::endl;
+void reporting::trigger(std::string AlertText) {
+	function::info(AlertText);
 }
 
 
@@ -41,11 +41,11 @@ void reporting::trigger() {
  // Compare return code to expected retcode, Return false if different.
 bool reporting::RETCODE_Compare() {
 	if (this->conf->getRETURNCODE() == this->results->getRETCODE()) {
-		std::cout << "HTTP Return Code Is As Expected." << std::endl;
+		function::info("HTTP Return Code Is As Expected.");
 		return true;
 	}
 	else {
-		std::cerr << "HTTP Return Code Is NOT As Expected!" << std::endl;
+		function::error("HTTP Return Code Is NOT As Expected!");
 		return false;
 	}
 }
@@ -63,4 +63,24 @@ bool reporting::SSLEXPIRYWARNING() {
 	else {
 		return true;
 	}
+}
+
+int reporting::getAlertSnooze()
+{
+	return this->conf->getALERTSNOOZE();
+}
+
+int reporting::getWarnSnooze()
+{
+	return this->conf->getSSLEXPIRYSNOOZE();
+}
+
+int reporting::getHTTPCODE()
+{
+	return this->results->getRETCODE();
+}
+
+int reporting::getEXPIRY()
+{
+	return this->results->getSSLEXPIRY();
 }

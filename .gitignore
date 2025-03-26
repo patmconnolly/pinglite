@@ -1,1 +1,5 @@
 .vs/
+include/version.hpp
+*.exe
+*.o
+pinglite.txt

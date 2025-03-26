@@ -5,7 +5,7 @@
 // SSL Expiry - INT (days left before expires)
 
 #include "payload.hpp"
-#include <iostream>
+#include "function.hpp"
 #include <string>
 #include <curl/curl.h>
 #include <chrono>
@@ -46,7 +46,7 @@ bool payload::webcall() {
     }
 
     if (!handle) {
-        std::cerr << "Error initializing curl!" << std::endl;
+        function::error("Error initializing curl!");
         SUCCESS = false;
     }
     else {
@@ -73,14 +73,14 @@ bool payload::webcall() {
             //Collect retcode.
             res = curl_easy_getinfo(handle, CURLINFO_RESPONSE_CODE, &retcode);
             this->RETCODE = retcode;
-            std::cout << "HTTP Return Code is: " << RETCODE << "." << std::endl;
+            function::info("HTTP Return Code is: ", std::to_string(RETCODE), ".");
 
             //Collect Cert Information
             if (insecure) {
                 this->SSLVALID = false;
                 this->SSLEXPIRY = 0;
                 this->INSECURE = true;
-                std::cout << "Insecure protocol!" << std::endl;
+                function::warning("Insecure protocol!");
             }
             else {
                 this->INSECURE = false;
@@ -89,29 +89,29 @@ bool payload::webcall() {
                 //Validate Certificate If Applicable
                 if (certinvalid) {
                     this->SSLVALID = false;
-                    std::cerr << "SSL Cert is Invalid!" << std::endl;
+                    function::error("SSL Cert is Invalid!");
                 }
                 else {
                     this->SSLVALID = true;
-                    std::cout << "SSL Cert is Valid." << std::endl;
+                    function::info("SSL Cert is Valid.");
                 }
 
                 //Check certificate expiry date.
                 std::string DateTimeString = payload::getDate(stderr_buffer);
                 this->SSLEXPIRY = payload::calculateDaysDifferenceInt(DateTimeString);
-                std::cout << "SSL Cert Expires on: " << DateTimeString << std::endl;
+                function::info("SSL Cert Expires on: ", DateTimeString);
                 if (this->SSLEXPIRY < 0) {
-                    std::cerr << "SSL Cert is Expired!" << std::endl;
+                    function::error("SSL Cert is Expired!");
                 }
                 else {
-                    std::cout << "SSL Cert Expires in " << this->SSLEXPIRY << " days." << std::endl;
+                    function::info("SSL Cert Expires in ", std::to_string(this->SSLEXPIRY), " days.");
                 }
             }
 
         }
         else {
-            std::cerr << "There was a problem with the call!" << std::endl;
-            std::cerr << ErrorText << std::endl;
+            function::error("There was a problem with the call!");
+            function::error(ErrorText);
             SUCCESS = false;
         }
     }
@@ -132,14 +132,14 @@ int payload::calculateDaysDifferenceInt(const std::string& dateTimeString) {
     ss >> std::get_time(&tm, "%b %d %H:%M:%S %Y");
 
     if (ss.fail()) {
-        std::cerr << "Error parsing date/time string." << std::endl;
+        function::error("Error parsing date/time string.");
         return -1; // Return -1 days on error
     }
 
     // Convert tm to time_point
     std::time_t timeT = std::mktime(&tm);
     if (timeT == -1) {
-        std::cerr << "Error converting tm to time_t" << std::endl;
+        function::error("Error converting tm to time_t");
         return -1;
     }
     auto parsedTimePoint = std::chrono::system_clock::from_time_t(timeT);

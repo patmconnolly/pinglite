@@ -22,6 +22,8 @@ public:
 	int getSSLVALID();
 	int getSSLEXPIRYREMINDER();
 	std::string getREPORTINGMETHOD();
+	int getSSLEXPIRYSNOOZE();
+	int getALERTSNOOZE();
 
 	//Destructor
 	~configuration();
@@ -33,6 +35,8 @@ private:
 	int SSLVALID;
 	int SSLEXPIRYREMINDER;
 	std::string REPORTINGMETHOD = "NONE";
+	int SSLEXPIRYSNOOZE; //How many days after previous alert to remind you SSL cert is expiring soon.
+	int ALERTSNOOZE; //How many minutes after previous alert to wait before alerting again.
 };
 
 #endif // CONFIGURATION_H
