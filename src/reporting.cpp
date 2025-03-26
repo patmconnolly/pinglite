@@ -1,7 +1,6 @@
 // Object to handle reporting.
 
 #include <string>
-#include <iostream>
 #include "reporting.hpp"
 #include "configuration.hpp"
 #include "payload.hpp"
@@ -32,7 +31,7 @@ int reporting::getRetcode() {
 
 //Triggers the alerts to be configured later.
 void reporting::trigger(std::string AlertText) {
-	std::cout << AlertText << std::endl;
+	function::info(AlertText);
 }
 
 
@@ -42,11 +41,11 @@ void reporting::trigger(std::string AlertText) {
  // Compare return code to expected retcode, Return false if different.
 bool reporting::RETCODE_Compare() {
 	if (this->conf->getRETURNCODE() == this->results->getRETCODE()) {
-		std::cout << "HTTP Return Code Is As Expected." << std::endl;
+		function::info("HTTP Return Code Is As Expected.");
 		return true;
 	}
 	else {
-		std::cerr << "HTTP Return Code Is NOT As Expected!" << std::endl;
+		function::error("HTTP Return Code Is NOT As Expected!");
 		return false;
 	}
 }

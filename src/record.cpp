@@ -1,6 +1,5 @@
 // Object to handle recordkeeping.
 
-#include <iostream>
 #include <fstream>
 #include <string>
 #include <sstream>
@@ -64,7 +63,7 @@ int record::write() {
 	std::ofstream outputFile(this->FILENAME); // Open the file for writing.
 
 	if (not outputFile.is_open()) {
-		std::cerr << "Record file could not be opened for writing!" << std::endl;
+		function::error("Record file could not be opened for writing!");
 		return 1;
 	}
 
@@ -80,7 +79,7 @@ int record::write() {
 
 	outputFile.close(); //Close the file.
 
-	std::cout << "File has been written to and closed." << std::endl;
+	function::info("File has been written to and closed.");
 	return 0;
 }
 
