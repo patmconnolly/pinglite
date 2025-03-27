@@ -69,7 +69,6 @@ namespace function {
 	void flushbuffer()
 	{
 		function::BUFFERLOGS = false;
-		if (function::HELP or function::CHECKVERSION) { std::cout << function::LOGBUFFER << std::endl; }
 		if (not function::SILENT) { function::writeFile(function::LOGBUFFER, function::LOGFILE); }
 		function::LOGBUFFER = "";
 	}
@@ -83,12 +82,14 @@ namespace function {
 	}
 
 	void version_message() {
+		function::debug("Displaying Version Information");
 		std::cout << "Compiled and packaged on " << COMPILE_DATE << " at " << COMPILE_TIME << " UTC from the " << COMPILE_BRANCH << " branch." << std::endl;
 		std::cout << "Pinglite version: " << COMPILE_BRANCH << "-" << COMPILE_DATE << std::endl;
 		return;
 	}
 
 	void help_message() {
+		function::debug("Displaying Help Message");
 		std::cout << "PingLite Usage" << std::endl;
 		std::cout << "===============================================================================================================================" << std::endl;
 		std::cout << "Flags" << std::endl;

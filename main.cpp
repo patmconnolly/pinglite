@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <ctime>
 
 #include "include/function.hpp"
 #include "include/payload.hpp"
@@ -10,6 +11,9 @@
 #include "include/record.hpp"
 
 int main(int argc, char* argv[]) {
+	std::time_t startTime = std::time(0); // Get start time.
+	char* dt = std::ctime(&startTime); // Convert to string format.
+	function::debug("Run at: ", dt);
 	//Collect and parse input.
 
 	if (argc == 1) {
@@ -90,6 +94,6 @@ int main(int argc, char* argv[]) {
 		delete targetPayload;
 	}
 	delete i;
-	
+	function::debug("======================================================================="); // Makes more readable in the output file.
 	return function::EXITCODE;
 }
