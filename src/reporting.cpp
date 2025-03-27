@@ -5,6 +5,7 @@
 #include "configuration.hpp"
 #include "payload.hpp"
 #include "function.hpp"
+#include "api.hpp"
 
 //Private variables of objects.
 // configuration conf;
@@ -30,13 +31,21 @@ int reporting::getRetcode() {
 }
 
 //Triggers the alerts to be configured later.
-void reporting::trigger(std::string AlertText) {
-	function::info(AlertText);
+void reporting::trigger(std::string ALERTTEXT) {
+	if (this->conf->getREPORTINGMETHOD() == "TEST") {
+		function::debug("Host ----------------: ", this->conf->getHOST());
+		function::debug(ALERTTEXT);
+		function::debug("Return Code ---------: ", std::to_string(this->getHTTPCODE()));
+		function::debug("Certificate Valid ---: ", function::stringifyBoolean(this->SSLVALID()));
+		function::debug("Certificate Expires in ", std::to_string(this->getEXPIRY()), " days.");
+	}
+	else if (this->conf->getREPORTINGMETHOD() == "API") {
+		api* handler = new api(conf->getAPIURL(), conf->getAPIPAYLOAD());
+		handler->updatePlaceholders(this->conf->getHOST(), this->getHTTPCODE(), this->SSLVALID(), this->getEXPIRY(), ALERTTEXT);
+		handler->trigger();
+		delete handler;
+	}
 }
-
-
-
-
 
  // Compare return code to expected retcode, Return false if different.
 bool reporting::RETCODE_Compare() {

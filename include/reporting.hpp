@@ -7,6 +7,9 @@
 #include "configuration.hpp"
 #include "payload.hpp"
 
+//Methods for reporting, more to be added as needed.
+#include "api.hpp"
+
 class reporting {
 public:
 	//Constructor
@@ -18,7 +21,7 @@ public:
 	//Returns 0 if no need for alerts. 1 if need to alert.
 	int getRetcode();
 
-	void trigger(std::string AlertText); //Triggers the alerts to be configured later.
+	void trigger(std::string ALERTTEXT); //Triggers the alerts to be configured later.
 	bool RETCODE_Compare(); // Compare return code to expected retcode, Return false if different.
 	bool SSLVALID(); //Return false if SSL is invalid or nonexistant (http).
 	bool SSLEXPIRYWARNING(); //Return false if SSL is expiring within the configured range.

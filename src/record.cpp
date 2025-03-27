@@ -79,7 +79,7 @@ int record::write() {
 
 	outputFile.close(); //Close the file.
 
-	function::info("File has been written to and closed.");
+	function::info("Record file has been written to and closed.");
 	return 0;
 }
 

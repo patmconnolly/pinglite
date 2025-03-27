@@ -1,0 +1,9 @@
+{
+  "results": {
+    "HOST": "{{ HOST }}",
+    "HTTP_RETURN_CODE": "{{ HTTP_CODE }}",
+    "SSL_IS_VALID": "{{ SSL_VALID }}",
+    "SSL_EXPIRES_IN_DAYS": "{{ SSL_EXPIRY_DAYS }}",
+    "ALERT_STRING":  "{{ ALERT_STRING }}"
+  }
+}

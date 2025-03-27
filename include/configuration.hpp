@@ -24,6 +24,8 @@ public:
 	std::string getREPORTINGMETHOD();
 	int getSSLEXPIRYSNOOZE();
 	int getALERTSNOOZE();
+	std::string getAPIURL();
+	std::string getAPIPAYLOAD();
 
 	//Destructor
 	~configuration();
@@ -37,6 +39,8 @@ private:
 	std::string REPORTINGMETHOD = "NONE";
 	int SSLEXPIRYSNOOZE; //How many days after previous alert to remind you SSL cert is expiring soon.
 	int ALERTSNOOZE; //How many minutes after previous alert to wait before alerting again.
+	std::string APIURL = "";
+	std::string APIPAYLOAD = "";
 };
 
 #endif // CONFIGURATION_H

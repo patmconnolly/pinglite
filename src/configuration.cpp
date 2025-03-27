@@ -28,6 +28,8 @@ int configuration::update(std::string confFile) {
 	std::string tempREPORTINGMETHOD;
 	int tempSSLEXPIRYSNOOZE;
 	int tempALERTSNOOZE;
+	std::string tempAPIURL;
+	std::string tempAPIPAYLOAD;
 
 	//Attempt to grab known variables, continue if cannot collect
 
@@ -101,6 +103,26 @@ int configuration::update(std::string confFile) {
 		function::warning("No ALERTSNOOZE Variable Defined.");
 	}
 
+	//---API URL
+	tempAPIURL = reader.Get("API", "URL", "");
+	if (tempAPIURL != "") {
+		this->APIURL = tempAPIURL;
+		function::debug("Collected API URL Variable.");
+	}
+	else {
+		function::warning("No API URL Variable Defined.");
+	}
+
+	//---API Payload
+	tempAPIPAYLOAD = reader.Get("API", "PAYLOAD", "");
+	if (tempAPIPAYLOAD != "") {
+		this->APIPAYLOAD = tempAPIPAYLOAD;
+		function::debug("Collected API PAYLOAD Variable.");
+	}
+	else {
+		function::warning("No API PAYLOAD Variable Defined.");
+	}
+
 	return 0;
 }
 
@@ -112,7 +134,7 @@ int configuration::validate() {
 	if (this->SSLVALID == -1) { VALID = false;  function::error("SSLVALID IS INVALID!"); }
 	if (this->SSLEXPIRYREMINDER == -1) { VALID = false;  function::error("SSLEXPIRYREMINDER IS INVALID!"); }
 
-	if (this->REPORTINGMETHOD != "NONE" and this->REPORTINGMETHOD != "RETCODE" and this->REPORTINGMETHOD != "TEST") { VALID = false; function::error("REPORTINGMETHOD IS INVALID!"); }
+	if (this->REPORTINGMETHOD != "NONE" and this->REPORTINGMETHOD != "RETCODE" and this->REPORTINGMETHOD != "TEST" and this->REPORTINGMETHOD != "API") { VALID = false; function::error("REPORTINGMETHOD IS INVALID!"); }
 
 	if (not VALID) {
 		return 1;
@@ -130,5 +152,7 @@ int configuration::getSSLEXPIRYREMINDER() { return this->SSLEXPIRYREMINDER; }
 std::string configuration::getREPORTINGMETHOD() { return this->REPORTINGMETHOD; }
 int configuration::getSSLEXPIRYSNOOZE() { return this->SSLEXPIRYSNOOZE; }
 int configuration::getALERTSNOOZE() { return this->ALERTSNOOZE; }
+std::string configuration::getAPIURL() { return this->APIURL; }
+std::string configuration::getAPIPAYLOAD() { return this->APIPAYLOAD; }
 
 configuration::~configuration() {}

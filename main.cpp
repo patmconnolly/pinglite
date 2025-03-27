@@ -59,7 +59,7 @@ int main(int argc, char* argv[]) {
 		}
 
 		// Executes configured test.
-		if (function::CONFIG) {
+		if (function::CONFIG and not function::KILL) {
 			function::info("Executing Webcall...");
 			targetPayload = new payload(conf->getHOST());
 			reporting* report = new reporting(conf, targetPayload);
@@ -67,7 +67,6 @@ int main(int argc, char* argv[]) {
 			else if (conf->getREPORTINGMETHOD() != "NONE") {
 				record* Data = nullptr;
 				bool reportRequired;
-				std::string reportText = "";
 
 				//Collect history, if it exists, and store in a historical object.
 				if (function::RESULTS) {
@@ -75,17 +74,10 @@ int main(int argc, char* argv[]) {
 					Data->update(report->RETCODE_Compare(), report->SSLVALID(), report->SSLEXPIRYWARNING());
 					reportRequired = Data->alertRequired(report->getWarnSnooze(), report->getAlertSnooze());
 					if (reportRequired) {
-						reportText += "Host ----------------: " + conf->getHOST() + "\n";
-						reportText += Data->alertText();
-						reportText += "Return Code ---------: " + std::to_string(report->getHTTPCODE()) + "\n";
-						reportText += "Certificate Valid ---: " + function::stringifyBoolean(report->SSLVALID()) + "\n";
-						reportText += "Certificate Expires in " + std::to_string(report->getEXPIRY()) + " days.\n";
+						report->trigger(Data->alertText());
 					}
 					Data->write();
 					delete Data;
-					if (reportRequired) {
-						report->trigger(reportText);
-					}
 				}
 			}
 			delete report;
