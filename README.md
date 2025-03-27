@@ -99,11 +99,11 @@ The wheel does not need to be recreated on a loop for constant processes, the ti
   - ~~Read files in order.~~
   - ~~Validate files.~~
   - ~~Store config in object.~~
-6. Create functionality for recording results.
-  - Read prior results, if applicable.
-  - Parse results into object.
-  - Compare results to new results.
-  - Record new results.
+6. ~~Create functionality for recording results.~~ _Complete_
+  - ~~Read prior results, if applicable.~~
+  - ~~Parse results into object.~~
+  - ~~Compare results to new results.~~
+  - ~~Record new results.~~
 7. Create functionality for alerting.
   - Create primary handler.
   - Create secondary handlers for other alert methods.
