@@ -24,6 +24,21 @@ namespace function {
 		}
 	}
 
+	void debug(std::string str, std::string str2, std::string str3)
+	{
+		std::string output = function::HEADER_DEBU + str + str2 + str3;
+		if (function::BUFFERLOGS) {
+			function::LOGBUFFER += output + "\n";
+		}
+		else {
+			if (not function::SILENT) {
+				std::cout << output << std::endl;
+				if (function::DEBUG) { std::cerr << output << std::endl; }
+				function::writeFile(output, function::LOGFILE);
+			}
+		}
+	}
+
 	void error(std::string str, std::string str2, std::string str3)
 	{
 		std::string output = function::HEADER_ERRR + str + str2 + str3;

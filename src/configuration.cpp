@@ -35,7 +35,7 @@ int configuration::update(std::string confFile) {
 	tempHOST = reader.Get("CHECK", "HOST", "");
 	if (tempHOST != "") {
 		this->HOST = tempHOST;
-		function::info("Collected HOST Variable.");
+		function::debug("Collected HOST Variable.");
 	}
 	else {
 		function::warning("No HOST Variable Defined.");
@@ -45,7 +45,7 @@ int configuration::update(std::string confFile) {
 	tempRETCODE = reader.GetInteger("VALIDATION", "RETURNCODE", -1);
 	if (tempRETCODE != -1) {
 		this->RETURNCODE = tempRETCODE;
-		function::info("Collected RETURNCODE Variable.");
+		function::debug("Collected RETURNCODE Variable.");
 	}
 	else {
 		function::warning("No RETURNCODE Variable Defined.");
@@ -55,7 +55,7 @@ int configuration::update(std::string confFile) {
 	tempSSLVALID = reader.GetInteger("VALIDATION", "SSLVALID", -1);
 	if (tempSSLVALID != -1) {
 		this->SSLVALID = tempSSLVALID;
-		function::info("Collected SSLVALID Variable.");
+		function::debug("Collected SSLVALID Variable.");
 	}
 	else {
 		function::warning("No SSLVALID Variable Defined.");
@@ -65,7 +65,7 @@ int configuration::update(std::string confFile) {
 	tempSSLEXPIRYREMINDER = reader.GetInteger("VALIDATION", "SSLEXPIRYREMINDER", -1);
 	if (tempSSLEXPIRYREMINDER != -1) {
 		this->SSLEXPIRYREMINDER = tempSSLEXPIRYREMINDER;
-		function::info("Collected SSLEXPIRYREMINDER Variable.");
+		function::debug("Collected SSLEXPIRYREMINDER Variable.");
 	}
 	else {
 		function::warning("No SSLEXPIRYREMINDER Variable Defined.");
@@ -75,7 +75,7 @@ int configuration::update(std::string confFile) {
 	tempREPORTINGMETHOD = reader.Get("REPORTING", "METHOD", "");
 	if (tempREPORTINGMETHOD != "") {
 		this->REPORTINGMETHOD = tempREPORTINGMETHOD;
-		function::info("Collected REPORTINGMETHOD Variable.");
+		function::debug("Collected REPORTINGMETHOD Variable.");
 	}
 	else {
 		function::warning("No REPORTINGMETHOD Variable Defined.");
@@ -85,7 +85,7 @@ int configuration::update(std::string confFile) {
 	tempSSLEXPIRYSNOOZE = reader.GetInteger("REPORTING", "SSLEXPIRYSNOOZE", -1);
 	if (tempSSLEXPIRYSNOOZE != -1) {
 		this->SSLEXPIRYSNOOZE = tempSSLEXPIRYSNOOZE;
-		function::info("Collected SSLEXPIRYSNOOZE Variable.");
+		function::debug("Collected SSLEXPIRYSNOOZE Variable.");
 	}
 	else {
 		function::warning("No SSLEXPIRYSNOOZE Variable Defined.");
@@ -95,7 +95,7 @@ int configuration::update(std::string confFile) {
 	tempALERTSNOOZE = reader.GetInteger("REPORTING", "ALERTSNOOZE", -1);
 	if (tempALERTSNOOZE != -1) {
 		this->ALERTSNOOZE = tempALERTSNOOZE;
-		function::info("Collected ALERTSNOOZE Variable.");
+		function::debug("Collected ALERTSNOOZE Variable.");
 	}
 	else {
 		function::warning("No ALERTSNOOZE Variable Defined.");

@@ -37,6 +37,7 @@ namespace function {
 
 	// String headers for LOG, WARN, and ERROR.
 	const std::string HEADER_INFO = "   [INFO] - ";
+	const std::string HEADER_DEBU = "  [DEBUG] - ";
 	const std::string HEADER_WARN = "[WARNING] - ";
 	const std::string HEADER_ERRR = "  [ERROR] - ";
 
@@ -45,6 +46,7 @@ namespace function {
 	void flushbuffer(); //Triggers a flush of the log buffer.
 	void writeFile(std::string text, std::string file); //Actual function that writes to a file.
 	void info(std::string str, std::string str2 = "", std::string str3 = ""); //Logs a string to the log, if debug prints as well.
+	void debug(std::string str, std::string str2 = "", std::string str3 = ""); //Logs a string to the log, if debug prints as well.
 	void error(std::string str, std::string str2 = "", std::string str3 = ""); //Logs a string to the log, if debug prints to stderr as well.
 	void warning(std::string str, std::string str2 = "", std::string str3 = ""); //Logs a string to the log, if debug prints to stderr as well.
 	void help_message();
