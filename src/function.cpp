@@ -32,7 +32,6 @@ namespace function {
 		}
 		else {
 			if (not function::SILENT) {
-				std::cout << output << std::endl;
 				if (function::DEBUG) { std::cerr << output << std::endl; }
 				function::writeFile(output, function::LOGFILE);
 			}
