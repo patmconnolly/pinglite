@@ -47,6 +47,8 @@ namespace function {
 	extern bool KILL;                // False by default, True if program needs to end as immidietly as possible.
 	extern int EXITCODE;             // 0 by default, 1 if needed program to fail execution.
 
+	extern bool ERRORLOGGING;        // False by default, True if log file cannot be opened.
+
 	// String headers for LOG, WARN, and ERROR.
 	const std::string HEADER_INFO = "   [INFO] - ";
 	const std::string HEADER_DEBU = "  [DEBUG] - ";

@@ -81,6 +81,7 @@ namespace function {
 
 	void flushbuffer()
 	{
+		function::debug("Flushing buffer to log file.");
 		function::BUFFERLOGS = false;
 		if (not function::SILENT) { function::writeFile(function::LOGBUFFER, function::LOGFILE); }
 		function::LOGBUFFER = "";
@@ -88,10 +89,18 @@ namespace function {
 
 	void writeFile(std::string text, std::string file)
 	{
-		std::ofstream outputFile;
-		outputFile.open(file, std::ios::app);
-		outputFile << text << std::endl;
-		outputFile.close();
+		if (not function::ERRORLOGGING) {
+			std::ofstream outputFile;
+			outputFile.open(file, std::ios::app);
+			if (not outputFile.is_open()) {
+				function::ERRORLOGGING = true;
+				function::error("LOG FILE CANNOT BE OPENED FOR WRITING!");
+			}
+			else {
+				outputFile << text << std::endl;
+			}
+			outputFile.close();
+		}
 	}
 
 	void version_message() {
@@ -276,4 +285,6 @@ namespace function {
 
 	bool KILL = false;                    // False by default, True if program needs to end as immidietly as possible.
 	int EXITCODE = 0;                     // 0 by default, 1 if needed program to fail execution.
+
+	bool ERRORLOGGING;                    // False by default, True if log file cannot be opened.
 }
