@@ -44,7 +44,6 @@ int main(int argc, char* argv[]) {
 
 	function::parseOptions(argc, argv, i); //Parse menu options.
 	if (not function::KILL) { function::validateOptions(); } //Ensure combination of menu options is good.
-	function::flushbuffer();
 	if (function::CHECKVERSION) { function::version_message(); }
 	if (function::HELP) { function::help_message(); }
 
@@ -70,6 +69,7 @@ int main(int argc, char* argv[]) {
 				function::KILL = true;
 			}
 		}
+		function::flushbuffer();
 
 		// Executes configured test.
 		if (function::CONFIG and not function::KILL) {
