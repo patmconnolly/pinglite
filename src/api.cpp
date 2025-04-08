@@ -34,10 +34,37 @@ api::~api() {}
 
 void api::trigger() {
     // Set CURL to Trigger Payload Here
+    auto handle = curl_easy_init();
+    struct curl_slist* headers = nullptr;
 
-    function::debug("     API URL: ", this->URL);
-    function::debug("PAYLOAD FILE: ", this->PAYLOADFILE);
-    function::debug("JSON PAYLOAD: \n", this->PAYLOAD);
+    if (!handle) {
+        function::error("Error initializing curl!");
+    }
+    else {
+        CURLcode res; //Variable for response.
+        curl_easy_setopt(handle, CURLOPT_URL, this->URL.c_str()); //Set URL
+        
+        headers = curl_slist_append(headers, "Content-Type: application/json; cahrset=utf-8");
+
+        curl_easy_setopt(handle, CURLOPT_HTTPHEADER, headers);
+
+        curl_easy_setopt(handle, CURLOPT_POST, 1L);
+
+        curl_easy_setopt(handle, CURLOPT_POSTFIELDS, this->PAYLOAD);
+
+        curl_easy_setopt(handle, CURLOPT_POSTFIELDSIZE, (long)this->PAYLOAD.length());
+
+        // Actual CURL Call
+        res = curl_easy_perform(handle);
+
+        if (res != CURLE_OK) {
+            function::error("CURL command failed to hit reporting target!");
+            function::error(curl_easy_strerror(res));
+        }
+
+        curl_slist_free_all(headers);
+    }
+    curl_easy_cleanup(handle);
 }
 
 void api::updatePlaceholders(std::string HOST, int HTTPCODE, bool SSLVALID, int SSLEXPIRYDAYS, std::string ALERTSTRING)
