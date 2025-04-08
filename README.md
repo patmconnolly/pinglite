@@ -27,6 +27,8 @@ These strings are case sensitive and will be replaced on the fly with the approp
 
 The headers are currently hardcoded to `Content-Type: application/json; cahrset=utf-8`.
 
+It is recommended that when using as a CRON task, to be documented later, to use the `silent` flag to avoid over logging to a file that is not rotated.
+
 ## Downloads and Installing
 
 ### Downloads
