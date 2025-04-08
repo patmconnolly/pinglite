@@ -50,9 +50,7 @@ void api::trigger() {
 
         curl_easy_setopt(handle, CURLOPT_POST, 1L);
 
-        function::debug("PAYLOAD - ", this->PAYLOAD);
-
-        curl_easy_setopt(handle, CURLOPT_POSTFIELDS, this->PAYLOAD);
+        curl_easy_setopt(handle, CURLOPT_POSTFIELDS, this->PAYLOAD.c_str());
 
         curl_easy_setopt(handle, CURLOPT_POSTFIELDSIZE, (long)this->PAYLOAD.length());
 
