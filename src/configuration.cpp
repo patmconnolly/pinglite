@@ -1,4 +1,18 @@
 // Object to store configuration pulled from file.
+// Copyright(C) 2025 Patrick Connolly
+//
+// This program is free software : you can redistribute it and /or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation version 3 of the License.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.If not, see < https://www.gnu.org/licenses/>.
+
 #include <string>
 #include "../third-party/inih/cpp/INIReader.h"
 #include "configuration.hpp"
@@ -25,6 +39,8 @@ int configuration::update(std::string confFile) {
 	int tempRETCODE;
 	int tempSSLVALID;
 	int tempSSLEXPIRYREMINDER;
+	std::string tempREPORTINGLOGFILE;
+	std::string tempREPORTINGRESULTS;
 	std::string tempREPORTINGMETHOD;
 	int tempSSLEXPIRYSNOOZE;
 	int tempALERTSNOOZE;
@@ -71,6 +87,27 @@ int configuration::update(std::string confFile) {
 	}
 	else {
 		function::warning("No SSLEXPIRYREMINDER Variable Defined.");
+	}
+
+	//---REPORTING LOGFILE
+	tempREPORTINGLOGFILE = reader.Get("REPORTING", "LOGFILE", "");
+	if (tempREPORTINGLOGFILE != "") {
+		function::LOGFILE = tempREPORTINGLOGFILE;
+		function::debug("Collected REPORTINGLOGFILE Variable.");
+	}
+	else {
+		function::warning("No REPORTINGLOGFILE Variable Defined.");
+	}
+
+	//---REPORTING RESULTS
+	tempREPORTINGRESULTS = reader.Get("REPORTING", "RESULTS", "");
+	if (tempREPORTINGRESULTS != "") {
+		function::RESULTS_FILE = tempREPORTINGRESULTS;
+		function::RESULTS = true;
+		function::debug("Collected REPORTINGRESULTS Variable.");
+	}
+	else {
+		function::warning("No REPORTINGRESULTS Variable Defined.");
 	}
 
 	//---REPORTING METHOD
@@ -133,6 +170,7 @@ int configuration::validate() {
 	if (this->RETURNCODE == -1) { VALID = false; function::error("RETURNCODE IS INVALID!"); }
 	if (this->SSLVALID == -1) { VALID = false;  function::error("SSLVALID IS INVALID!"); }
 	if (this->SSLEXPIRYREMINDER == -1) { VALID = false;  function::error("SSLEXPIRYREMINDER IS INVALID!"); }
+	if (this->REPORTINGMETHOD != "NONE" and this->REPORTINGMETHOD != "RETCODE" and not function::RESULTS) { VALID = false; function::error("REPORTINGRESULTS IS INVALID!"); }
 
 	if (this->REPORTINGMETHOD != "NONE" and this->REPORTINGMETHOD != "RETCODE" and this->REPORTINGMETHOD != "TEST" and this->REPORTINGMETHOD != "API") { VALID = false; function::error("REPORTINGMETHOD IS INVALID!"); }
 

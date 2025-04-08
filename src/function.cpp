@@ -1,4 +1,17 @@
 // Library of functions to use as to not clutter up main.
+// Copyright(C) 2025 Patrick Connolly
+//
+// This program is free software : you can redistribute it and /or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation version 3 of the License.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.If not, see < https://www.gnu.org/licenses/>.
 
 #include <iostream>
 #include <string>
@@ -90,6 +103,12 @@ namespace function {
 
 	void help_message() {
 		function::debug("Displaying Help Message");
+		std::cout << "PingLite Copyright (C) 2025 Patrick Connolly" << std::endl;
+		std::cout << "This program comes with ABSOLUTELY NO WARRANTY." << std::endl;
+		std::cout << "This is free software, and you are welcome to redistribute it under certain conditions." << std::endl;
+		std::cout << "You should have received a copy of the GNU General Public License v3 along with this program." << std::endl;
+		std::cout << "If not, see <https://www.gnu.org/licenses/>." << std::endl;
+		std::cout << "" << std::endl;
 		std::cout << "PingLite Usage" << std::endl;
 		std::cout << "===============================================================================================================================" << std::endl;
 		std::cout << "Flags" << std::endl;
@@ -98,10 +117,8 @@ namespace function {
 		std::cout << " -v, --version          Displays the version number and exits." << std::endl;
 		std::cout << " -d, --debug            Displays logs as they occur to stdout, still logs to log file." << std::endl;
 		std::cout << " -s, --silent           Supress all messages, log nothing. Output only what is needed at an absoloute minimum." << std::endl;
-		std::cout << " -l, --logfile          Manually specify the log file, defaults to pinglite.log in current directory." << std::endl;
 		std::cout << " -m, --manual           Indicates a manual run with a URL. No results will be recorded, no alerts to be sent." << std::endl;
 		std::cout << " -t, --test             Tests the configuration files and exits." << std::endl;
-		std::cout << " -r, --results          Specifies the file to record the results, if the file does not exist it will be created." << std::endl;
 		std::cout << " -c, --config           Indicates all subsequent arguments are the configuration files ordered from lowest priority to highest." << std::endl;
 		std::cout << "" << std::endl;
 		std::cout << "Example Usage" << std::endl;
@@ -110,12 +127,11 @@ namespace function {
 		std::cout << "pinglite --version" << std::endl;
 		std::cout << "pinglite --manual https://download.pinglite.xyz" << std::endl;
 		std::cout << "pinglite --test globalconfig.ini localconfig.ini siteconfig.ini" << std::endl;
-		std::cout << "pinglite --debug --logfile output.txt --results results.ini --config configuration.ini" << std::endl;
-		std::cout << "pinglite --results results.txt --config globalconfig.ini localconfig.ini siteconfig.ini" << std::endl;
+		std::cout << "pinglite --debug --config configuration.ini" << std::endl;
+		std::cout << "pinglite --config globalconfig.ini localconfig.ini siteconfig.ini" << std::endl;
 		std::cout << "" << std::endl;
 		std::cout << "Notes" << std::endl;
 		std::cout << "-------------------------------------------------------------------------------------------------------------------------------" << std::endl;
-		std::cout << "The results and configuration flags can be used together. The results flag is optional." << std::endl;
 		std::cout << "Help, Manual, and Test must be used with no other flags." << std::endl;
 		std::cout << "" << std::endl;
 		return;
@@ -158,12 +174,6 @@ namespace function {
 			function::KILL = true;
 			function::EXITCODE = 1;
 		}
-		if (function::SILENT and function::LOG_FILE) {
-			function::error("SILENT and LOGFILE cannot be used together!");
-			function::HELP = true;
-			function::KILL = true;
-			function::EXITCODE = 1;
-		}
 		if (function::MANUAL and function::CONFIG) {
 			function::error("MANUAL and CONFIG cannot be used together!");
 			function::HELP = true;
@@ -176,20 +186,8 @@ namespace function {
 			function::KILL = true;
 			function::EXITCODE = 1;
 		}
-		if (function::MANUAL and function::RESULTS) {
-			function::error("MANUAL and RESULTS cannot be used together!");
-			function::HELP = true;
-			function::KILL = true;
-			function::EXITCODE = 1;
-		}
 		if (function::TEST and function::CONFIG) {
 			function::error("TEST and CONFIG cannot be used together!");
-			function::HELP = true;
-			function::KILL = true;
-			function::EXITCODE = 1;
-		}
-		if (function::RESULTS and not function::CONFIG) {
-			function::error("RESULTS and CONFIG MUST be used together!");
 			function::HELP = true;
 			function::KILL = true;
 			function::EXITCODE = 1;
@@ -220,23 +218,6 @@ namespace function {
 				function::info("SILENT FLAG SET, NO MORE OUTPUT WILL OCCUR.");
 
 			}
-			else if (arg == "-r" || arg == "--results") {
-				function::RESULTS = true;
-				std::string resultslog = "";
-				if (*i < argc - 1) {
-					(*i)++;
-					function::RESULTS_FILE = argv[*i];
-					resultslog += "Recordfile stored as: " + function::RESULTS_FILE + ".";
-					function::info(resultslog);
-				}
-				else {
-					resultslog += "File must be passed in with record flag.";
-					function::error(resultslog);
-					function::HELP = true;
-					function::KILL = true;
-					function::EXITCODE = 1;
-				}
-			}
 			else if (arg == "-m" || arg == "--manual") {
 				function::MANUAL = true;
 				std::string manuallog = "";
@@ -249,23 +230,6 @@ namespace function {
 				else {
 					manuallog += "URL must be passed in with manual flag.";
 					function::error(manuallog);
-					function::HELP = true;
-					function::KILL = true;
-					function::EXITCODE = 1;
-				}
-			}
-			else if (arg == "-l" || arg == "--logfile") {
-				function::LOG_FILE = true;
-				std::string logfilelog = "";
-				if (*i < argc - 1) {
-					(*i)++;
-					function::LOGFILE = argv[*i];
-					logfilelog += "Logfile: " + function::LOGFILE + ".";
-					function::info(logfilelog);
-				}
-				else {
-					logfilelog += "Filename must be passed with logfile flag.";
-					function::error(logfilelog);
 					function::HELP = true;
 					function::KILL = true;
 					function::EXITCODE = 1;
@@ -296,8 +260,6 @@ namespace function {
 	bool DEBUG = false;                   // Global variable for debugging.
 	bool SILENT = false;                  // Global variable for silence, supress all messages, log nothing.
 
-	bool LOG_FILE = false;                // If a manual logfile is configured.
-
 	bool MANUAL = false;                  // If manual URL is to be checked.
 	std::string MAN_URL = "";             // --The manual URL string.
 
@@ -309,7 +271,7 @@ namespace function {
 
 	bool BUFFERLOGS = true;               // Determines if buffer is to be used for logs.
 	                                      // --Initially buffer until flags are parsed and determine what to do with logs.
-	std::string LOGFILE = "pinglite.txt"; // --Configured logfile string.
+	std::string LOGFILE = "pinglite.log"; // --Configured logfile string.
 	std::string LOGBUFFER = "";           // Temp log storage until if silence is determined as well as when the logfile is defined.
 
 	bool KILL = false;                    // False by default, True if program needs to end as immidietly as possible.

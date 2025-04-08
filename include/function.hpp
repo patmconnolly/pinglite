@@ -1,4 +1,17 @@
 // Library of functions to use as to not clutter up main.
+// Copyright(C) 2025 Patrick Connolly
+//
+// This program is free software : you can redistribute it and /or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation version 3 of the License.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.If not, see < https://www.gnu.org/licenses/>.
 
 #ifndef FUNCITON_H
 #define FUNCTION_H
@@ -15,7 +28,6 @@ namespace function {
 	extern bool DEBUG;               // Global variable for debugging.
 	extern bool SILENT;              // Global variable for silence, supress all messages, log nothing.
 
-	extern bool LOG_FILE;            // If a manual logfile is configured.
 	extern std::string LOGFILE;      // --Configured logfile string.
 
 	extern bool MANUAL;              // If manual URL is to be checked.
