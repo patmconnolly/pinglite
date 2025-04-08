@@ -1,4 +1,17 @@
 // Main class for PingLite
+// Copyright(C) 2025 Patrick Connolly
+//
+// This program is free software : you can redistribute it and /or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation version 3 of the License.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.If not, see < https://www.gnu.org/licenses/>.
 
 #include <iostream>
 #include <string>
@@ -31,7 +44,6 @@ int main(int argc, char* argv[]) {
 
 	function::parseOptions(argc, argv, i); //Parse menu options.
 	if (not function::KILL) { function::validateOptions(); } //Ensure combination of menu options is good.
-	function::flushbuffer();
 	if (function::CHECKVERSION) { function::version_message(); }
 	if (function::HELP) { function::help_message(); }
 
@@ -57,9 +69,10 @@ int main(int argc, char* argv[]) {
 				function::KILL = true;
 			}
 		}
+		function::flushbuffer();
 
 		// Executes configured test.
-		if (function::CONFIG) {
+		if (function::CONFIG and not function::KILL) {
 			function::info("Executing Webcall...");
 			targetPayload = new payload(conf->getHOST());
 			reporting* report = new reporting(conf, targetPayload);
@@ -67,7 +80,6 @@ int main(int argc, char* argv[]) {
 			else if (conf->getREPORTINGMETHOD() != "NONE") {
 				record* Data = nullptr;
 				bool reportRequired;
-				std::string reportText = "";
 
 				//Collect history, if it exists, and store in a historical object.
 				if (function::RESULTS) {
@@ -75,17 +87,10 @@ int main(int argc, char* argv[]) {
 					Data->update(report->RETCODE_Compare(), report->SSLVALID(), report->SSLEXPIRYWARNING());
 					reportRequired = Data->alertRequired(report->getWarnSnooze(), report->getAlertSnooze());
 					if (reportRequired) {
-						reportText += "Host ----------------: " + conf->getHOST() + "\n";
-						reportText += Data->alertText();
-						reportText += "Return Code ---------: " + std::to_string(report->getHTTPCODE()) + "\n";
-						reportText += "Certificate Valid ---: " + function::stringifyBoolean(report->SSLVALID()) + "\n";
-						reportText += "Certificate Expires in " + std::to_string(report->getEXPIRY()) + " days.\n";
+						report->trigger(Data->alertText());
 					}
 					Data->write();
 					delete Data;
-					if (reportRequired) {
-						report->trigger(reportText);
-					}
 				}
 			}
 			delete report;

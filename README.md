@@ -7,6 +7,28 @@ Using this as our frame of reference we can break down what exactly we want from
 
 The name PingLite was chosen, as monitoring can be as simple and lightweight as a ping. No fancy UI, no extra paid utilities, just simple config and monitor.
 
+## How To Configure Reporting
+
+### API
+
+In your config file, enter your complete URL to hit ubnder the `[API] URL` variable.
+
+Your PAYLOAD can be whatever you want it to be, configure the JSON file in the `[API] PAYLOAD` variable.
+
+Your available variables are as follows:
+
+- `{{ HOST }}`
+- `{{ HTTP_CODE }}`
+- `{{ SSL_VALID }}`
+- `{{ SSL_EXPIRY_DAYS }}`
+- `{{ ALERT_STRING }}`
+
+These strings are case sensitive and will be replaced on the fly with the appropriate string data for your payload.
+
+The headers are currently hardcoded to `Content-Type: application/json; cahrset=utf-8`.
+
+It is recommended that when using as a CRON task, to be documented later, to use the `silent` flag to avoid over logging to a file that is not rotated.
+
 ## Downloads and Installing
 
 ### Downloads
@@ -84,33 +106,7 @@ The wheel does not need to be recreated on a loop for constant processes, the ti
 
 ## To-Do List:
 
-1. ~~Define configuration files for what to monitor.~~ _Complete_
-2. ~~Basic infrastructure for releases and testing.~~ _Complete_
-3. ~~Create help screen.~~ _Complete_
-4. ~~Create functionality for manual test.~~ _Complete_
-  - ~~Hit URL~~
-  - ~~Parse return for following:~~
-    - ~~If resolved.~~ _Part of the regular process._
-    - ~~Returncode~~
-    - ~~SSL Valid~~
-    - ~~SSL Expiry~~
-  - ~~Display results.~~
-5. ~~Create functionality for config files.~~ _Complete_
-  - ~~Read files in order.~~
-  - ~~Validate files.~~
-  - ~~Store config in object.~~
-6. ~~Create functionality for recording results.~~ _Complete_
-  - ~~Read prior results, if applicable.~~
-  - ~~Parse results into object.~~
-  - ~~Compare results to new results.~~
-  - ~~Record new results.~~
-7. Create functionality for alerting.
-  - Create primary handler.
-  - Create secondary handlers for other alert methods.
-    - API Call with variables to be used in config file for custom API.
-    - Email handler.
-    - Other as needed.
-  - Based on results and config, call alert handler as needed.
+The basic to-do list has been completed. Other handlers can be added as needed. Bugs will be fixed upon being notified.
 
 ## Outside expertice needed:
 

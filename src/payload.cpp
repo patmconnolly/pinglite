@@ -1,4 +1,20 @@
 // Object to store payload returned from web call.
+// Copyright(C) 2025 Patrick Connolly
+//
+// This program is free software : you can redistribute it and /or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation version 3 of the License.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the
+// GNU General Public License for more details.
+// 
+// You should have received a copy of the GNU General Public License
+// along with this program.If not, see < https://www.gnu.org/licenses/>.
+// 
+// 
+// 
 // RETCODE - INT
 // RESOLVED - BOOL
 // SSL Valid - BOOL (possible string for what it should be per cert)
@@ -60,7 +76,7 @@ bool payload::webcall() {
         curl_easy_setopt(handle, CURLOPT_VERBOSE, 1L); //Enable verbose to collect SSL expiry date exactly.
         curl_easy_setopt(handle, CURLOPT_DEBUGFUNCTION, payload::debug_function); //
         curl_easy_setopt(handle, CURLOPT_DEBUGDATA, &stderr_buffer); //
-        curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, payload::discard_data);
+        curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, function::discard_data);
         curl_easy_setopt(handle, CURLOPT_WRITEDATA, nullptr);
 
 
@@ -184,11 +200,6 @@ int payload::debug_function(CURL* handle, curl_infotype type, char* data, size_t
         buffer->append(data, size);
     }
     return 0;
-}
-
-//Discard HTML data as that is not needed.
-size_t payload::discard_data(void* buffer, size_t size, size_t nmemb, void* userp) {
-    return size * nmemb;
 }
 
 //Strip expiry date from verbose data.
