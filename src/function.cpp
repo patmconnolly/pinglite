@@ -262,6 +262,11 @@ namespace function {
 		}
 	}
 
+	//Discard HTML data as that is not needed.
+	size_t discard_data(void* buffer, size_t size, size_t nmemb, void* userp) {
+		return size * nmemb;
+	}
+
 	// Global Variables for Determining Execution
 	bool HELP = false;                    // If helpmessage is going to be displayed.
 	bool CHECKVERSION = false;            // If version information is going to be displayed.

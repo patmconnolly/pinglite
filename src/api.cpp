@@ -54,6 +54,8 @@ void api::trigger() {
 
         curl_easy_setopt(handle, CURLOPT_POSTFIELDSIZE, (long)this->PAYLOAD.length());
 
+        curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, function::discard_data);
+
         // Actual CURL Call
         res = curl_easy_perform(handle);
 

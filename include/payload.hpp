@@ -47,8 +47,6 @@ private:
 
 	// Collect the verbose curl output as string instead of file.
 	static int debug_function(CURL* handle, curl_infotype type, char* data, size_t size, void* userp);
-	//Discard HTML data as that is not needed.
-	static size_t discard_data(void* buffer, size_t size, size_t nmemb, void* userp);
 
 	//Strip expiry date from verbose data.
 	static std::string getDate(const std::string& inputString);
