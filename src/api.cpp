@@ -35,6 +35,9 @@ api::~api() {}
 
 void api::trigger() {
     // Set CURL to Trigger Payload Here
+    function::debug("URL: ", this->URL);
+    function::debug("HEADERS: ", this->HEADERS);
+    function::debug("PAYLOAD: ", this->PAYLOAD);
     auto handle = curl_easy_init();
     struct curl_slist* headers = nullptr;
 

@@ -53,10 +53,14 @@ void reporting::trigger(std::string ALERTTEXT) {
 		function::debug("Certificate Expires in ", std::to_string(this->getEXPIRY()), " days.");
 	}
 	else if (this->conf->getREPORTINGMETHOD() == "API") {
+		function::debug("API Alert Selected.");
 		api* handler = new api(conf->getAPIURL(), conf->getAPIHEADERS(), conf->getAPIPAYLOAD());
+		function::debug("Updating Placeholders in Payload.");
 		handler->updatePlaceholders(this->conf->getHOST(), this->getHTTPCODE(), this->SSLVALID(), this->getEXPIRY(), ALERTTEXT);
+		function::debug("Triggering API Call.");
 		handler->trigger();
 		delete handler;
+		function::debug("API Call Complete.");
 	}
 }
 
