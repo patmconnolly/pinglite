@@ -64,7 +64,6 @@ void api::trigger() {
 
         if (ErrorText.find("No error") != std::string::npos) {
             function::debug("CURL command succeeded.");
-            function::debug(ErrorText);
         }
         else {
             function::error("CURL command failed to hit reporting target!");
