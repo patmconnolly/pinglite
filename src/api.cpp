@@ -60,7 +60,10 @@ void api::trigger() {
         // Actual CURL Call
         res = curl_easy_perform(handle);
 
-        if (res != CURLE_OK) {
+        if (res == CURLE_OK) {
+            function::debug("CURL command succeeded.");
+        }
+        else {
             function::error("CURL command failed to hit reporting target!");
             function::error(curl_easy_strerror(res));
         }
