@@ -37,6 +37,7 @@ void api::trigger() {
     // Set CURL to Trigger Payload Here
     auto handle = curl_easy_init();
     struct curl_slist* headers = nullptr;
+    std::string ErrorText = "";
 
     if (!handle) {
         function::error("Error initializing curl!");
@@ -59,14 +60,15 @@ void api::trigger() {
 
         // Actual CURL Call
         res = curl_easy_perform(handle);
+        ErrorText = curl_easy_strerror(res);
 
-        if (res == CURLE_OK) {
+        if (ErrorText.find("No error") != std::string::npos) {
             function::debug("CURL command succeeded.");
-            function::debug(res);
+            function::debug(ErrorText);
         }
         else {
             function::error("CURL command failed to hit reporting target!");
-            function::error(curl_easy_strerror(res));
+            function::error(ErrorText);
         }
 
         curl_slist_free_all(headers);
