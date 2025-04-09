@@ -62,6 +62,7 @@ void api::trigger() {
 
         if (res == CURLE_OK) {
             function::debug("CURL command succeeded.");
+            function::debug(res);
         }
         else {
             function::error("CURL command failed to hit reporting target!");
