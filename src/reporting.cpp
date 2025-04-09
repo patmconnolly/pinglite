@@ -53,7 +53,7 @@ void reporting::trigger(std::string ALERTTEXT) {
 		function::debug("Certificate Expires in ", std::to_string(this->getEXPIRY()), " days.");
 	}
 	else if (this->conf->getREPORTINGMETHOD() == "API") {
-		api* handler = new api(conf->getAPIURL(), conf->getAPIPAYLOAD());
+		api* handler = new api(conf->getAPIURL(), conf->getAPIHEADERS(), conf->getAPIPAYLOAD());
 		handler->updatePlaceholders(this->conf->getHOST(), this->getHTTPCODE(), this->SSLVALID(), this->getEXPIRY(), ALERTTEXT);
 		handler->trigger();
 		delete handler;

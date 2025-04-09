@@ -22,7 +22,7 @@
 class api {
 public:
 	//Constructor
-	api(std::string URL, std::string PAYLOADFILE);
+	api(std::string URL, std::string HEADERS, std::string PAYLOADFILE);
 
 	//Destructor
 	~api();
@@ -33,6 +33,7 @@ public:
 private:
 	//Private Variables
 	std::string URL;
+	std::string HEADERS;
 	std::string PAYLOADFILE;
 	std::string PAYLOAD;
 

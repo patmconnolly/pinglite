@@ -38,6 +38,7 @@ public:
 	int getSSLEXPIRYSNOOZE();
 	int getALERTSNOOZE();
 	std::string getAPIURL();
+	std::string getAPIHEADERS();
 	std::string getAPIPAYLOAD();
 
 	//Destructor
@@ -53,6 +54,7 @@ private:
 	int SSLEXPIRYSNOOZE; //How many days after previous alert to remind you SSL cert is expiring soon.
 	int ALERTSNOOZE; //How many minutes after previous alert to wait before alerting again.
 	std::string APIURL = "";
+	std::string APIHEADERS = "";
 	std::string APIPAYLOAD = "";
 };
 

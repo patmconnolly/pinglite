@@ -20,8 +20,9 @@
 #include "function.hpp"
 
 // Constructor
-api::api(std::string URL, std::string PAYLOADFILE) {
+api::api(std::string URL, std::string HEADERS, std::string PAYLOADFILE) {
 	this->URL = URL;
+    this->HEADERS = HEADERS;
 	this->PAYLOADFILE = PAYLOADFILE;
     std::ifstream json_file(this->PAYLOADFILE, std::ios::in | std::ios::binary);
     if (!json_file.is_open()) { function::error("CANNOT OPEN JSON FILE: ", this->PAYLOADFILE); return; }
@@ -44,7 +45,7 @@ void api::trigger() {
         CURLcode res; //Variable for response.
         curl_easy_setopt(handle, CURLOPT_URL, this->URL.c_str()); //Set URL
         
-        headers = curl_slist_append(headers, "Content-Type: application/json; cahrset=utf-8");
+        headers = curl_slist_append(headers, this->HEADERS.c_str());
 
         curl_easy_setopt(handle, CURLOPT_HTTPHEADER, headers);
 
