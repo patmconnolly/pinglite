@@ -22,7 +22,7 @@
 // Constructor
 api::api(std::string URL, std::string HEADERS, std::string PAYLOADFILE) {
 	this->URL = URL;
-    this->HEADERS = HEADERS;
+    this->HEADERS = function::stripQuotesIfExist(HEADERS);
 	this->PAYLOADFILE = PAYLOADFILE;
     std::ifstream json_file(this->PAYLOADFILE, std::ios::in | std::ios::binary);
     if (!json_file.is_open()) { function::error("CANNOT OPEN JSON FILE: ", this->PAYLOADFILE); return; }

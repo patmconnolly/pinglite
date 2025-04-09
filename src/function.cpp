@@ -203,6 +203,19 @@ namespace function {
 		}
 	}
 
+	std::string stripQuotesIfExist(const std::string& str)
+	{
+		if (str.empty()) { return str; }
+		std::string result = str; //Create duplicate of string.
+
+		//Check for matching quotes if string is greater than 0.
+		if (result.length() >= 2 and result.front() == '"' and result.back() == '"') {
+			result.erase(0, 1); //Remove leading quote.
+			result.pop_back();  //Remove trailing quote.
+		}
+		return result;
+	}
+
 	void parseOptions(int argc, char* argv[], int* i)
 	{
 		std::string arg = "";
