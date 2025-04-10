@@ -20,4 +20,4 @@ elif [[ "$branch" == "stable" ]]; then
 fi
 
 
-tar -cvf $outputfile $IncludedFilenames
+tar --owner 0 --group 0 -cvf $outputfile $IncludedFilenames
