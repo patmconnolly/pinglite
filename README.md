@@ -69,7 +69,7 @@ PingLite is compiled using Jenkins pipelines that trigger a docker container bui
 From the root of the project, execute the following for a manual compile:
 
 ```
-docker run --rm -v .:/usr/src/myapp -w /usr/src/myapp gcc:12 make
+docker run --rm -v .:/usr/src/myapp -w /usr/src/myapp patmconnolly/compiler:latest make
 ```
 
 ### Goals
