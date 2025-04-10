@@ -69,6 +69,7 @@ namespace function {
 	std::string stringifyBoolean(bool value); //Enter a boolean, returns a string (true/false).
 	void parseOptions(int argc, char* argv[], int* i);
 	void validateOptions(); //Parse through selected options and verify the combination of options selected are good.
+	std::string stripQuotesIfExist(const std::string& str); //Strip leading and tailing quotes if they exist.
 
 	//Discard HTML data as that is not needed. For CURL Calls.
 	size_t discard_data(void* buffer, size_t size, size_t nmemb, void* userp);

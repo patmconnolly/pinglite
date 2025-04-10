@@ -25,8 +25,6 @@ Your available variables are as follows:
 
 These strings are case sensitive and will be replaced on the fly with the appropriate string data for your payload.
 
-The headers are currently hardcoded to `Content-Type: application/json; cahrset=utf-8`.
-
 It is recommended that when using as a CRON task, to be documented later, to use the `silent` flag to avoid over logging to a file that is not rotated.
 
 ## Downloads and Installing
@@ -71,7 +69,7 @@ PingLite is compiled using Jenkins pipelines that trigger a docker container bui
 From the root of the project, execute the following for a manual compile:
 
 ```
-docker run --rm -v .:/usr/src/myapp -w /usr/src/myapp gcc:12 make
+docker run --rm -v .:/usr/src/myapp -w /usr/src/myapp patmconnolly/compiler:latest make
 ```
 
 ### Goals

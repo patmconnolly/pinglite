@@ -45,6 +45,7 @@ int configuration::update(std::string confFile) {
 	int tempSSLEXPIRYSNOOZE;
 	int tempALERTSNOOZE;
 	std::string tempAPIURL;
+	std::string tempAPIHEADERS;
 	std::string tempAPIPAYLOAD;
 
 	//Attempt to grab known variables, continue if cannot collect
@@ -150,6 +151,16 @@ int configuration::update(std::string confFile) {
 		function::warning("No API URL Variable Defined.");
 	}
 
+	//---API HEADERS
+	tempAPIHEADERS = reader.Get("API", "HEADERS", "XXX");
+	if (tempAPIHEADERS != "XXX") {
+		this->APIHEADERS = tempAPIHEADERS;
+		function::debug("Collected API HEADERS Variable.");
+	}
+	else {
+		function::warning("No API HEADERS Variable Defined.");
+	}
+
 	//---API Payload
 	tempAPIPAYLOAD = reader.Get("API", "PAYLOAD", "");
 	if (tempAPIPAYLOAD != "") {
@@ -191,6 +202,7 @@ std::string configuration::getREPORTINGMETHOD() { return this->REPORTINGMETHOD; 
 int configuration::getSSLEXPIRYSNOOZE() { return this->SSLEXPIRYSNOOZE; }
 int configuration::getALERTSNOOZE() { return this->ALERTSNOOZE; }
 std::string configuration::getAPIURL() { return this->APIURL; }
+std::string configuration::getAPIHEADERS() { return this->APIHEADERS; }
 std::string configuration::getAPIPAYLOAD() { return this->APIPAYLOAD; }
 
 configuration::~configuration() {}
