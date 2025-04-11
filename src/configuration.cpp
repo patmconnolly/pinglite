@@ -25,6 +25,9 @@ configuration::configuration() {
 	this->SSLEXPIRYREMINDER = -1;
 	this->SSLEXPIRYSNOOZE = -1;
 	this->ALERTSNOOZE = -1;
+	this->APIURL = "httpx://EMPTY";
+	this->APIHEADERS = "}{";
+	this->APIPAYLOAD = "}{";
 }
 
 int configuration::update(std::string confFile) {
@@ -177,13 +180,20 @@ int configuration::update(std::string confFile) {
 int configuration::validate() {
 	bool VALID = true;
 
-	if (this->HOST == "httpx://EMPTY") { VALID = false; function::error("HOST IS INVALID!"); }
-	if (this->RETURNCODE == -1) { VALID = false; function::error("RETURNCODE IS INVALID!"); }
-	if (this->SSLVALID == -1) { VALID = false;  function::error("SSLVALID IS INVALID!"); }
-	if (this->SSLEXPIRYREMINDER == -1) { VALID = false;  function::error("SSLEXPIRYREMINDER IS INVALID!"); }
-	if (this->REPORTINGMETHOD != "NONE" and this->REPORTINGMETHOD != "RETCODE" and not function::RESULTS) { VALID = false; function::error("REPORTINGRESULTS IS INVALID!"); }
+	if (this->HOST == "httpx://EMPTY") { VALID = false; function::error("[CHECK]HOST IS INVALID!"); }
+	if (this->RETURNCODE == -1) { VALID = false; function::error("[VALIDATION]RETURNCODE IS INVALID!"); }
+	if (this->SSLVALID == -1) { VALID = false;  function::error("[VALIDATION]SSLVALID IS INVALID!"); }
+	if (this->SSLEXPIRYREMINDER == -1) { VALID = false;  function::error("[VALIDATION]SSLEXPIRYREMINDER IS INVALID!"); }
+	if (this->REPORTINGMETHOD != "NONE" and this->REPORTINGMETHOD != "RETCODE" and not function::RESULTS) { VALID = false; function::error("[REPORTING]RESULTS IS INVALID!"); }
 
-	if (this->REPORTINGMETHOD != "NONE" and this->REPORTINGMETHOD != "RETCODE" and this->REPORTINGMETHOD != "TEST" and this->REPORTINGMETHOD != "API") { VALID = false; function::error("REPORTINGMETHOD IS INVALID!"); }
+	if (this->REPORTINGMETHOD != "NONE" and this->REPORTINGMETHOD != "RETCODE" and this->REPORTINGMETHOD != "TEST" and this->REPORTINGMETHOD != "API") { VALID = false; function::error("[REPORTING]METHOD IS INVALID!"); }
+
+	if (this->REPORTINGMETHOD == "API") {
+		//Validate each of the required values for the API method.
+		if (this->APIURL == "httpx://EMPTY") { VALID = false; function::error("[API]URL IS INVALID!"); }
+		if (this->APIHEADERS == "}{") { VALID = false; function::error("[API]HEADERS IS INVALID!"); }
+		if (this->APIPAYLOAD == "}{") { VALID = false; function::error("[API]PAYLOAD IS INVALID!"); }
+	}
 
 	if (not VALID) {
 		return 1;

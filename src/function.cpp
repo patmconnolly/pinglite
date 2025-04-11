@@ -84,12 +84,13 @@ namespace function {
 		function::debug("Flushing buffer to log file.");
 		function::BUFFERLOGS = false;
 		if (not function::SILENT) { function::writeFile(function::LOGBUFFER, function::LOGFILE); }
+		if (function::MANUAL or function::TEST) { std::cout << function::LOGBUFFER << std::endl; } // Dumping log to stdout since no logfile is assumed.
 		function::LOGBUFFER = "";
 	}
 
 	void writeFile(std::string text, std::string file)
 	{
-		if (not function::ERRORLOGGING) {
+		if (not function::ERRORLOGGING and not function::NOLOGFILE) {
 			std::ofstream outputFile;
 			outputFile.open(file, std::ios::app);
 			if (not outputFile.is_open()) {
@@ -104,6 +105,7 @@ namespace function {
 	}
 
 	void version_message() {
+		function::KILL = true;
 		function::debug("Displaying Version Information");
 		std::cout << "Compiled and packaged on " << COMPILE_DATE << " at " << COMPILE_TIME << " UTC from the " << COMPILE_BRANCH << " branch." << std::endl;
 		std::cout << "Pinglite version: " << COMPILE_BRANCH << "-" << COMPILE_DATE << std::endl;
@@ -111,6 +113,7 @@ namespace function {
 	}
 
 	void help_message() {
+		function::KILL = true;
 		function::debug("Displaying Help Message");
 		std::cout << "PingLite Copyright (C) 2025 Patrick Connolly" << std::endl;
 		std::cout << "This program comes with ABSOLUTELY NO WARRANTY." << std::endl;
@@ -225,11 +228,9 @@ namespace function {
 			arg = argv[*i];
 			if (arg == "-h" || arg == "--help") {
 				function::HELP = true;
-				function::KILL = true;
 			}
 			else if (arg == "-v" || arg == "--version") {
 				function::CHECKVERSION = true;
-				function::KILL = true;
 			}
 			else if (arg == "-d" || arg == "--debug") {
 				function::DEBUG = true;
@@ -300,6 +301,7 @@ namespace function {
 	                                      // --Initially buffer until flags are parsed and determine what to do with logs.
 	std::string LOGFILE = "pinglite.log"; // --Configured logfile string.
 	std::string LOGBUFFER = "";           // Temp log storage until if silence is determined as well as when the logfile is defined.
+	bool NOLOGFILE = false;               // False by default, true when no logfile will be defined.
 
 	bool KILL = false;                    // False by default, True if program needs to end as immidietly as possible.
 	int EXITCODE = 0;                     // 0 by default, 1 if needed program to fail execution.
