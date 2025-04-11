@@ -43,7 +43,7 @@ int main(int argc, char* argv[]) {
 	std::string arg = "";
 
 	function::parseOptions(argc, argv, i); //Parse menu options.
-	if (not function::KILL) { function::validateOptions(); } //Ensure combination of menu options is good.
+	if (not function::KILL) { function::debug("Validating Options"); function::validateOptions(); } //Ensure combination of menu options is good.
 	if (function::CHECKVERSION) { function::version_message(); }
 	if (function::HELP) { function::help_message(); }
 
@@ -54,6 +54,7 @@ int main(int argc, char* argv[]) {
 		// Executes the manual test.
 		if (function::MANUAL) {
 			targetPayload = new payload(function::MAN_URL);
+			function::NOLOGFILE = true;
 			if (not targetPayload->validWebcall()) {
 				function::KILL = true;
 				function::EXITCODE = 1;
@@ -97,6 +98,10 @@ int main(int argc, char* argv[]) {
 		}
 		delete conf;
 		delete targetPayload;
+	}
+	else {
+		function::NOLOGFILE = true;
+		function::flushbuffer();
 	}
 	delete i;
 	function::debug("======================================================================="); // Makes more readable in the output file.

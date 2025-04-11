@@ -43,6 +43,7 @@ namespace function {
 	                                 // --Initially buffer until flags are parsed and determine what to do with logs.
 	extern std::string LOGFILE;      // Configured logfile.
 	extern std::string LOGBUFFER;    // Temp log storage until if silence is determined as well as when the logfile is defined.
+	extern bool NOLOGFILE;           // False by default, true when no logfile will be defined.
 
 	extern bool KILL;                // False by default, True if program needs to end as immidietly as possible.
 	extern int EXITCODE;             // 0 by default, 1 if needed program to fail execution.
