@@ -98,6 +98,10 @@ int main(int argc, char* argv[]) {
 		delete conf;
 		delete targetPayload;
 	}
+	else {
+		function::NOLOGFILE = true;
+		function::flushbuffer();
+	}
 	delete i;
 	function::debug("======================================================================="); // Makes more readable in the output file.
 	return function::EXITCODE;
