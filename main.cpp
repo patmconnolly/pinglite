@@ -54,7 +54,7 @@ int main(int argc, char* argv[]) {
 		// Executes the manual test.
 		if (function::MANUAL) {
 			targetPayload = new payload(function::MAN_URL);
-			bool NOLOGFILE = true;
+			function::NOLOGFILE = true;
 			if (not targetPayload->validWebcall()) {
 				function::KILL = true;
 				function::EXITCODE = 1;
