@@ -188,7 +188,7 @@ int configuration::validate() {
 
 	if (this->REPORTINGMETHOD != "NONE" and this->REPORTINGMETHOD != "RETCODE" and this->REPORTINGMETHOD != "TEST" and this->REPORTINGMETHOD != "API") { VALID = false; function::error("[REPORTING]METHOD IS INVALID!"); }
 
-	if (this->REPORTINGMETHOD != "API") {
+	if (this->REPORTINGMETHOD == "API") {
 		//Validate each of the required values for the API method.
 		if (this->APIURL == "httpx://EMPTY") { VALID = false; function::error("[API]URL IS INVALID!"); }
 		if (this->APIHEADERS == "}{") { VALID = false; function::error("[API]HEADERS IS INVALID!"); }
