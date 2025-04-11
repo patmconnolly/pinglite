@@ -84,6 +84,7 @@ namespace function {
 		function::debug("Flushing buffer to log file.");
 		function::BUFFERLOGS = false;
 		if (not function::SILENT) { function::writeFile(function::LOGBUFFER, function::LOGFILE); }
+		if (function::NOLOGFILE) { std::cout << function::LOGBUFFER << std::endl; }
 		function::LOGBUFFER = "";
 	}
 
