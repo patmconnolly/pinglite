@@ -101,20 +101,24 @@ bool record::alertRequired(int SSLEXPIRYSNOOZE, int ALERTSNOOZE)
 	bool isRequired = false;
 
 	//Checks Site Codes
+	bool SKIPSSLVALID = false; //Lets me skip checking if the SSL cert is valid if site is returning down.
+	bool SKIPSSLWARN = false; //Lets me skip the ssl warn part since if the cert is invalid, it doesn't matter when it expires.
+
 	if (this->NEWCODEEXPECTED and this->CODECHANGE) {
 		isRequired = true;
 		this->ALERTSTRING += "Recovery: Site is now returning the correct code.\n";
 	}
 	else if (not this->NEWCODEEXPECTED and this->isAlertSnoozeExpired(ALERTSNOOZE)) {
 		isRequired = true;
+		SKIPSSLVALID = true;
+		SKIPSSLWARN = true;
 		this->ALERTSTRING += "ERROR: Site Is Returning Incorrect Code!\n";
 		this->LASTALERT = this->NOW;
 		if (this->CODECHANGE and this->DOWNSINCE == 0) { this->DOWNSINCE = this->NOW; }
 	}
 
 	//Checks SSL Certificate Validity
-	bool SKIPSSLWARN = false; //Lets me skip the ssl warn part since if the cert is invalid, it doesn't matter when it expires.
-	if (this->NEWSSLVALID and this->SSLVALIDCHANGE) {
+	if (this->NEWSSLVALID and this->SSLVALIDCHANGE and not SKIPSSLVALID) {
 		isRequired = true;
 		this->ALERTSTRING += "Recovery: SSL Certificate is now valid.\n";
 	}
