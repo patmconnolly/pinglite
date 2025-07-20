@@ -6,6 +6,7 @@ if [ -z "$1" ]; then
 fi
 
 branch="$1"
+compileos="$2"
 year=$(date -u +%Y)
 month=$(date -u +%m)
 day=$(date -u +%d)
@@ -22,5 +23,6 @@ cat <<EOF > include/version.hpp
 std::string COMPILE_DATE="$year-$month-$day";
 std::string COMPILE_TIME="$hour:$minute";
 std::string COMPILE_BRANCH="$branch";
+std::string COMPILE_OS="$compileos";
 #endif //VERSION_H
 EOF
