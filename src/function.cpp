@@ -107,8 +107,8 @@ namespace function {
 	void version_message() {
 		function::KILL = true;
 		function::debug("Displaying Version Information");
-		std::cout << "Compiled and packaged on " << COMPILE_DATE << " at " << COMPILE_TIME << " UTC from the " << COMPILE_BRANCH << " branch." << std::endl;
-		std::cout << "Pinglite version: " << COMPILE_BRANCH << "-" << COMPILE_DATE << std::endl;
+		std::cout << "Compiled and packaged on " << COMPILE_DATE << " at " << COMPILE_TIME << " UTC from the " << COMPILE_BRANCH << " branch using " << COMPILE_OS << "." << std::endl;
+		std::cout << "Pinglite version: " << COMPILE_BRANCH << "-" << COMPILE_DATE << "-" << COMPILE_OS << std::endl;
 		return;
 	}
 
